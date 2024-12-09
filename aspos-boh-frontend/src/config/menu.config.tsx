@@ -6,62 +6,71 @@ export const MENU_SIDEBAR: TMenuConfig = [
     icon: 'element-11',
     children: [
       {
-        title: 'Light Sidebar',
+        title: 'Sales Enquiry',
         path: '/'
       },
-
+      {
+        title: 'Cashier Enquiry',
+        path: '/s'
+      },
+      {
+        title: 'Major Enquiry',
+        path: '/s'
+      },
     ]
   },
   {
-    heading: 'User'
+    heading: 'POS Configuration'
   },
-
   {
     title: 'My Account',
     icon: 'setting-2',
     children: [
       {
-        title: 'Account',
+        title: 'Menu Item',
+        path: '/account/security/backup-and-recovery'
+      },
+      {
+        title: 'Major Group',
+        path: '/account/security/security-log'
+      },
+      {
+        title: 'Family Group',
+        path: '/account/invite-a-friend'
+      },
+      {
+        title: 'Device',
         children: [
           {
-            title: 'User Profile',
+            title: 'PC Table',
             path: '/account/home/user-profile'
           },
           {
-            title: 'Settings - Plain',
+            title: 'Printer',
+            path: '/account/home/settings-plain'
+          },
+          {
+            title: 'Kitchen Printer',
             path: '/account/home/settings-plain'
           },
         ]
       },
-      {
-        title: 'Security',
-        children: [
-          {
-            title: 'Backup & Recovery',
-            path: '/account/security/backup-and-recovery'
-          },
-          {
-            title: 'Security Log',
-            path: '/account/security/security-log'
-          }
-        ]
-      },
-      {
-        title: 'More',
-        collapse: true,
-        collapseTitle: 'Show less',
-        expandTitle: 'Show 1 more',
-        dropdownProps: {
-          placement: 'right-start'
-        },
-        children: [
-          {
-            title: 'Invite a Friend',
-            path: '/account/invite-a-friend'
-          },
+      // {
+      //   title: 'More',
+      //   collapse: true,
+      //   collapseTitle: 'Show less',
+      //   expandTitle: 'Show 1 more',
+      //   dropdownProps: {
+      //     placement: 'right-start'
+      //   },
+      //   children: [
+      //     {
+      //       title: 'Invite a Friend',
+      //       path: '/account/invite-a-friend'
+      //     },
 
-        ]
-      }
+      //   ]
+      // }
     ]
   },
   {
