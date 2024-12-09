@@ -159,6 +159,23 @@ const SelectSeparator = React.forwardRef<
 ));
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
+const SelectTitle = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
+>(({ className, children, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      'relative flex w-full cursor-default select-none items-center rounded-md py-1.5 px-2 text-sm font-semibold text-muted-foreground',
+      className
+    )}
+    {...props}
+  >
+    {children}
+  </div>
+));
+SelectTitle.displayName = 'SelectTitle';
+
 export {
   Select,
   SelectGroup,
@@ -169,5 +186,6 @@ export {
   SelectItem,
   SelectSeparator,
   SelectScrollUpButton,
-  SelectScrollDownButton
+  SelectScrollDownButton,
+  SelectTitle
 };

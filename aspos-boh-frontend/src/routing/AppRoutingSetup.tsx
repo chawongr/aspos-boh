@@ -16,11 +16,12 @@ import {
   NetworkVisitorsPage
 } from '@/pages/network';
 
+import { SalesEnquiryPage } from '@/pages/dashboards'
+
 import { AuthPage } from '@/auth';
 import { RequireAuth } from '@/auth/RequireAuth';
 import { Demo1Layout } from '@/layouts/demo1';
 import { ErrorsRouting } from '@/errors';
-
 
 const AppRoutingSetup = (): ReactElement => {
   return (
@@ -28,7 +29,7 @@ const AppRoutingSetup = (): ReactElement => {
       <Route element={<RequireAuth />}>
         <Route element={<Demo1Layout />}>
           {/* <Route path="/" element={<DefaultPage />} /> */}
-          <Route path="/" element={<AccountSettingsPlainPage />} />
+          <Route path="/" element={<SalesEnquiryPage />} />
           <Route path="/account/home/user-profile" element={<AccountUserProfilePage />} />
 
           <Route path="/account/home/settings-plain" element={<AccountSettingsPlainPage />} />
