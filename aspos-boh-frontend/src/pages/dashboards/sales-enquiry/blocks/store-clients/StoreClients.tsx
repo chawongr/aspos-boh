@@ -2,42 +2,19 @@ import { useMemo, useState } from 'react';
 import {
   DataGrid,
   DataGridColumnHeader,
-  KeenIcon,
-  useDataGrid,
   DataGridRowSelectAll,
   DataGridRowSelect
 } from '@/components';
 import { ColumnDef, Column, RowSelectionState } from '@tanstack/react-table';
-import { toAbsoluteUrl } from '@/utils';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  SelectTitle
-} from '@/components/ui/select';
 import { StoreClientsData, IStoreClientsData } from '.';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
-import { cn } from '@/lib/utils';
-import { Calendar } from '@/components/ui/calendar';
-import { format } from 'date-fns';
-
-import FilterDate from '@/components/ui/filterDate';
-
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-
 
 interface IColumnFilterProps<TData, TValue> {
   column: Column<TData, TValue>;
 }
 
 const StoreClients = () => {
-
-  const [date, setDate] = useState<Date | undefined>(new Date());
-
-
   const ColumnInputFilter = <TData, TValue>({ column }: IColumnFilterProps<TData, TValue>) => {
     return (
       <Input
@@ -236,18 +213,11 @@ const StoreClients = () => {
   };
 
   const Toolbar = () => {
-    const { table } = useDataGrid();
-    const [searchInput, setSearchInput] = useState('');
-
     return (
       <div className="card-header flex-wrap gap-2 border-b-0 px-5">
         <h3 className="card-title font-medium text-sm">Showing 10 of 49,053 users</h3>
-
         <div className="flex flex-wrap gap-2 lg:gap-5">
-
           <div className="flex flex-wrap gap-2.5">
-
-
           </div>
         </div>
       </div>
