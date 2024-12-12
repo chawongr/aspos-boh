@@ -10,17 +10,8 @@ import {
   ToolbarPageTitle
 } from '@/partials/toolbar';
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select';
-
 import { SalesEnquiryContent } from '.';
 import { useLayout } from '@/providers';
-import { StoreClientsFilter } from './blocks/store-clients/StoreClientFilter';
 
 const SalesEnquiryPage = () => {
   const { currentLayout } = useLayout();
@@ -48,7 +39,6 @@ const SalesEnquiryPage = () => {
       )}
 
       <Container>
-        <StoreClientsFilter/>
         <SalesEnquiryContent/>
       </Container>
     </Fragment>

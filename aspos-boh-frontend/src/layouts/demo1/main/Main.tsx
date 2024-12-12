@@ -2,7 +2,7 @@ import { Fragment, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Outlet, useLocation } from 'react-router';
 import { useMenuCurrentItem } from '@/components/menu';
-import { Footer, Header, Sidebar, useDemo1Layout } from '../';
+import { Header, Sidebar, useDemo1Layout } from '../';
 import { useMenus } from '@/providers';
 
 const Main = () => {
@@ -58,7 +58,6 @@ const Main = () => {
           <Outlet />
         </main>
 
-        <Footer />
       </div>
     </Fragment>
   );
