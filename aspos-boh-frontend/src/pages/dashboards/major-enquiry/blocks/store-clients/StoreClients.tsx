@@ -52,7 +52,7 @@ const StoreClients = () => {
       {
         accessorFn: (row) => row.clientId,
         id: 'clientId',
-        header: ({ column }) => <DataGridColumnHeader title="Sales Date" column={column} />,
+        header: ({ column }) => <DataGridColumnHeader title="Major Group" column={column} />,
         enableSorting: true,
         cell: (info: any) => info.row.original.clientId,
         meta: {
@@ -63,7 +63,7 @@ const StoreClients = () => {
       {
         accessorFn: (row) => row.ordersValue,
         id: 'ordersValue',
-        header: ({ column }) => <DataGridColumnHeader title="Sales Time" column={column} />,
+        header: ({ column }) => <DataGridColumnHeader title="Family Group" column={column} />,
         enableSorting: true,
         cell: (info: any) => info.row.original.ordersValue,
         meta: {
@@ -74,7 +74,7 @@ const StoreClients = () => {
       {
         accessorFn: (row) => row.clientId,
         id: 'clientId',
-        header: ({ column }) => <DataGridColumnHeader title="Check No." column={column} />,
+        header: ({ column }) => <DataGridColumnHeader title="Stall" column={column} />,
         enableSorting: true,
         cell: (info: any) => info.row.original.clientId,
         meta: {
@@ -85,7 +85,7 @@ const StoreClients = () => {
       {
         accessorFn: (row) => row.activity,
         id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Total Selling Price" column={column} />,
+        header: ({ column }) => <DataGridColumnHeader title="Bill Count" column={column} />,
         enableSorting: true,
         cell: (info: any) => info.row.original.activity,
         meta: {
@@ -96,7 +96,7 @@ const StoreClients = () => {
       {
         accessorFn: (row) => row.activity,
         id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Gross Sales" column={column} />,
+        header: ({ column }) => <DataGridColumnHeader title="Net Sales" column={column} />,
         enableSorting: true,
         cell: (info: any) => info.row.original.activity,
         meta: {
@@ -107,84 +107,7 @@ const StoreClients = () => {
       {
         accessorFn: (row) => row.activity,
         id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Total Discount" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Discount Variance" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Nest Sales" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Total Tax" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Total Sales" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Total Service" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Total Revenue" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Cashier" column={column} />,
+        header: ({ column }) => <DataGridColumnHeader title="AVG/Bill" column={column} />,
         enableSorting: true,
         cell: (info: any) => info.row.original.activity,
         meta: {
