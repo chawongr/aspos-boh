@@ -9,10 +9,19 @@ import { ColumnDef, Column, RowSelectionState } from '@tanstack/react-table';
 import { StoreClientsData, IStoreClientsData } from '.';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
+import { ToolbarDescription } from '@/partials/toolbar';
 
 interface IColumnFilterProps<TData, TValue> {
   column: Column<TData, TValue>;
 }
+
+const EnforceSwitch = ({ enforce }: { enforce: boolean }) => {
+  return (
+    <label className="switch switch-sm">
+      <input type="checkbox" checked={enforce} value="1" readOnly />
+    </label>
+  );
+};
 
 const StoreClients = () => {
   const ColumnInputFilter = <TData, TValue>({ column }: IColumnFilterProps<TData, TValue>) => {
@@ -39,9 +48,20 @@ const StoreClients = () => {
         }
       },
       {
+        accessorFn: (row) => row.clientId,
+        id: 'clientId',
+        header: ({ column }) => <DataGridColumnHeader title="Code" column={column} />,
+        enableSorting: true,
+        cell: (info: any) => info.row.original.clientId,
+        meta: {
+          headerClassName: 'min-w-[150px]',
+          cellClassName: 'text-gray-800 font-normal'
+        }
+      },
+      {
         accessorFn: (row) => row.user.name,
         id: 'user',
-        header: ({ column }) => <DataGridColumnHeader title="Business Date" column={column} />,
+        header: ({ column }) => <DataGridColumnHeader title="Name" column={column} />,
         enableSorting: true,
         cell: (info: any) => info.row.original.user.name,
         meta: {
@@ -50,148 +70,26 @@ const StoreClients = () => {
         }
       },
       {
-        accessorFn: (row) => row.clientId,
-        id: 'clientId',
-        header: ({ column }) => <DataGridColumnHeader title="Sales Date" column={column} />,
+        accessorFn: (row) => row.enforce,
+        id: 'enforce',
+        header: ({ column }) => <DataGridColumnHeader title="Active" column={column} />,
         enableSorting: true,
-        cell: (info: any) => info.row.original.clientId,
+        cell: (info: any) => <EnforceSwitch enforce={info.row.original.enforce} />,
         meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
+          headerClassName: 'min-w-[137px]',
+          cellClassName: 'text-gray-800 font-medium'
         }
       },
       {
-        accessorFn: (row) => row.ordersValue,
-        id: 'ordersValue',
-        header: ({ column }) => <DataGridColumnHeader title="Sales Time" column={column} />,
+        id: 'actions',
+        header: ({ column }) => <DataGridColumnHeader title="Delete Item" column={column} />,
         enableSorting: true,
-        cell: (info: any) => info.row.original.ordersValue,
+        cell: () => <button className="deleteBtn">Delete</button>,
         meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
+          headerClassName: 'w-28',
+          cellClassName: 'text-gray-800 font-medium'
         }
-      },
-      {
-        accessorFn: (row) => row.clientId,
-        id: 'clientId',
-        header: ({ column }) => <DataGridColumnHeader title="Check No." column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.clientId,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Total Selling Price" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Gross Sales" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Total Discount" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Discount Variance" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Nest Sales" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Total Tax" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Total Sales" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Total Service" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Total Revenue" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.activity,
-        id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Cashier" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.activity,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
+      }
     ],
     []
   );
@@ -225,16 +123,23 @@ const StoreClients = () => {
   };
 
   return (
-    <DataGrid
-      columns={columns}
-      data={data}
-      rowSelection={true}
-      onRowSelectionChange={handleRowSelection}
-      pagination={{ size: 5 }}
-      sorting={[{ id: 'user', desc: false }]}
-      toolbar={<Toolbar />}
-      layout={{ card: true }}
-    />
+    <div>
+      <ToolbarDescription>
+        <div className="flex items-center flex-wrap gap-1.5 font-medium mt-8 mb-3">
+          <span className="text-md text-[#071437]">Family Group List</span>
+        </div>
+      </ToolbarDescription>
+      <DataGrid
+        columns={columns}
+        data={data}
+        rowSelection={true}
+        onRowSelectionChange={handleRowSelection}
+        pagination={{ size: 5 }}
+        sorting={[{ id: 'user', desc: false }]}
+        toolbar={<Toolbar />}
+        layout={{ card: true }}
+      />
+    </div>
   );
 };
 
