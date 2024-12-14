@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Fragment } from 'react';
 
 import { Container } from '@/components/container';
@@ -25,15 +26,11 @@ const MajorGroupPage = () => {
               <ToolbarPageTitle />
               <ToolbarDescription>
                 <div className="flex items-center flex-wrap gap-1.5 font-medium">
-                  <span className="text-md text-gray-600">Sales Enquiry Data</span>
+                  <span className="text-md text-gray-600"></span>
                 </div>
               </ToolbarDescription>
             </ToolbarHeading>
-            <ToolbarActions>
-              <a href="#" className="btn btn-sm btn-primary">
-                Download
-              </a>
-            </ToolbarActions>
+        
           </Toolbar>
         </Container>
       )}
