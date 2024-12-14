@@ -717,6 +717,21 @@ module.exports = {
     require('./src/plugins/components/scrollable'),
     require('./src/plugins/components/progress'),
     require('./src/plugins/components/apexcharts'),
-    require('./src/plugins/components/leaflet')
+    require('./src/plugins/components/leaflet'),
+    function ({ addComponents }) {
+      addComponents({
+        '.deleteBtn': {
+          backgroundColor: '#FEB7B7',
+          color: '#9B2B2B',          
+          padding: '0.5rem 1rem',   
+          borderRadius: '0.5rem',  
+          fontWeight: '500',        
+          transition: 'background-color 0.2s ease-in-out',
+          '&:hover': {
+            backgroundColor: '#FC8181',
+          },
+        },
+      });
+    },
   ]
 };

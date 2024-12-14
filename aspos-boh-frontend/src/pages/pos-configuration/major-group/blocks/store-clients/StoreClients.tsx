@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { useMemo, useState } from 'react';
 import {
   DataGrid,
@@ -10,9 +9,7 @@ import { ColumnDef, Column, RowSelectionState } from '@tanstack/react-table';
 import { StoreClientsData, IStoreClientsData } from '.';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
-import {
-  ToolbarDescription
-} from '@/partials/toolbar';
+import { ToolbarDescription } from '@/partials/toolbar';
 
 interface IColumnFilterProps<TData, TValue> {
   column: Column<TData, TValue>;
@@ -87,7 +84,7 @@ const StoreClients = () => {
         id: 'actions',
         header: ({ column }) => <DataGridColumnHeader title="Delete Items" column={column} />,
         enableSorting: true,
-        cell: () => <button className="btn bg-[#FEB7B7] text-[#9B2B2B] hover:bg-red-300">Delete</button>,
+        cell: () => <button className="deleteBtn">Delete</button>,
         meta: {
           headerClassName: 'w-28',
           cellClassName: 'text-gray-800 font-medium'

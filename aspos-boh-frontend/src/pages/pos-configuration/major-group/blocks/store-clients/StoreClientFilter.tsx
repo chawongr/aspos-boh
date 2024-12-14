@@ -1,25 +1,6 @@
-/* eslint-disable prettier/prettier */
 import { useState } from 'react';
-import { KeenIcon } from '@/components';
-
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-    SelectTitle
-} from '@/components/ui/select';
-
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Calendar } from '@/components/ui/calendar';
-import { cn } from '@/lib/utils';
-import { format } from 'date-fns';
-import { Input } from '@/components/ui/input';
-
 
 const StoreClientsFilter = () => {
-    const [date, setDate] = useState<Date | undefined>(new Date());
 
     return (
         <div className="card">

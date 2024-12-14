@@ -1,11 +1,9 @@
-/* eslint-disable prettier/prettier */
 import { Fragment } from 'react';
 
 import { Container } from '@/components/container';
 
 import {
   Toolbar,
-  ToolbarActions,
   ToolbarDescription,
   ToolbarHeading,
   ToolbarPageTitle
