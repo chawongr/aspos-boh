@@ -3,9 +3,9 @@ import { Fragment } from 'react';
 import { IHighlightedPostsItems, MiscHighlightedPosts } from '@/partials/misc';
 import { toAbsoluteUrl } from '@/utils';
 
-import { InvitePeople, Invites } from './blocks';
+import { General } from './blocks';
 
-const AccountInviteAFriendContent = () => {
+const SystemSettingContent = () => {
   const posts: IHighlightedPostsItems = [
     {
       icon: 'users',
@@ -34,10 +34,7 @@ const AccountInviteAFriendContent = () => {
     <div className="grid grid-cols-1 xl:grid-cols-4 gap-5 lg:gap-7.5">
       <div className="col-span-2">
         <div className="flex flex-col gap-5 lg:gap-7.5">
-          <InvitePeople />
-
-          <Invites />
-
+          <General />
         </div>
       </div>
       <div className="col-span-2">
@@ -49,4 +46,4 @@ const AccountInviteAFriendContent = () => {
   );
 };
 
-export { AccountInviteAFriendContent };
+export { SystemSettingContent };

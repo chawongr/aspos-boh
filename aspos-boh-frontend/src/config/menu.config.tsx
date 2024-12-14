@@ -71,6 +71,11 @@ export const MENU_SIDEBAR: TMenuConfig = [
     ]
   },
   {
+    title: 'System Setting',
+    icon: 'users',
+    path: '/system-setting'
+  },
+  {
     title: 'Network',
     icon: 'users',
     children: [
