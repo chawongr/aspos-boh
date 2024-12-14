@@ -11,7 +11,7 @@ export const MENU_SIDEBAR: TMenuConfig = [
       },
       {
         title: 'Cashier Enquiry',
-        path: '/s'
+        path: '/dashboard/cashier-enquiry'
       },
       {
         title: 'Major Enquiry',

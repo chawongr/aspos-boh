@@ -1,12 +1,12 @@
 import { StoreClients, StoreClientsFilter } from './blocks/store-clients';
 
-const SalesEnquiryContent = () => {
+const CashierEnquiryContent = () => {
   return (
-    <div className="grid gap-5 lg:gap-7.5 mb-7">
+    <div className="grid gap-5 lg:gap-7.5">
       <StoreClientsFilter/>
       <StoreClients />
     </div>
   );
 };
 
-export { SalesEnquiryContent };
+export { CashierEnquiryContent };
