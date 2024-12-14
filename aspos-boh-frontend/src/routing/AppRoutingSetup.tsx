@@ -16,7 +16,9 @@ import {
   NetworkVisitorsPage
 } from '@/pages/network';
 
-import { SalesEnquiryPage, CashierEnquiryPage } from '@/pages/dashboards'
+import { SalesEnquiryPage, CashierEnquiryPage, MajorEnquiryPage } from '@/pages/dashboards'
+
+import { FamilyGroupPage, MenuItemPage, MajorGroupPage, KitchenPrinterPage,PCTablePage,PrinterPage } from '@/pages/pos-configuration'
 
 import { AuthPage } from '@/auth';
 import { RequireAuth } from '@/auth/RequireAuth';
@@ -30,8 +32,17 @@ const AppRoutingSetup = (): ReactElement => {
         <Route element={<Demo1Layout />}>
           <Route path="/" element={<SalesEnquiryPage />} />
           <Route path="/dashboard/cashier-enquiry" element={<CashierEnquiryPage />} />
-          <Route path="/account/home/user-profile" element={<AccountUserProfilePage />} />
+          <Route path="/dashboard/major-enquiry" element={<MajorEnquiryPage />} />
 
+          <Route path="/pos-config/family-group" element={<FamilyGroupPage />} />
+          <Route path="/pos-config/menu-item" element={<MenuItemPage />} />
+          <Route path="/pos-config/major-group" element={<MajorGroupPage />} />
+
+          <Route path="/pos-config/device/pc-table" element={<PCTablePage />} />
+          <Route path="/pos-config/device/printer" element={<PrinterPage />} />
+          <Route path="/pos-config/device/kitchen-printer" element={<KitchenPrinterPage />} />
+
+          <Route path="/account/home/user-profile" element={<AccountUserProfilePage />} />
           <Route path="/account/home/settings-plain" element={<AccountSettingsPlainPage />} />
           <Route
             path="/account/security/backup-and-recovery"

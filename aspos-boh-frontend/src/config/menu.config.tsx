@@ -15,43 +15,40 @@ export const MENU_SIDEBAR: TMenuConfig = [
       },
       {
         title: 'Major Enquiry',
-        path: '/s'
+        path: '/dashboard/major-enquiry'
       },
     ]
   },
   {
-    heading: 'POS Configuration'
-  },
-  {
-    title: 'My Account',
+    title: 'POS Configuration',
     icon: 'setting-2',
     children: [
       {
         title: 'Menu Item',
-        path: '/account/security/backup-and-recovery'
+        path: '/pos-config/menu-item'
       },
       {
         title: 'Major Group',
-        path: '/account/security/security-log'
+        path: '/pos-config/major-group'
       },
       {
         title: 'Family Group',
-        path: '/account/invite-a-friend'
+        path: '/pos-config/family-group'
       },
       {
         title: 'Device',
         children: [
           {
             title: 'PC Table',
-            path: '/account/home/user-profile'
+            path: '/pos-config/device/pc-table'
           },
           {
             title: 'Printer',
-            path: '/account/home/settings-plain'
+            path: '/pos-config/device/printer'
           },
           {
             title: 'Kitchen Printer',
-            path: '/account/home/settings-plain'
+            path: '/pos-config/device/kitchen-printer'
           },
         ]
       },
