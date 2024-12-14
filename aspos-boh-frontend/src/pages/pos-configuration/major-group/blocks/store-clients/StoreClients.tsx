@@ -82,7 +82,7 @@ const StoreClients = () => {
       },
       {
         id: 'actions',
-        header: ({ column }) => <DataGridColumnHeader title="Delete Items" column={column} />,
+        header: ({ column }) => <DataGridColumnHeader title="Delete Item" column={column} />,
         enableSorting: true,
         cell: () => <button className="deleteBtn">Delete</button>,
         meta: {
