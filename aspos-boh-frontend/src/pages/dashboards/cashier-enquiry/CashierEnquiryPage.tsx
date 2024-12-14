@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 
 import { Container } from '@/components/container';
+
 import {
   Toolbar,
   ToolbarActions,
@@ -9,25 +10,28 @@ import {
   ToolbarPageTitle
 } from '@/partials/toolbar';
 
-import { AccountBackupAndRecoveryContent } from '.';
+import { CashierEnquiryContent } from '.';
 import { useLayout } from '@/providers';
 
-const AccountBackupAndRecoveryPage = () => {
+const CashierEnquiryPage = () => {
   const { currentLayout } = useLayout();
 
   return (
     <Fragment>
-
       {currentLayout?.name === 'demo1-layout' && (
         <Container>
           <Toolbar>
             <ToolbarHeading>
               <ToolbarPageTitle />
-              <ToolbarDescription>Central Hub for Personal Customization</ToolbarDescription>
+              <ToolbarDescription>
+                <div className="flex items-center flex-wrap gap-1.5 font-medium">
+                  <span className="text-md text-gray-600">Sales Enquiry Data</span>
+                </div>
+              </ToolbarDescription>
             </ToolbarHeading>
             <ToolbarActions>
-              <a href="#" className="btn btn-sm btn-light">
-                Order History
+              <a href="#" className="btn btn-sm btn-primary">
+                Download
               </a>
             </ToolbarActions>
           </Toolbar>
@@ -35,10 +39,10 @@ const AccountBackupAndRecoveryPage = () => {
       )}
 
       <Container>
-        <AccountBackupAndRecoveryContent />
+        <CashierEnquiryContent/>
       </Container>
     </Fragment>
   );
 };
 
-export { AccountBackupAndRecoveryPage };
+export { CashierEnquiryPage };

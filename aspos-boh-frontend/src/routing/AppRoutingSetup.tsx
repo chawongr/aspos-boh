@@ -16,7 +16,7 @@ import {
   NetworkVisitorsPage
 } from '@/pages/network';
 
-import { SalesEnquiryPage } from '@/pages/dashboards'
+import { SalesEnquiryPage, CashierEnquiryPage } from '@/pages/dashboards'
 
 import { AuthPage } from '@/auth';
 import { RequireAuth } from '@/auth/RequireAuth';
@@ -28,8 +28,8 @@ const AppRoutingSetup = (): ReactElement => {
     <Routes>
       <Route element={<RequireAuth />}>
         <Route element={<Demo1Layout />}>
-          {/* <Route path="/" element={<DefaultPage />} /> */}
           <Route path="/" element={<SalesEnquiryPage />} />
+          <Route path="/dashboard/cashier-enquiry" element={<CashierEnquiryPage />} />
           <Route path="/account/home/user-profile" element={<AccountUserProfilePage />} />
 
           <Route path="/account/home/settings-plain" element={<AccountSettingsPlainPage />} />
