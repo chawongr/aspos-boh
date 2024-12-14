@@ -20,6 +20,8 @@ import { SalesEnquiryPage, CashierEnquiryPage, MajorEnquiryPage } from '@/pages/
 
 import { FamilyGroupPage, MenuItemPage, MajorGroupPage, KitchenPrinterPage,PCTablePage,PrinterPage } from '@/pages/pos-configuration'
 
+import { SystemSettingPage } from '@/pages/system-setting'
+
 import { AuthPage } from '@/auth';
 import { RequireAuth } from '@/auth/RequireAuth';
 import { Demo1Layout } from '@/layouts/demo1';
@@ -41,6 +43,11 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/pos-config/device/pc-table" element={<PCTablePage />} />
           <Route path="/pos-config/device/printer" element={<PrinterPage />} />
           <Route path="/pos-config/device/kitchen-printer" element={<KitchenPrinterPage />} />
+
+          <Route path="/system-setting" element={<SystemSettingPage />} />
+          {/* <Route path="/system-setting" element={<AccountUserProfilePage />} /> */}
+
+
 
           <Route path="/account/home/user-profile" element={<AccountUserProfilePage />} />
           <Route path="/account/home/settings-plain" element={<AccountSettingsPlainPage />} />
