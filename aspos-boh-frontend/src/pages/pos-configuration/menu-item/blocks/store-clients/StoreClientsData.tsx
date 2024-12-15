@@ -12,6 +12,7 @@ interface IStoreClientsData {
     name: string;
   };
   activity: string;
+  enforce: boolean;
 }
 
 const StoreClientsData: IStoreClientsData[] = [
@@ -27,7 +28,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'estonia.svg',
       name: 'Estonia'
     },
-    activity: 'Current session'
+    activity: 'Current session',
+    enforce: true
   },
   {
     user: {
@@ -41,7 +43,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'malaysia.svg',
       name: 'Malaysia'
     },
-    activity: 'Week ago'
+    activity: 'Week ago',
+    enforce: true
   },
   {
     user: {
@@ -55,7 +58,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'ukraine.svg',
       name: 'Ukraine'
     },
-    activity: 'Week ago'
+    activity: 'Week ago',
+    enforce: true
   },
   {
     user: {
@@ -69,7 +73,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'canada.svg',
       name: 'Canada'
     },
-    activity: 'Current session'
+    activity: 'Current session',
+    enforce: true
   },
   {
     user: {
@@ -83,7 +88,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'india.svg',
       name: 'India'
     },
-    activity: 'Month ago'
+    activity: 'Month ago',
+    enforce: true
   },
   {
     user: {
@@ -97,7 +103,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'united-states.svg',
       name: 'USA'
     },
-    activity: 'Today, 15:02'
+    activity: 'Today, 15:02',
+    enforce: true
   },
   {
     user: {
@@ -111,7 +118,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'turkey.svg',
       name: 'Turkey'
     },
-    activity: 'Current session'
+    activity: 'Current session',
+    enforce: true
   },
   {
     user: {
@@ -125,7 +133,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'brazil.svg',
       name: 'Brasil'
     },
-    activity: 'Current session'
+    activity: 'Current session',
+    enforce: true
   },
   {
     user: {
@@ -139,7 +148,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'latvia.svg',
       name: 'Latvia'
     },
-    activity: 'Week ago'
+    activity: 'Week ago',
+    enforce: true
   },
   {
     user: {
@@ -153,7 +163,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'uruguay.svg',
       name: 'Uruguay'
     },
-    activity: 'Current session'
+    activity: 'Current session',
+    enforce: true
   },
   {
     user: {
@@ -167,7 +178,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'germany.svg',
       name: 'Germany'
     },
-    activity: 'Yesterday'
+    activity: 'Yesterday',
+    enforce: true
   },
   {
     user: {
@@ -181,7 +193,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'france.svg',
       name: 'France'
     },
-    activity: '2 days ago'
+    activity: '2 days ago',
+    enforce: true
   },
   {
     user: {
@@ -195,7 +208,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'italy.svg',
       name: 'Italy'
     },
-    activity: 'Today, 8:45 am'
+    activity: 'Today, 8:45 am',
+    enforce: true
   },
   {
     user: {
@@ -209,7 +223,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'japan.svg',
       name: 'Japan'
     },
-    activity: 'Current session'
+    activity: 'Current session',
+    enforce: true
   },
   {
     user: {
@@ -223,7 +238,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'mexico.svg',
       name: 'Mexico'
     },
-    activity: 'Week ago'
+    activity: 'Week ago',
+    enforce: true
   },
   {
     user: {
@@ -237,7 +253,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'south-korea.svg',
       name: 'South Korea'
     },
-    activity: 'Today, 14:10'
+    activity: 'Today, 14:10',
+    enforce: true
   },
   {
     user: {
@@ -251,7 +268,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'russia.svg',
       name: 'Russia'
     },
-    activity: 'Current session'
+    activity: 'Current session',
+    enforce: false
   },
   {
     user: {
@@ -265,7 +283,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'spain.svg',
       name: 'Spain'
     },
-    activity: '3 days ago'
+    activity: '3 days ago',
+    enforce: true
   },
   {
     user: {
@@ -279,7 +298,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'portugal.svg',
       name: 'Portugal'
     },
-    activity: 'Week ago'
+    activity: 'Week ago',
+    enforce: true
   },
   {
     user: {
@@ -293,7 +313,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'netherlands.svg',
       name: 'Netherlands'
     },
-    activity: 'Current session'
+    activity: 'Current session',
+    enforce: true
   },
   {
     user: {
@@ -307,7 +328,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'belgium.svg',
       name: 'Belgium'
     },
-    activity: 'esterday'
+    activity: 'esterday',
+    enforce: true
   },
   {
     user: {
@@ -321,7 +343,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'sweden.svg',
       name: 'sweden.svg'
     },
-    activity: '2 days ago'
+    activity: '2 days ago',
+    enforce: true
   },
   {
     user: {
@@ -335,7 +358,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'norway.svg',
       name: 'Norway'
     },
-    activity: 'Today, 11:53 am'
+    activity: 'Today, 11:53 am',
+    enforce: true
   },
   {
     user: {
@@ -349,7 +373,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'denmark.svg',
       name: 'Denmark'
     },
-    activity: 'Current session'
+    activity: 'Current session',
+    enforce: false
   },
   {
     user: {
@@ -363,7 +388,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'austria.svg',
       name: 'Austria'
     },
-    activity: 'Month ago'
+    activity: 'Month ago',
+    enforce: true
   },
   {
     user: {
@@ -377,7 +403,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'poland.svg',
       name: 'Poland'
     },
-    activity: 'Today, 15:02'
+    activity: 'Today, 15:02',
+    enforce: true
   },
   {
     user: {
@@ -391,7 +418,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'switzerland.svg',
       name: 'Switzerland'
     },
-    activity: 'Current session'
+    activity: 'Current session',
+    enforce: true
   },
   {
     user: {
@@ -405,7 +433,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'finland.svg',
       name: 'Finland'
     },
-    activity: 'Current session'
+    activity: 'Current session',
+    enforce: true
   },
   {
     user: {
@@ -419,7 +448,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'ireland.svg',
       name: 'Ireland'
     },
-    activity: 'Week ago'
+    activity: 'Week ago',
+    enforce: true
   },
   {
     user: {
@@ -433,7 +463,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'portugal.svg',
       name: 'Portugal'
     },
-    activity: 'Current session'
+    activity: 'Current session',
+    enforce: true
   },
   {
     user: {
@@ -447,7 +478,8 @@ const StoreClientsData: IStoreClientsData[] = [
       flag: 'estonia.svg',
       name: 'Estonia'
     },
-    activity: 'Current session'
+    activity: 'Current session',
+    enforce: true
   }
 ];
 

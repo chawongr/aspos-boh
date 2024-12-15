@@ -733,5 +733,20 @@ module.exports = {
         },
       });
     },
+    function ({ addComponents }) {
+      addComponents({
+        '.editBtn': {
+          backgroundColor: '#FFF5B9',
+          color: '#9F8C1F',          
+          padding: '0.5rem 0.7rem',   
+          borderRadius: '0.5rem',  
+          fontWeight: '500',        
+          transition: 'background-color 0.2s ease-in-out',
+          '&:hover': {
+            backgroundColor: '#F1DD6A',
+          },
+        },
+      });
+    },
   ]
 };
