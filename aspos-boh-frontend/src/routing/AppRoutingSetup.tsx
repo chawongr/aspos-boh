@@ -16,9 +16,30 @@ import {
   NetworkVisitorsPage
 } from '@/pages/network';
 
-import { SalesEnquiryPage, CashierEnquiryPage, MajorEnquiryPage } from '@/pages/dashboards'
+import { 
+  SalesEnquiryPage, 
+  CashierEnquiryPage, 
+  MajorEnquiryPage 
+} from '@/pages/dashboards'
 
-import { FamilyGroupPage, MenuItemPage, MajorGroupPage, KitchenPrinterPage,PCTablePage,PrinterPage } from '@/pages/pos-configuration'
+import { 
+  FamilyGroupPage, 
+  MenuItemPage, 
+  MajorGroupPage, 
+  KitchenPrinterPage,
+  PCTablePage,
+  PrinterPage
+} from '@/pages/pos-configuration'
+
+import{
+  GoodReceiptPage,
+  ItemTypePage,
+  ItemsPage,
+  StockCountPage,
+  SupplierPage
+
+  
+}from '@/pages/inventory-management'
 
 import { SystemSettingPage } from '@/pages/system-setting'
 
@@ -47,7 +68,11 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/system-setting" element={<SystemSettingPage />} />
           {/* <Route path="/system-setting" element={<AccountUserProfilePage />} /> */}
 
-
+          <Route path="/inventory-manage/goods-receipt" element={<GoodReceiptPage />} />
+          <Route path="/inventory-manage/item-type" element={<ItemTypePage />} />
+          <Route path="/inventory-manage/items" element={<ItemsPage />} />
+          <Route path="/inventory-manage/stock-count" element={<StockCountPage />} />
+          <Route path="/inventory-manage/supplier" element={<SupplierPage />} />
 
           <Route path="/account/home/user-profile" element={<AccountUserProfilePage />} />
           <Route path="/account/home/settings-plain" element={<AccountSettingsPlainPage />} />
