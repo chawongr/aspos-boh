@@ -76,6 +76,31 @@ export const MENU_SIDEBAR: TMenuConfig = [
     path: '/system-setting'
   },
   {
+    title: 'Inventory Management',
+    icon: 'setting-2',
+    children: [
+      {
+        title: 'Goods Receipt',
+        path: '/inventory-manage/goods-receipt'
+      },
+      {
+        title: 'Item Type',
+        path: '/inventory-manage/item-type'
+      },
+      {
+        title: 'Items',
+        path: '/inventory-manage/items'
+      },
+      {
+        title: 'Stock Count',
+        path: '/inventory-manage/stock-count'
+      },{
+        title: 'Supplier',
+        path: '/inventory-manage/supplier'
+      },
+    ]
+  },
+  {
     title: 'Network',
     icon: 'users',
     children: [

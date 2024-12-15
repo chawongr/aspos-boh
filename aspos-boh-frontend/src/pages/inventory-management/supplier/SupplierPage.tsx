@@ -4,16 +4,15 @@ import { Container } from '@/components/container';
 
 import {
   Toolbar,
-  ToolbarActions,
   ToolbarDescription,
   ToolbarHeading,
   ToolbarPageTitle
 } from '@/partials/toolbar';
 
-import { MenuItemContent } from '.';
+import { SupplierContent } from '.';
 import { useLayout } from '@/providers';
 
-const MenuItemPage = () => {
+const SupplierPage = () => {
   const { currentLayout } = useLayout();
 
   return (
@@ -25,24 +24,19 @@ const MenuItemPage = () => {
               <ToolbarPageTitle />
               <ToolbarDescription>
                 <div className="flex items-center flex-wrap gap-1.5 font-medium">
-                  <span className="text-md text-gray-600">Menu Items Management</span>
+                  <span className="text-md text-gray-600"></span>
                 </div>
               </ToolbarDescription>
             </ToolbarHeading>
-            <ToolbarActions>
-              <a href="#" className="btn btn-sm btn-primary">
-                Add New Item
-              </a>
-            </ToolbarActions>
           </Toolbar>
         </Container>
       )}
 
       <Container>
-        <MenuItemContent/>
+        <SupplierContent/>
       </Container>
     </Fragment>
   );
 };
 
-export { MenuItemPage };
+export { SupplierPage };

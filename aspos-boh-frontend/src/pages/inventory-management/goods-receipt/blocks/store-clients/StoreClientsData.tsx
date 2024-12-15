@@ -44,7 +44,7 @@ const StoreClientsData: IStoreClientsData[] = [
       name: 'Malaysia'
     },
     activity: 'Week ago',
-    enforce: true
+    enforce: false
   },
   {
     user: {
@@ -284,7 +284,7 @@ const StoreClientsData: IStoreClientsData[] = [
       name: 'Spain'
     },
     activity: '3 days ago',
-    enforce: true
+    enforce: false
   },
   {
     user: {
@@ -314,7 +314,7 @@ const StoreClientsData: IStoreClientsData[] = [
       name: 'Netherlands'
     },
     activity: 'Current session',
-    enforce: true
+    enforce: false
   },
   {
     user: {
@@ -359,7 +359,7 @@ const StoreClientsData: IStoreClientsData[] = [
       name: 'Norway'
     },
     activity: 'Today, 11:53 am',
-    enforce: true
+    enforce: false
   },
   {
     user: {
@@ -374,7 +374,7 @@ const StoreClientsData: IStoreClientsData[] = [
       name: 'Denmark'
     },
     activity: 'Current session',
-    enforce: false
+    enforce: true
   },
   {
     user: {

@@ -9,6 +9,7 @@ import { ColumnDef, Column, RowSelectionState } from '@tanstack/react-table';
 import { StoreClientsData, IStoreClientsData } from '.';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
+import { ToolbarDescription } from '@/partials/toolbar';
 
 interface IColumnFilterProps<TData, TValue> {
   column: Column<TData, TValue>;
@@ -49,7 +50,7 @@ const StoreClients = () => {
       {
         accessorFn: (row) => row.clientId,
         id: 'clientId',
-        header: ({ column }) => <DataGridColumnHeader title="Item Code" column={column} />,
+        header: ({ column }) => <DataGridColumnHeader title="Code" column={column} />,
         enableSorting: true,
         cell: (info: any) => info.row.original.clientId,
         meta: {
@@ -69,67 +70,13 @@ const StoreClients = () => {
         }
       },
       {
-        accessorFn: (row) => row.user.name,
-        id: 'user',
-        header: ({ column }) => <DataGridColumnHeader title="Major Group" column={column} />,
+        accessorFn: (row) => row.enforce,
+        id: 'enforce',
+        header: ({ column }) => <DataGridColumnHeader title="Active" column={column} />,
         enableSorting: true,
-        cell: (info: any) => info.row.original.user.name,
+        cell: (info: any) => <EnforceSwitch enforce={info.row.original.enforce} />,
         meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.user.name,
-        id: 'user',
-        header: ({ column }) => <DataGridColumnHeader title="Family Group" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.user.name,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.ordersValue,
-        id: 'ordersValue',
-        header: ({ column }) => <DataGridColumnHeader title="Price" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.ordersValue,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-      {
-        accessorFn: (row) => row.clientId,
-        id: 'clientId',
-        header: ({ column }) => <DataGridColumnHeader title="Lastest Update" column={column} />,
-        enableSorting: true,
-        cell: (info: any) => info.row.original.clientId,
-        meta: {
-          headerClassName: 'min-w-[150px]',
-          cellClassName: 'text-gray-800 font-normal'
-        }
-      },
-       {
-          accessorFn: (row) => row.enforce,
-          id: 'enforce',
-          header: ({ column }) => <DataGridColumnHeader title="Active" column={column} />,
-          enableSorting: true,
-          cell: (info: any) => <EnforceSwitch enforce={info.row.original.enforce} />,
-          meta: {
-            headerClassName: 'min-w-[137px]',
-            cellClassName: 'text-gray-800 font-medium'
-          }
-        },     
-      {
-        id: 'actions',
-        header: ({ column }) => <DataGridColumnHeader title="Edit Item" column={column} />,
-        enableSorting: true,
-        cell: () => <button className="editBtn">Edit Item</button>,
-        meta: {
-          headerClassName: 'w-28',
+          headerClassName: 'min-w-[137px]',
           cellClassName: 'text-gray-800 font-medium'
         }
       },
@@ -176,16 +123,23 @@ const StoreClients = () => {
   };
 
   return (
-    <DataGrid
-      columns={columns}
-      data={data}
-      rowSelection={true}
-      onRowSelectionChange={handleRowSelection}
-      pagination={{ size: 5 }}
-      sorting={[{ id: 'user', desc: false }]}
-      toolbar={<Toolbar />}
-      layout={{ card: true }}
-    />
+    <div>
+      <ToolbarDescription>
+        <div className="flex items-center flex-wrap gap-1.5 font-medium mt-8 mb-3">
+          <span className="text-md text-[#071437]">(Description Table)</span>
+        </div>
+      </ToolbarDescription>
+      <DataGrid
+        columns={columns}
+        data={data}
+        rowSelection={true}
+        onRowSelectionChange={handleRowSelection}
+        pagination={{ size: 5 }}
+        sorting={[{ id: 'user', desc: false }]}
+        toolbar={<Toolbar />}
+        layout={{ card: true }}
+      />
+    </div>
   );
 };
 
