@@ -29,7 +29,7 @@ const StoreClientsFilter = () => {
                     <label className="form-label max-w-32">Store Group</label>
                     <div className="grid gap-5 grow items-start">
                         <Select defaultValue="all">
-                            <SelectTrigger size="sm">
+                            <SelectTrigger size="md">
                                 <SelectValue placeholder="Select" />
                             </SelectTrigger>
                             <SelectContent>
@@ -42,7 +42,7 @@ const StoreClientsFilter = () => {
                     <label className="form-label max-w-32">Store</label>
                     <div className="grid gap-5 grow items-start">
                         <Select defaultValue="foodRepublic">
-                            <SelectTrigger size="sm">
+                            <SelectTrigger size="md">
                                 <SelectValue placeholder="Select" />
                             </SelectTrigger>
                             <SelectContent>
@@ -57,7 +57,7 @@ const StoreClientsFilter = () => {
                     <label className="form-label max-w-32">RVC</label>
                     <div className="grid gap-5 grow items-start">
                         <Select defaultValue="registration">
-                            <SelectTrigger size="sm">
+                            <SelectTrigger size="md">
                                 <SelectValue placeholder="Select" />
                             </SelectTrigger>
                             <SelectContent>
@@ -72,7 +72,7 @@ const StoreClientsFilter = () => {
                     <label className="form-label max-w-32">PC</label>
                     <div className="grid gap-5 grow items-start">
                         <Select defaultValue="1">
-                            <SelectTrigger size="sm">
+                            <SelectTrigger size="md">
                                 <SelectValue placeholder="Select" />
                             </SelectTrigger>
                             <SelectContent>

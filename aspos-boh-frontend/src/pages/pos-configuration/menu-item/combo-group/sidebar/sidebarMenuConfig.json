@@ -6,12 +6,12 @@
             "path": "/dashboard",
             "children": [
                 {
-                    "name": "Combo Item",
+                    "name": "Combo Item1",
                     "path": "/users/all"
 
                 },
                 {
-                    "name": "Combo Item",
+                    "name": "Combo Item2",
                     "path": "/users/add"
                 }
             ]
