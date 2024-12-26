@@ -182,3 +182,20 @@ export interface IMenuBreadcrumb {
 }
 
 export type TMenuBreadcrumbs = IMenuBreadcrumb[];
+
+export interface IMenuItem {
+  name: string;  
+  icon?: string;             
+  path?: string;             
+  children?: IMenuItem[];     
+  disabled?: boolean;        
+  heading?: string;
+}
+
+export interface Menu {
+  menuItems: IMenuItem[];      
+}
+
+
+
+
