@@ -5,7 +5,6 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-    SelectTitle
 } from '@/components/ui/select';
 
 const DetailTab = () => {
@@ -52,30 +51,6 @@ const DetailTab = () => {
                             </div>
                         </div>
                     ))}
-                    {/* <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-                        <span className="form-label max-w-32 w-full">Price 1</span>
-                        <div className="grow min-w-48">
-                            <input className="input w-full" type="number" placeholder="Enter Quantity" />
-                        </div>
-                    </div>
-                    <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-                        <span className="form-label max-w-32 w-full">Price 2</span>
-                        <div className="grow min-w-48">
-                            <input className="input w-full" type="number" placeholder="Enter Quantity" />
-                        </div>
-                    </div>
-                    <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-                        <span className="form-label max-w-32 w-full">Price 3</span>
-                        <div className="grow min-w-48">
-                            <input className="input w-full" type="number" placeholder="Enter Quantity" />
-                        </div>
-                    </div>
-                    <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-                        <span className="form-label max-w-32 w-full">Price 4</span>
-                        <div className="grow min-w-48">
-                            <input className="input w-full" type="number" placeholder="Enter Quantity" />
-                        </div>
-                    </div> */}
                 </div>
             </div>
         </div>
