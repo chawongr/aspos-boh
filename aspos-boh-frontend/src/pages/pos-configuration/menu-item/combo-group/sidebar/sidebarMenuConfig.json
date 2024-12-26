@@ -1,0 +1,49 @@
+{
+    "menuItems": [
+        {
+            "name": "CB01 Combo1",
+            "icon": "folder",
+            "path": "/dashboard",
+            "children": [
+                {
+                    "name": "Combo Item",
+                    "path": "/users/all"
+
+                },
+                {
+                    "name": "Combo Item",
+                    "path": "/users/add"
+                }
+            ]
+        },
+        {
+            "name": "CB02 Combo2",
+            "icon": "folder",
+            "children": [
+                {
+                    "name": "Combo Item",
+                    "path": "/users/all"
+                },
+                {
+                    "name": "Combo Item",
+                    "path": "/users/add"
+                }
+            ]
+        },
+        {
+            "name": "CB03 Combo3",
+            "icon": "folder",
+            "disabled": true
+        },
+        {
+            "name": "CB04 Combo4",
+            "icon": "folder",
+            "path": "/settings/general"
+        },
+        {
+            "name": "CB05 Combo5",
+            "icon": "folder",
+            "path": "/settings/general"
+        }
+    ]
+}

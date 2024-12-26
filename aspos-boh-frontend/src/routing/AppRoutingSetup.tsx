@@ -28,7 +28,8 @@ import {
   MajorGroupPage, 
   KitchenPrinterPage,
   PCTablePage,
-  PrinterPage
+  PrinterPage,
+  ComboGroupPage
 } from '@/pages/pos-configuration'
 
 import{
@@ -59,8 +60,10 @@ const AppRoutingSetup = (): ReactElement => {
 
           <Route path="/pos-config/family-group" element={<FamilyGroupPage />} />
           <Route path="/pos-config/menu-item" element={<MenuItemPage />} />
-          <Route path="/pos-config/major-group" element={<MajorGroupPage />} />
+          <Route path="/pos-config/menu-item/combo-group" element={<ComboGroupPage />} />
 
+          <Route path="/pos-config/major-group" element={<MajorGroupPage />} />
+          
           <Route path="/pos-config/device/pc-table" element={<PCTablePage />} />
           <Route path="/pos-config/device/printer" element={<PrinterPage />} />
           <Route path="/pos-config/device/kitchen-printer" element={<KitchenPrinterPage />} />
