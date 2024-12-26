@@ -73,7 +73,12 @@ export const MENU_SIDEBAR: TMenuConfig = [
   {
     title: 'System Setting',
     icon: 'users',
-    path: '/system-setting'
+    children: [
+      {
+        title: 'System Setting',
+        path: '/system-setting',
+      }
+    ],
   },
   {
     title: 'Inventory Management',

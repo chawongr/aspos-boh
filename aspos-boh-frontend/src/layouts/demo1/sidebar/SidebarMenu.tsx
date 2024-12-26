@@ -81,17 +81,17 @@ const SidebarMenu = () => {
               linkPy
             )}
           >
-            <MenuIcon className={clsx('items-start text-gray-500 dark:text-gray-400', iconWidth)}>
+            <MenuIcon className={clsx('items-start text-[#c4d6fb]', iconWidth)}>
               {item.icon && <KeenIcon icon={item.icon} className={iconSize} />}
             </MenuIcon>
-            <MenuTitle className="text-sm font-medium text-gray-800 menu-item-active:text-primary menu-link-hover:!text-primary">
+            <MenuTitle className="text-sm font-medium text-[#c4d6fb] menu-item-active:text-gray-500 menu-link-hover:!text-white">
               {item.title}
             </MenuTitle>
             {buildMenuArrow()}
           </MenuLink>
           <MenuSub
             className={clsx(
-              'relative before:absolute before:top-0 before:bottom-0 before:border-s before:border-gray-200',
+              'relative before:absolute before:top-0 before:bottom-0 before:border-s before:border-[#c4d6fb]',
               itemsGap,
               accordionBorderLeft[0],
               accordionPl[0]
@@ -184,7 +184,7 @@ const SidebarMenu = () => {
                 <span className="flex menu-item-show:hidden">{item.expandTitle}</span>
               </MenuTitle>
             ) : (
-              <MenuTitle className="text-2sm font-normal me-1 text-gray-800 menu-item-active:text-primary menu-item-active:font-medium menu-link-hover:!text-primary">
+              <MenuTitle className="text-2sm font-normal me-1 text-[#c4d6fb] menu-item-active:text-primary menu-item-active:font-medium menu-link-hover:!text-white">
                 {item.title}
               </MenuTitle>
             )}
@@ -194,7 +194,7 @@ const SidebarMenu = () => {
           <MenuSub
             className={clsx(
               !item.collapse &&
-                'relative before:absolute before:top-0 before:bottom-0 before:border-s before:border-gray-200',
+                'relative before:absolute before:top-0 before:bottom-0 before:border-s before:border-[#c4d6fb]',
               itemsGap,
               !item.collapse && accordionBorderLeft[level],
               !item.collapse && accordionPl[level],
@@ -211,7 +211,7 @@ const SidebarMenu = () => {
           <MenuLink
             path={item.path}
             className={clsx(
-              'border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg',
+              'border border-transparent items-center grow menu-item-active:bg-white menu-item-active:bg-opacity-20 menu-item-active:border-[#c4d6fb] dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg',
               accordionLinkGap[level],
               accordionLinkPl,
               linkPr,
@@ -219,7 +219,7 @@ const SidebarMenu = () => {
             )}
           >
             {buildMenuBullet()}
-            <MenuTitle className="text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
+            <MenuTitle className="text-2sm font-normal text-[#c4d6fb] menu-item-active:text-white menu-item-active:font-semibold menu-link-hover:!text-white"> 
               {item.title}
             </MenuTitle>
           </MenuLink>
@@ -271,7 +271,7 @@ const SidebarMenu = () => {
 
   const buildMenuBullet = () => {
     return (
-      <MenuBullet className="flex w-[6px] -start-[3px] rtl:start-0 relative before:absolute before:top-0 before:size-[6px] before:rounded-full rtl:before:translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary"></MenuBullet>
+      <MenuBullet className="flex w-[6px] -start-[3px] rtl:start-0 relative before:absolute before:top-0 before:size-[6px] before:rounded-full rtl:before:translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-white menu-item-hover:before:bg-primary"></MenuBullet>
     );
   };
 

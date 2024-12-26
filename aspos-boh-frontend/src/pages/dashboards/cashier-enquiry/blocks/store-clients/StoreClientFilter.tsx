@@ -20,7 +20,7 @@ const StoreClientsFilter = () => {
     const [date, setDate] = useState<Date | undefined>(new Date());
 
     return (
-        <div className="card mb-7">
+        <div className="card">
             <div className="card-header" id="webhooks">
                 <h3 className="card-title">Filter</h3>
             </div>
