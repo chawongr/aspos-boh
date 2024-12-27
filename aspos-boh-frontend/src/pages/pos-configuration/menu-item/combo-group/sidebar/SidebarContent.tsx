@@ -5,7 +5,7 @@ const SidebarContent = () => {
   return (
     <div>
       <div className="scrollable-y-hover mr-4">
-        <div className='flex'>
+        <div className='flex mb-4'>
           <label className="input input-sm mb-2">
             <KeenIcon icon="magnifier" />
             <input

@@ -235,12 +235,12 @@ const SidebarMenu = () => {
             {showComboDot && (
               <div className="absolute z-10  right-0 bg-gray-50 px-4 py-2 rounded-lg border border-gray-300 divide-y divide-gray-300 ">
                 <button className='flex gap-2 w-full pb-2'>
-                  <div className='text-primary text-xl'><KeenIcon icon="add-files" /></div>
-                  <div className='text-md my-auto'>Add Menu Item</div>
+                  <div className='text-blue-600 text-xl'><KeenIcon icon="add-files" /></div>
+                  <div className='text-md my-auto text-blue-600'>Add Menu Item</div>
                 </button>
                 <button className='flex gap-2 w-full pt-2'>
                   <div className='text-red-500 text-xl'><KeenIcon icon="delete-folder" /></div>
-                  <div className='text-md my-auto'>Combo Group</div>
+                  <div className='text-md my-auto text-red-500'>Combo Group</div>
                 </button>
               </div>
             )}
@@ -287,8 +287,6 @@ const SidebarMenu = () => {
       );
     }
   };
-
-  // Other buildMenuItemChild, buildMenuItemChildDisabled, buildMenuSoon methods stay the same
 
   return (
     <Menu highlight={true} multipleExpand={false} className={clsx('flex flex-col grow', itemsGap)}>
