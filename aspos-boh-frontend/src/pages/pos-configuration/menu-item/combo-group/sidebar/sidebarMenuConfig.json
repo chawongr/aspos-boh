@@ -3,16 +3,13 @@
         {
             "name": "CB01 Combo1",
             "icon": "folder",
-            "path": "/dashboard",
             "children": [
                 {
-                    "name": "Combo Item1",
-                    "path": "/users/all"
+                    "name": "Combo Item1"
 
                 },
                 {
-                    "name": "Combo Item2",
-                    "path": "/users/add"
+                    "name": "Combo Item2"
                 }
             ]
         },
@@ -21,12 +18,10 @@
             "icon": "folder",
             "children": [
                 {
-                    "name": "Combo Item",
-                    "path": "/users/all"
+                    "name": "Combo Item"
                 },
                 {
-                    "name": "Combo Item",
-                    "path": "/users/add"
+                    "name": "Combo Item"
                 }
             ]
         },
@@ -37,13 +32,11 @@
         },
         {
             "name": "CB04 Combo4",
-            "icon": "folder",
-            "path": "/settings/general"
+            "icon": "folder"
         },
         {
             "name": "CB05 Combo5",
-            "icon": "folder",
-            "path": "/settings/general"
+            "icon": "folder"
         }
     ]
 }
