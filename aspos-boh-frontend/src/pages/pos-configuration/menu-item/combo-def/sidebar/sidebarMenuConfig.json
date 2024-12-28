@@ -1,0 +1,42 @@
+{
+    "menuItems": [
+        {
+            "name": "CB01 Combo1",
+            "icon": "folder",
+            "children": [
+                {
+                    "name": "Combo Item1"
+
+                },
+                {
+                    "name": "Combo Item2"
+                }
+            ]
+        },
+        {
+            "name": "CB02 Combo2",
+            "icon": "folder",
+            "children": [
+                {
+                    "name": "Combo Item"
+                },
+                {
+                    "name": "Combo Item"
+                }
+            ]
+        },
+        {
+            "name": "CB03 Combo3",
+            "icon": "folder",
+            "disabled": true
+        },
+        {
+            "name": "CB04 Combo4",
+            "icon": "folder"
+        },
+        {
+            "name": "CB05 Combo5",
+            "icon": "folder"
+        }
+    ]
+}

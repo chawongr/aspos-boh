@@ -78,8 +78,8 @@ const DetailTab = () => {
                                 <SelectValue placeholder="Select" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="cbi1">Combo Item1</SelectItem>
-                                <SelectItem value="cbi2">Combo Item2</SelectItem>
+                                <SelectItem value="cbi1">Combo Item 1</SelectItem>
+                                <SelectItem value="cbi2">Combo Item 2</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>

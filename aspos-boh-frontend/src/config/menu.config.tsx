@@ -32,7 +32,7 @@ export const MENU_SIDEBAR: TMenuConfig = [
             path: '/pos-config/menu-item/combo-group'
           },
           {
-            title: 'Combo Def',
+            title: 'Combo Definition',
             path: '/pos-config/menu-item/combo-def'
           },
         ]

@@ -1,4 +1,4 @@
-import { SidebarMenu } from './';
+import { SidebarMenu } from '.';
 import { KeenIcon } from '@/components';
 
 const SidebarContent = () => {
@@ -10,7 +10,7 @@ const SidebarContent = () => {
             <KeenIcon icon="magnifier" />
             <input
               type="text"
-              placeholder="Search combo group..."
+              placeholder="Search combo definition..."
               className=''
             />
           </label>

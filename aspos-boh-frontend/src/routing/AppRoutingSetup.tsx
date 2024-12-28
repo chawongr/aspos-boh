@@ -35,6 +35,8 @@ import {
   SystemUrlPage
 } from '@/pages/pos-configuration'
 
+import { ComboDefPage } from '@/pages/pos-configuration/menu-item/combo-def'
+
 import{
   GoodReceiptPage,
   ItemTypePage,
@@ -64,6 +66,8 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/pos-config/family-group" element={<FamilyGroupPage />} />
           <Route path="/pos-config/menu-item" element={<MenuItemPage />} />
           <Route path="/pos-config/menu-item/combo-group" element={<ComboGroupPage />} />
+          <Route path="/pos-config/menu-item/combo-def" element={<ComboDefPage />} />
+
 
           <Route path="/pos-config/major-group" element={<MajorGroupPage />} />
           
