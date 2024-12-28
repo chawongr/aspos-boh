@@ -6,6 +6,7 @@ import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
+import { Checkbox } from './Checkbox';
 
 const Select = SelectPrimitive.Root;
 
@@ -177,6 +178,51 @@ const SelectTitle = React.forwardRef<
 ));
 SelectTitle.displayName = 'SelectTitle';
 
+// MultiSelect Component
+const MultiSelect = ({
+  items,
+  onChange,
+}: {
+  items: { value: string; label: string }[];
+  onChange: (selectedItems: Set<string>) => void;
+}) => {
+  const [selectedItems, setSelectedItems] = React.useState<Set<string>>(new Set());
+
+  const toggleSelection = (value: string) => {
+    const newSelection = new Set(selectedItems);
+    if (newSelection.has(value)) {
+      newSelection.delete(value);
+    } else {
+      newSelection.add(value);
+    }
+    setSelectedItems(newSelection);
+    onChange(newSelection);
+  };
+
+  return (
+    <Select>
+      <SelectTrigger>
+        {selectedItems.size > 0
+          ? `${selectedItems.size} selected`
+          : 'Select items...'}
+      </SelectTrigger>
+      <SelectContent>
+        {items.map((item) => (
+          <div
+            key={item.value}
+            className="flex items-center space-x-2 p-2 cursor-pointer hover:bg-gray-100"
+            onClick={() => toggleSelection(item.value)}
+          >
+            <Checkbox checked={selectedItems.has(item.value)} />
+            <span className="text-sm">{item.label}</span>
+          </div>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+};
+
+
 export {
   Select,
   SelectGroup,
@@ -188,5 +234,6 @@ export {
   SelectSeparator,
   SelectScrollUpButton,
   SelectScrollDownButton,
-  SelectTitle
+  SelectTitle,
+  MultiSelect
 };

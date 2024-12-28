@@ -1,43 +1,40 @@
 import { Fragment } from 'react';
 
 import { Container } from '@/components/container';
-
 import {
   Toolbar,
   ToolbarDescription,
   ToolbarHeading,
-  ToolbarPageTitle
 } from '@/partials/toolbar';
 
-import { ComboGroupContent } from '.';
+import { SystemOptionContent } from '.';
 import { useLayout } from '@/providers';
+import { PageNavbar } from '@/pages/pos-configuration/system';
 
-const ComboGroupPage = () => {
+const SystemOptionPage = () => {
   const { currentLayout } = useLayout();
 
   return (
     <Fragment>
+
       {currentLayout?.name === 'demo1-layout' && (
         <Container>
           <Toolbar>
             <ToolbarHeading>
-              <ToolbarPageTitle />
-              <ToolbarDescription>
-                <div className="flex items-center flex-wrap gap-1.5 font-medium">
-                  <span className="text-md text-gray-600">Combo group management</span>
-                </div>
-              </ToolbarDescription>
+              <h1 className="text-xl font-medium leading-none text-gray-900">System</h1>
+              <ToolbarDescription>System POS Management</ToolbarDescription>
             </ToolbarHeading>
-        
           </Toolbar>
         </Container>
       )}
 
+      <PageNavbar />
+
       <Container>
-        <ComboGroupContent/>
+        <SystemOptionContent />
       </Container>
     </Fragment>
   );
 };
 
-export { ComboGroupPage };
+export { SystemOptionPage };
