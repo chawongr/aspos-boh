@@ -7,7 +7,6 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  MultiSelect
 } from '@/components/ui/select';
 
 const GeneralMain = () => {
@@ -30,7 +29,6 @@ const GeneralMain = () => {
             <span className="form-label max-w-32 w-full">Store Name</span>
             <div className="grow min-w-48">
               <span className="text-2sm text-gray-700 w-full">James Capenter</span>
-                {/* <input className="input w-full" type="text" placeholder="Enter Combo Code" value="CB01 Combo1" /> */}
             </div>
           </div>
 

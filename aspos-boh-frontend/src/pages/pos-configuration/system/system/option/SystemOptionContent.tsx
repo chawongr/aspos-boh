@@ -1,8 +1,3 @@
-import { Fragment } from 'react';
-
-import { IHighlightedPostsItems, MiscHighlightedPosts } from '@/partials/misc';
-import { toAbsoluteUrl } from '@/utils';
-
 import { GeneralOption } from './blocks';
 
 const SystemOptionContent = () => {

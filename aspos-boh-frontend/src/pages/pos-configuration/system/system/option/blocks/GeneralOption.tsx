@@ -1,14 +1,4 @@
 import { useState } from 'react';
-import { KeenIcon } from '@/components';
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  MultiSelect
-} from '@/components/ui/select';
 
 const GeneralOption = () => {
   return (

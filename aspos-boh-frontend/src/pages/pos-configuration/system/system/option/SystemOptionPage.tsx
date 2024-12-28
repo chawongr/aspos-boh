@@ -3,10 +3,8 @@ import { Fragment } from 'react';
 import { Container } from '@/components/container';
 import {
   Toolbar,
-  ToolbarActions,
   ToolbarDescription,
   ToolbarHeading,
-  ToolbarPageTitle
 } from '@/partials/toolbar';
 
 import { SystemOptionContent } from '.';
@@ -23,15 +21,9 @@ const SystemOptionPage = () => {
         <Container>
           <Toolbar>
             <ToolbarHeading>
-              {/* <ToolbarPageTitle /> */}
               <h1 className="text-xl font-medium leading-none text-gray-900">System</h1>
               <ToolbarDescription>System POS Management</ToolbarDescription>
             </ToolbarHeading>
-            {/* <ToolbarActions>
-              <div className="btn btn-sm btn-primary">
-                Save
-              </div>
-            </ToolbarActions> */}
           </Toolbar>
         </Container>
       )}
