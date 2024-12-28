@@ -6,7 +6,8 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
+  MultiSelect
 } from '@/components/ui/select';
 
 const GeneralMain = () => {
@@ -130,6 +131,7 @@ const GeneralMain = () => {
               <label className="form-label max-w-32"></label>
               <div className="switch switch-sm grow flex justify-start">
                 <input type="checkbox" value="1" name="check" defaultChecked readOnly />
+                <span className="text-gray-800 text-sm">Allowed</span>
               </div>
           </div>
 
@@ -209,9 +211,30 @@ const GeneralMain = () => {
                   </Select>
               </div>
           </div>
-          
 
-          {/* <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+          <div className="flex items-baseline flex-wrap gap-2.5">
+              <label className="form-label max-w-32">Approver User</label>
+              <div className="grid gap-5 grow items-start">
+                  <Select defaultValue="user1">
+                      <SelectTrigger size="md">
+                          <SelectValue placeholder="Select"  />
+                      </SelectTrigger>
+                      <SelectContent>
+                          <SelectItem value="user1" className='checkbox-label'>user 1</SelectItem>
+                      </SelectContent>
+                  </Select>
+              </div>
+          </div>
+
+          {/* <div className="flex flex-col gap-2.5">
+              <label className="checkbox-group">
+                <input className="checkbox" name="attributes" type="checkbox" value="1" readOnly />
+                <span className="checkbox-label">Show list names</span>
+              </label>
+              <div className="form-hint">See the name next to each icon</div>
+            </div> 
+            
+          <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
             <span className="form-label w-full">24hr Time</span>
             <div className="switch switch-sm grow flex justify-end">
               <input type="checkbox" value="1" name="check" defaultChecked readOnly />

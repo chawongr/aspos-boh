@@ -6,7 +6,8 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
+  MultiSelect
 } from '@/components/ui/select';
 
 const GeneralOption = () => {
@@ -25,102 +26,21 @@ const GeneralOption = () => {
             </div>
           </div>
 
-          <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <span className="form-label max-w-32 w-full">Store Name</span>
-            <div className="grow min-w-48">
-              <input className="input w-full" type="text" />
-            </div>
-          </div>
-
-          <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <span className="form-label max-w-32 w-full">Version</span>
-            <div className="grow min-w-48">
-              <input className="input w-full" type="text" />
-            </div>
-          </div>
-
-          <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <span className="form-label max-w-32 w-full">Decimal Point</span>
-            <div className="grow min-w-48">
-              <input className="input w-full" type="text" />
-            </div>
-          </div>
-
-          <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <span className="form-label max-w-32 w-full">Amount Due Rounding</span>
-            <div className="grow min-w-48">
-              <input className="input w-full" type="text" />
-            </div>
-          </div>
-
-          <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <span className="form-label max-w-32 w-full">Default Tender Media</span>
-            <div className="grow min-w-48">
-              <input className="input w-full" type="text" />
-            </div>
-          </div>
-
-          <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <span className="form-label w-full">24hr Time</span>
-            <div className="switch switch-sm grow flex justify-end">
-              <input type="checkbox" value="1" name="check" defaultChecked readOnly />
-            </div>
-          </div>
-
-          <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <span className="form-label w-full">On - Weight in Pounds</span>
-            <div className="switch switch-sm grow flex justify-end">
-              <input type="checkbox" value="1" name="check" defaultChecked readOnly />
-            </div>
-          </div>
-
-          <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <span className="form-label w-full">On - Use Auto business date</span>
-            <div className="switch switch-sm grow flex justify-end">
-              <input type="checkbox" value="1" name="check" defaultChecked readOnly />
-            </div>
-          </div>
-
-          <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <span className="form-label w-full">On - Pickup control by employee</span>
-            <div className="switch switch-sm grow flex justify-end">
-              <input type="checkbox" value="1" name="check" defaultChecked readOnly />
-            </div>
-          </div>
-
-          <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <span className="form-label w-full">Perform inventory closing during end of day process</span>
-            <div className="switch switch-sm grow flex justify-end">
-              <input type="checkbox" value="1" name="check" defaultChecked readOnly />
-            </div>
-          </div>
-
-          <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <span className="form-label w-full">Do not allow inventory receipt without purchase order</span>
-            <div className="switch switch-sm grow flex justify-end">
-              <input type="checkbox" value="1" name="check" defaultChecked readOnly />
-            </div>
-          </div>
-
-          <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <span className="form-label w-full">Shutdown computer after end of day process</span>
-            <div className="switch switch-sm grow flex justify-end">
-              <input type="checkbox" value="1" name="check" defaultChecked readOnly />
-            </div>
+          <div className="flex items-baseline flex-wrap gap-2.5">
+              <label className="form-label max-w-32">Approver User</label>
+              <div className="grid gap-5 grow items-start">
+                <MultiSelect
+                  items={[
+                    { value: '1', label: 'Option 1' },
+                    { value: '2', label: 'Option 2' },
+                    { value: '3', label: 'Option 3' },
+                  ]}
+                  onChange={(selectedItems) => console.log('Selected items:', Array.from(selectedItems))}
+                />
+              </div>
           </div>
 
         </div>
-      </div>
-      <div className="card mt-7">
-        <div className="card-body grid gap-5">
-          <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-            <span className="form-label max-w-32 w-full">License</span>
-            <div className="grow min-w-48">
-              <input className="input w-full" type="text" />
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   );
