@@ -10,6 +10,9 @@ import { StoreClientsData, IStoreClientsData } from '.';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 
+import { KeenIcon } from '@/components';
+
+
 interface IColumnFilterProps<TData, TValue> {
   column: Column<TData, TValue>;
 }
@@ -218,6 +221,24 @@ const StoreClients = () => {
         <h3 className="card-title font-medium text-sm">Showing 10 of 49,053 users</h3>
         <div className="flex flex-wrap gap-2 lg:gap-5">
           <div className="flex flex-wrap gap-2.5">
+            <button className='btn btn-sm border border-cyan-500 text-cyan-500'>
+              <div className='text-xl mb-1'>
+                <KeenIcon icon="chart-simple-3" />
+              </div>
+              <div >Show footer</div>
+            </button>
+            <button className='btn btn-sm border border-[#28A745] text-[#28A745]'>
+              <div className='text-xl mb-1'>
+                <KeenIcon icon="folder-up" />
+              </div>
+              <div>Export</div>
+            </button>
+            <button className='btn btn-sm border border-[#FFA500] text-[#FFA500]'>
+              <div className='text-xl mb-1'>
+                <KeenIcon icon="folder-down" />
+              </div>
+              <div>Save As</div>
+            </button>
           </div>
         </div>
       </div>
