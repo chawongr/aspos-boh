@@ -748,5 +748,20 @@ module.exports = {
         },
       });
     },
+    function ({ addComponents }) {
+      addComponents({
+        '.loadBtn': {
+          backgroundColor: '#BCDBFF',
+          color: '#11488B',          
+          padding: '0.5rem 0.7rem',   
+          borderRadius: '0.5rem',  
+          fontWeight: '500',        
+          transition: 'background-color 0.2s ease-in-out',
+          '&:hover': {
+            backgroundColor: '#72AEF5',
+          },
+        },
+      });
+    },
   ]
 };
