@@ -32,7 +32,8 @@ import {
   ComboGroupPage,
   SystemMainPage,
   SystemOptionPage,
-  SystemUrlPage
+  SystemUrlPage,
+  HqSyncDownPage
 } from '@/pages/pos-configuration'
 
 import { ComboDefPage } from '@/pages/pos-configuration/menu-item/combo-def'
@@ -78,6 +79,7 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/pos-config/system/system/main" element={<SystemMainPage />} />
           <Route path="/pos-config/system/system/option" element={<SystemOptionPage />} />
           <Route path="/pos-config/system/system/url" element={<SystemUrlPage />} />
+          <Route path="/pos-config/system/store/hqSync" element={<HqSyncDownPage />} />
 
           <Route path="/system-setting" element={<SystemSettingPage />} />
           {/* <Route path="/system-setting" element={<AccountUserProfilePage />} /> */}
