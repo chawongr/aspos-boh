@@ -149,6 +149,16 @@ export const MENU_SIDEBAR: TMenuConfig = [
     ]
   },
   {
+    title: 'Support',
+    icon: 'setting-2',
+    children: [
+      {
+        title: 'User',
+        path: '/support/user'
+      },
+    ]
+  },
+  {
     title: 'Network',
     icon: 'users',
     children: [
