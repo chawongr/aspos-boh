@@ -173,6 +173,11 @@ export const MENU_SIDEBAR: TMenuConfig = [
     path: '/help'
   },
   {
+    title: 'Line OA',
+    icon: 'setting-2',
+    path: '/line-oa'
+  },
+  {
     title: 'Network',
     icon: 'users',
     children: [
