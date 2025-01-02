@@ -26,9 +26,7 @@ import {
   InventoryEnquiryPage
 } from '@/pages/dashboards'
 
-import {
-  HelpPage
-} from '@/pages/help'
+import { HelpPage } from '@/pages/help'
 
 import {
   FamilyGroupPage,
@@ -44,9 +42,9 @@ import {
   HqSyncDownPage,
 } from '@/pages/pos-configuration'
 
-import {
-  UserSupportPage
-} from '@/pages/support'
+import { UserSupportPage } from '@/pages/support'
+
+import { LineOAPage } from '@/pages/line-oa'
 
 import { ComboDefPage } from '@/pages/pos-configuration/menu-item/combo-def'
 
@@ -87,6 +85,7 @@ const AppRoutingSetup = (): ReactElement => {
 
           <Route path="/logs" element={<LogsPage />} />
 
+          <Route path="/line-oa" element={<LineOAPage />} />
 
           <Route path="/pos-config/device/pc-table" element={<PCTablePage />} />
           <Route path="/pos-config/device/printer" element={<PrinterPage />} />
