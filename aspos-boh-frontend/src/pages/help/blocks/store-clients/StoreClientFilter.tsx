@@ -25,14 +25,14 @@ const StoreClientsFilter = () => {
                 <h3 className="card-title">How can we help ?</h3>
             </div>
             <div className="card-body grid gap-5 flex justify-center">
-                <div className="flex items-baseline flex-wrap gap-2.5 w-[500px] border-blue-400 ">
-                    <div className="gap-5 grow flex items-center ">
-                        <KeenIcon icon="magnifier" className="text-gray-700 text-xl" />
+                <div className="flex items-baseline flex-wrap gap-2.5 w-[450px]  border-input border border-solid rounded-full ">
+                    <div className="gap-5 grow flex items-center mx-4">
+                        <KeenIcon icon="magnifier" className="text-gray-700 text-xl " />
                         <input
                             type="text"
                             name="query"
                             // value={searchInput}
-                            className="input px-0 border-none bg-transparent shadow-none ms-2.5"
+                            className="input px-0 border-none bg-transparent shadow-none ms-2"
                             // onChange={(e) => setSearchInput(e.target.value)}
                             placeholder="Tap to start search"
                         />
