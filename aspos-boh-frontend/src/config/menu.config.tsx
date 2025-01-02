@@ -17,6 +17,10 @@ export const MENU_SIDEBAR: TMenuConfig = [
         title: 'Major Enquiry',
         path: '/dashboard/major-enquiry'
       },
+      {
+        title: 'Inventory Enquiry',
+        path: '/dashboard/inventory-enquiry'
+      },
     ]
   },
   {
@@ -157,6 +161,11 @@ export const MENU_SIDEBAR: TMenuConfig = [
         path: '/support/user'
       },
     ]
+  },
+  {
+    title: 'Help',
+    icon: 'setting-2',
+    path: '/help'
   },
   {
     title: 'Network',
