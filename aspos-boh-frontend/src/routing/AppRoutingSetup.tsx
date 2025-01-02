@@ -40,6 +40,7 @@ import {
   SystemOptionPage,
   SystemUrlPage,
   HqSyncDownPage,
+  SystemPage
 } from '@/pages/pos-configuration'
 
 import { UserSupportPage } from '@/pages/support'
@@ -95,6 +96,7 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/pos-config/system/system/option" element={<SystemOptionPage />} />
           <Route path="/pos-config/system/system/url" element={<SystemUrlPage />} />
           <Route path="/pos-config/system/store/hqSync" element={<HqSyncDownPage />} />
+          <Route path="/pos-config/system" element={<SystemPage />} />
 
           <Route path="/support/user" element={<UserSupportPage />} />
 
