@@ -88,6 +88,10 @@ export const MENU_SIDEBAR: TMenuConfig = [
             ]
           },
           {
+            title: 'System',
+            path: '/pos-config/system',
+          },
+          {
             title: 'Store',
             path: '/pos-config/system/system',
             children: [
