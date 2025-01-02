@@ -163,6 +163,11 @@ export const MENU_SIDEBAR: TMenuConfig = [
     ]
   },
   {
+    title: 'Logs',
+    icon: 'setting-2',
+    path: '/logs'
+  },
+  {
     title: 'Help',
     icon: 'setting-2',
     path: '/help'
