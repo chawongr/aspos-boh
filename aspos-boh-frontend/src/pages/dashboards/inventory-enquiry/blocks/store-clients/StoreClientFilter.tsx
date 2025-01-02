@@ -239,15 +239,18 @@ const StoreClientsFilter = () => {
                         <div className="flex">
                             <div className='flex'>
                                 <input className="checkbox" type="checkbox" />
-                                <div className="ml-2">Dairy</div>
+                                <label className="form-label ml-2 my-auto">Dairy</label>
+
                             </div>
                             <div className='ml-10 flex'>
                                 <input className="checkbox" type="checkbox" />
-                                <div className="ml-2">Weekly</div>
+                                <label className="form-label ml-2 my-auto">Weekly</label>
+
                             </div>
                             <div className='ml-10 flex'>
                                 <input className="checkbox" type="checkbox" />
-                                <div className="ml-2">Monthly</div>
+                                <label className="form-label ml-2 my-auto">Monthly</label>
+
                             </div>
 
                         </div>
