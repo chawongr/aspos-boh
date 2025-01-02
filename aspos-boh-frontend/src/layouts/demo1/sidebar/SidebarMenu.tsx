@@ -107,7 +107,7 @@ const SidebarMenu = () => {
           <MenuLink
             path={item.path}
             className={clsx(
-              'border border-transparent menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg',
+              'border border-transparent menu-item-active:bg-white menu-item-active:bg-opacity-20 menu-item-active:border-[#c4d6fb] dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg  dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg',
               accordionLinkGap[0],
               linkPy,
               linkPl,
@@ -116,13 +116,13 @@ const SidebarMenu = () => {
           >
             <MenuIcon
               className={clsx(
-                'items-start text-gray-600 dark:text-gray-500 menu-item-active:text-primary menu-link-hover:!text-primary',
+                'items-start text-[#c4d6fb] dark:text-[#c4d6fb] menu-item-active:text-[#c4d6fb] menu-link-hover:text-[#c4d6fb]',
                 iconWidth
               )}
             >
               {item.icon && <KeenIcon icon={item.icon} className={iconSize} />}
             </MenuIcon>
-            <MenuTitle className="text-sm font-medium text-gray-800 menu-item-active:text-primary menu-link-hover:!text-primary">
+            <MenuTitle className="text-sm font-medium text-[#c4d6fb] menu-item-active:text-white menu-link-hover:!text-white">
               {item.title}
             </MenuTitle>
           </MenuLink>

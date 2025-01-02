@@ -23,6 +23,10 @@ import {
 } from '@/pages/dashboards'
 
 import { 
+  HelpPage 
+} from '@/pages/help'
+
+import { 
   FamilyGroupPage, 
   MenuItemPage, 
   MajorGroupPage, 
@@ -67,6 +71,7 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/" element={<SalesEnquiryPage />} />
           <Route path="/dashboard/cashier-enquiry" element={<CashierEnquiryPage />} />
           <Route path="/dashboard/major-enquiry" element={<MajorEnquiryPage />} />
+          <Route path="/dashboard/inventory-enquiry" element={<MajorEnquiryPage />} />
 
           <Route path="/pos-config/family-group" element={<FamilyGroupPage />} />
           <Route path="/pos-config/menu-item" element={<MenuItemPage />} />
@@ -86,6 +91,8 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/pos-config/system/store/hqSync" element={<HqSyncDownPage />} />
 
           <Route path="/support/user" element={<UserSupportPage />} />
+
+          <Route path="/help" element={<HelpPage />} />
 
           <Route path="/system-setting" element={<SystemSettingPage />} />
           {/* <Route path="/system-setting" element={<AccountUserProfilePage />} /> */}
