@@ -25,7 +25,7 @@ const HelpPage = () => {
               <ToolbarPageTitle />
               <ToolbarDescription>
                 <div className="flex items-center flex-wrap gap-1.5 font-medium">
-                  <span className="text-md text-gray-600"></span>
+                  <span className="text-md text-gray-600">Help management</span>
                 </div>
               </ToolbarDescription>
             </ToolbarHeading>
