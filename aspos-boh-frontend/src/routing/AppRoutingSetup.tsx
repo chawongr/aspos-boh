@@ -19,7 +19,8 @@ import {
 import { 
   SalesEnquiryPage, 
   CashierEnquiryPage, 
-  MajorEnquiryPage 
+  MajorEnquiryPage,
+  InventoryEnquiryPage
 } from '@/pages/dashboards'
 
 import { 
@@ -37,7 +38,7 @@ import {
   SystemMainPage,
   SystemOptionPage,
   SystemUrlPage,
-  HqSyncDownPage
+  HqSyncDownPage,
 } from '@/pages/pos-configuration'
 
 import { 
@@ -71,7 +72,7 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/" element={<SalesEnquiryPage />} />
           <Route path="/dashboard/cashier-enquiry" element={<CashierEnquiryPage />} />
           <Route path="/dashboard/major-enquiry" element={<MajorEnquiryPage />} />
-          <Route path="/dashboard/inventory-enquiry" element={<MajorEnquiryPage />} />
+          <Route path="/dashboard/inventory-enquiry" element={<InventoryEnquiryPage />} />
 
           <Route path="/pos-config/family-group" element={<FamilyGroupPage />} />
           <Route path="/pos-config/menu-item" element={<MenuItemPage />} />

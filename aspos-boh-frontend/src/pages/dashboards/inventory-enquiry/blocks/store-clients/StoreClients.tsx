@@ -10,6 +10,9 @@ import { StoreClientsData, IStoreClientsData } from '.';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 
+import { KeenIcon } from '@/components';
+
+
 interface IColumnFilterProps<TData, TValue> {
   column: Column<TData, TValue>;
 }
@@ -52,7 +55,7 @@ const StoreClients = () => {
       {
         accessorFn: (row) => row.clientId,
         id: 'clientId',
-        header: ({ column }) => <DataGridColumnHeader title="Major Group" column={column} />,
+        header: ({ column }) => <DataGridColumnHeader title="Sales Date" column={column} />,
         enableSorting: true,
         cell: (info: any) => info.row.original.clientId,
         meta: {
@@ -63,7 +66,7 @@ const StoreClients = () => {
       {
         accessorFn: (row) => row.ordersValue,
         id: 'ordersValue',
-        header: ({ column }) => <DataGridColumnHeader title="Family Group" column={column} />,
+        header: ({ column }) => <DataGridColumnHeader title="Sales Time" column={column} />,
         enableSorting: true,
         cell: (info: any) => info.row.original.ordersValue,
         meta: {
@@ -74,7 +77,7 @@ const StoreClients = () => {
       {
         accessorFn: (row) => row.clientId,
         id: 'clientId',
-        header: ({ column }) => <DataGridColumnHeader title="Stall" column={column} />,
+        header: ({ column }) => <DataGridColumnHeader title="Check No." column={column} />,
         enableSorting: true,
         cell: (info: any) => info.row.original.clientId,
         meta: {
@@ -85,7 +88,7 @@ const StoreClients = () => {
       {
         accessorFn: (row) => row.activity,
         id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Bill Count" column={column} />,
+        header: ({ column }) => <DataGridColumnHeader title="Total Selling Price" column={column} />,
         enableSorting: true,
         cell: (info: any) => info.row.original.activity,
         meta: {
@@ -96,7 +99,7 @@ const StoreClients = () => {
       {
         accessorFn: (row) => row.activity,
         id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Net Sales" column={column} />,
+        header: ({ column }) => <DataGridColumnHeader title="Gross Sales" column={column} />,
         enableSorting: true,
         cell: (info: any) => info.row.original.activity,
         meta: {
@@ -107,7 +110,84 @@ const StoreClients = () => {
       {
         accessorFn: (row) => row.activity,
         id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="AVG/Bill" column={column} />,
+        header: ({ column }) => <DataGridColumnHeader title="Total Discount" column={column} />,
+        enableSorting: true,
+        cell: (info: any) => info.row.original.activity,
+        meta: {
+          headerClassName: 'min-w-[150px]',
+          cellClassName: 'text-gray-800 font-normal'
+        }
+      },
+      {
+        accessorFn: (row) => row.activity,
+        id: 'activity',
+        header: ({ column }) => <DataGridColumnHeader title="Discount Variance" column={column} />,
+        enableSorting: true,
+        cell: (info: any) => info.row.original.activity,
+        meta: {
+          headerClassName: 'min-w-[150px]',
+          cellClassName: 'text-gray-800 font-normal'
+        }
+      },
+      {
+        accessorFn: (row) => row.activity,
+        id: 'activity',
+        header: ({ column }) => <DataGridColumnHeader title="Nest Sales" column={column} />,
+        enableSorting: true,
+        cell: (info: any) => info.row.original.activity,
+        meta: {
+          headerClassName: 'min-w-[150px]',
+          cellClassName: 'text-gray-800 font-normal'
+        }
+      },
+      {
+        accessorFn: (row) => row.activity,
+        id: 'activity',
+        header: ({ column }) => <DataGridColumnHeader title="Total Tax" column={column} />,
+        enableSorting: true,
+        cell: (info: any) => info.row.original.activity,
+        meta: {
+          headerClassName: 'min-w-[150px]',
+          cellClassName: 'text-gray-800 font-normal'
+        }
+      },
+      {
+        accessorFn: (row) => row.activity,
+        id: 'activity',
+        header: ({ column }) => <DataGridColumnHeader title="Total Sales" column={column} />,
+        enableSorting: true,
+        cell: (info: any) => info.row.original.activity,
+        meta: {
+          headerClassName: 'min-w-[150px]',
+          cellClassName: 'text-gray-800 font-normal'
+        }
+      },
+      {
+        accessorFn: (row) => row.activity,
+        id: 'activity',
+        header: ({ column }) => <DataGridColumnHeader title="Total Service" column={column} />,
+        enableSorting: true,
+        cell: (info: any) => info.row.original.activity,
+        meta: {
+          headerClassName: 'min-w-[150px]',
+          cellClassName: 'text-gray-800 font-normal'
+        }
+      },
+      {
+        accessorFn: (row) => row.activity,
+        id: 'activity',
+        header: ({ column }) => <DataGridColumnHeader title="Total Revenue" column={column} />,
+        enableSorting: true,
+        cell: (info: any) => info.row.original.activity,
+        meta: {
+          headerClassName: 'min-w-[150px]',
+          cellClassName: 'text-gray-800 font-normal'
+        }
+      },
+      {
+        accessorFn: (row) => row.activity,
+        id: 'activity',
+        header: ({ column }) => <DataGridColumnHeader title="Cashier" column={column} />,
         enableSorting: true,
         cell: (info: any) => info.row.original.activity,
         meta: {
@@ -141,6 +221,24 @@ const StoreClients = () => {
         <h3 className="card-title font-medium text-sm">Showing 10 of 49,053 users</h3>
         <div className="flex flex-wrap gap-2 lg:gap-5">
           <div className="flex flex-wrap gap-2.5">
+            <button className='btn btn-sm border border-cyan-500 text-cyan-500'>
+              <div className='text-xl mb-1'>
+                <KeenIcon icon="chart-simple-3" />
+              </div>
+              <div >Show footer</div>
+            </button>
+            <button className='btn btn-sm border border-[#28A745] text-[#28A745]'>
+              <div className='text-xl mb-1'>
+                <KeenIcon icon="folder-up" />
+              </div>
+              <div>Export</div>
+            </button>
+            <button className='btn btn-sm border border-[#FFA500] text-[#FFA500]'>
+              <div className='text-xl mb-1'>
+                <KeenIcon icon="folder-down" />
+              </div>
+              <div>Save As</div>
+            </button>
           </div>
         </div>
       </div>
