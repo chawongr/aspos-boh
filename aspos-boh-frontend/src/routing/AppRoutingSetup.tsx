@@ -8,7 +8,7 @@ import {
   AccountUserProfilePage
 } from '@/pages/account';
 
-import { LogsPage } from '@/pages/logs'
+import { LogsPage } from '@/pages/logs-page'
 
 import {
   NetworkAppRosterPage,
