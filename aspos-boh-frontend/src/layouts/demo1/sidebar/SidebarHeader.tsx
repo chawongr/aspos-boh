@@ -11,7 +11,6 @@ const SidebarHeader = forwardRef<HTMLDivElement, any>((props, ref) => {
     <Fragment>
       <Link to="/" className="dark:hidden">
         <img
-          // src={toAbsoluteUrl('/media/app/default-logo.svg')}
           src={toAbsoluteUrl('/media/app/aspos-logo.jpg')}
           className="default-logo min-h-[22px] max-w-none w-[80px]"
         />
