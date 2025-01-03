@@ -49,23 +49,23 @@ export const MENU_SIDEBAR: TMenuConfig = [
         title: 'Family Group',
         path: '/pos-config/family-group'
       },
-      {
-        title: 'Device',
-        children: [
-          {
-            title: 'PC Table',
-            path: '/pos-config/device/pc-table'
-          },
-          {
-            title: 'Printer',
-            path: '/pos-config/device/printer'
-          },
-          {
-            title: 'Kitchen Printer',
-            path: '/pos-config/device/kitchen-printer'
-          },
-        ]
-      },
+      // {
+      //   title: 'Device',
+      //   children: [
+      //     {
+      //       title: 'PC Table',
+      //       path: '/pos-config/device/pc-table'
+      //     },
+      //     {
+      //       title: 'Printer',
+      //       path: '/pos-config/device/printer'
+      //     },
+      //     {
+      //       title: 'Kitchen Printer',
+      //       path: '/pos-config/device/kitchen-printer'
+      //     },
+      //   ]
+      // },
       {
         title: 'System',
         children: [
@@ -102,44 +102,44 @@ export const MENU_SIDEBAR: TMenuConfig = [
       // }
     ]
   },
-  {
-    title: 'System Setting',
-    icon: 'users',
-    children: [
-      {
-        title: 'System Setting',
-        path: '/system-setting',
-      }
-    ],
-  },
-  {
-    title: 'Inventory Management',
-    icon: 'setting-2',
-    children: [
-      {
-        title: 'Goods Receipt',
-        path: '/inventory-manage/goods-receipt'
-      },
-      {
-        title: 'Item Type',
-        path: '/inventory-manage/item-type'
-      },
-      {
-        title: 'Items',
-        path: '/inventory-manage/items'
-      },
-      {
-        title: 'Stock Count',
-        path: '/inventory-manage/stock-count'
-      },{
-        title: 'Supplier',
-        path: '/inventory-manage/supplier'
-      },
-    ]
-  },
+  // {
+  //   title: 'System Setting',
+  //   icon: 'users',
+  //   children: [
+  //     {
+  //       title: 'System Setting',
+  //       path: '/system-setting',
+  //     }
+  //   ],
+  // },
+  // {
+  //   title: 'Inventory Management',
+  //   icon: 'setting-2',
+  //   children: [
+  //     {
+  //       title: 'Goods Receipt',
+  //       path: '/inventory-manage/goods-receipt'
+  //     },
+  //     {
+  //       title: 'Item Type',
+  //       path: '/inventory-manage/item-type'
+  //     },
+  //     {
+  //       title: 'Items',
+  //       path: '/inventory-manage/items'
+  //     },
+  //     {
+  //       title: 'Stock Count',
+  //       path: '/inventory-manage/stock-count'
+  //     },{
+  //       title: 'Supplier',
+  //       path: '/inventory-manage/supplier'
+  //     },
+  //   ]
+  // },
   {
     title: 'Support',
-    icon: 'setting-2',
+    icon: 'support',
     children: [
       {
         title: 'User',
@@ -149,54 +149,54 @@ export const MENU_SIDEBAR: TMenuConfig = [
   },
   {
     title: 'Logs',
-    icon: 'setting-2',
+    icon: 'notepad',
     path: '/logs'
   },
   {
     title: 'Help',
-    icon: 'setting-2',
+    icon: 'question-2',
     path: '/help'
   },
   {
     title: 'Line OA',
-    icon: 'setting-2',
+    icon: 'messages',
     path: '/line-oa'
   },
-  {
-    title: 'Network',
-    icon: 'users',
-    children: [
-      {
-        title: 'User Table',
-        children: [
-          {
-            title: 'Team Crew',
-            path: '/network/user-table/team-crew'
-          },
-          {
-            title: 'App Roster',
-            path: '/network/user-table/app-roster'
-          },
-          {
-            title: 'Market Authors',
-            path: '/network/user-table/market-authors'
-          },
-          {
-            title: 'SaaS Users',
-            path: '/network/user-table/saas-users'
-          },
-          {
-            title: 'Store Clients',
-            path: '/network/user-table/store-clients'
-          },
-          {
-            title: 'Visitors',
-            path: '/network/user-table/visitors'
-          }
-        ]
-      },
-    ]
-  },
+  // {
+  //   title: 'Network',
+  //   icon: 'users',
+  //   children: [
+  //     {
+  //       title: 'User Table',
+  //       children: [
+  //         {
+  //           title: 'Team Crew',
+  //           path: '/network/user-table/team-crew'
+  //         },
+  //         {
+  //           title: 'App Roster',
+  //           path: '/network/user-table/app-roster'
+  //         },
+  //         {
+  //           title: 'Market Authors',
+  //           path: '/network/user-table/market-authors'
+  //         },
+  //         {
+  //           title: 'SaaS Users',
+  //           path: '/network/user-table/saas-users'
+  //         },
+  //         {
+  //           title: 'Store Clients',
+  //           path: '/network/user-table/store-clients'
+  //         },
+  //         {
+  //           title: 'Visitors',
+  //           path: '/network/user-table/visitors'
+  //         }
+  //       ]
+  //     },
+  //   ]
+  // },
   
 ];
 
