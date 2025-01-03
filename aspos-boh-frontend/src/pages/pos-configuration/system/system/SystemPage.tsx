@@ -25,15 +25,15 @@ const SystemPage = () => {
               <ToolbarPageTitle />
               <ToolbarDescription>
                 <div className="flex items-center flex-wrap gap-1.5 font-medium">
-                  <span className="text-md text-gray-600">Sales Enquiry Management</span>
+                  <span className="text-md text-gray-600">System Management</span>
                 </div>
               </ToolbarDescription>
             </ToolbarHeading>
-            {/* <ToolbarActions>
+            <ToolbarActions>
               <a href="#" className="btn btn-sm btn-primary">
-                Download
+                Save
               </a>
-            </ToolbarActions> */}
+            </ToolbarActions>
           </Toolbar>
         </Container>
       )}

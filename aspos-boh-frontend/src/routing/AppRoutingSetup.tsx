@@ -36,9 +36,6 @@ import {
   PCTablePage,
   PrinterPage,
   ComboGroupPage,
-  SystemMainPage,
-  SystemOptionPage,
-  SystemUrlPage,
   HqSyncDownPage,
   SystemPage
 } from '@/pages/pos-configuration'
@@ -92,9 +89,6 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/pos-config/device/printer" element={<PrinterPage />} />
           <Route path="/pos-config/device/kitchen-printer" element={<KitchenPrinterPage />} />
 
-          <Route path="/pos-config/system/system/main" element={<SystemMainPage />} />
-          <Route path="/pos-config/system/system/option" element={<SystemOptionPage />} />
-          <Route path="/pos-config/system/system/url" element={<SystemUrlPage />} />
           <Route path="/pos-config/system/store/hqSync" element={<HqSyncDownPage />} />
           <Route path="/pos-config/system" element={<SystemPage />} />
 
