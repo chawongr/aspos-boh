@@ -1,0 +1,84 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useRef, useState } from 'react';
+import { useResponsive, useViewport } from '@/hooks';
+import { useDemo1Layout } from '..';
+import { SidebarContent,  } from '.';
+import clsx from 'clsx';
+import { usePathname } from '@/providers';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle
+} from '@/components/ui/sheet';
+
+export const Sidebar = () => {
+  const selfRef = useRef<HTMLDivElement>(null);
+  const { pathname, prevPathname } = usePathname();
+
+  const desktopMode = useResponsive('up', 'lg');
+  const { mobileSidebarOpen, setSidebarMouseLeave, setMobileSidebarOpen } = useDemo1Layout();
+  const { layout } = useDemo1Layout();
+  const themeClass: string =
+    layout.options.sidebar.theme === 'dark' || pathname === '/dark-sidebar'
+      ? 'dark [&.dark]:bg-coal-600'
+      : 'dark:bg-coal-600';
+
+  const handleMobileSidebarClose = () => {
+    setMobileSidebarOpen(false);
+  };
+
+  const handleMouseEnter = () => {
+    setSidebarMouseLeave(false);
+  };
+
+  const handleMouseLeave = () => {
+    setSidebarMouseLeave(true);
+  };
+
+  const renderContent = () => {
+    return (
+      <div
+        ref={selfRef}
+        onMouseLeave={handleMouseLeave}
+        onMouseEnter={handleMouseEnter}
+        className={clsx(
+          'sidebar bg-light lg:border-e lg:border-e-gray-200 dark:border-e-coal-100 lg:flex flex-col items-stretch shrink-0',
+          themeClass
+        )}
+      >
+        <SidebarContent />
+
+      </div>
+    );
+  };
+
+  useEffect(() => {
+    // Hide drawer on route chnage after menu link click
+    if (!desktopMode && prevPathname !== pathname) {
+      handleMobileSidebarClose();
+    }
+  }, [desktopMode, pathname, prevPathname]);
+
+  if (desktopMode) {
+    return renderContent();
+  } else {
+    return (
+      <Sheet open={mobileSidebarOpen} onOpenChange={setMobileSidebarOpen}>
+        <SheetContent
+          className="border-0 p-0 w-[--tw-sidebar-width] scrollable-y-auto"
+          forceMount={true}
+          side="left"
+          close={false}
+        >
+          <SheetHeader className="sr-only">
+            <SheetTitle>Mobile Menu</SheetTitle>
+            <SheetDescription></SheetDescription>
+          </SheetHeader>
+          {renderContent()}
+        </SheetContent>
+      </Sheet>
+    );
+  }
+};
