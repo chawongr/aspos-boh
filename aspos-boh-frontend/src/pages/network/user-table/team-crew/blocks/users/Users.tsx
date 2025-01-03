@@ -30,7 +30,7 @@ const Users = () => {
         className="h-9 w-full max-w-40"
       />
     );
-  };  
+  };
 
   const columns = useMemo<ColumnDef<IUsersData>[]>(
     () => [
@@ -47,11 +47,11 @@ const Users = () => {
       {
         accessorFn: (row: IUsersData) => row.user,
         id: 'users',
-        header: ({ column }) => <DataGridColumnHeader title="Member" filter={<ColumnInputFilter column={column}/>} column={column} />, 
+        header: ({ column }) => <DataGridColumnHeader title="Member" filter={<ColumnInputFilter column={column} />} column={column} />,
         enableSorting: true,
         cell: ({ row }) => {  // 'row' argumentini cell funksiyasiga qo'shdik
           return (
-            
+
             <div className="flex items-center gap-4">
               <img
                 src={toAbsoluteUrl(`/media/avatars/${row.original.user.avatar}`)}
@@ -63,10 +63,10 @@ const Users = () => {
                 <Link to="#" className="text-sm font-medium text-gray-900 hover:text-primary-active mb-px">
                   {row.original.user.userName}
                 </Link>
-                
+
                 <Link to="#" className="text-2sm text-gray-700 font-normal hover:text-primary-active">
                   {row.original.user.userGmail}
-                </Link> 
+                </Link>
               </div>
             </div>
           );
@@ -79,7 +79,7 @@ const Users = () => {
       {
         accessorFn: (row) => row.role,
         id: 'role',
-        header: ({ column }) => <DataGridColumnHeader title="Pole" column={column}/>,  
+        header: ({ column }) => <DataGridColumnHeader title="Pole" column={column} />,
         enableSorting: true,
         cell: (info) => {
           return info.row.original.role;
@@ -87,13 +87,13 @@ const Users = () => {
         meta: {
           headerClassName: 'min-w-[180px]',
         }
-      },   
+      },
       {
         accessorFn: (row) => row.status,
         id: 'status',
-        header: ({ column }) => <DataGridColumnHeader title="Status" column={column}/>,  
+        header: ({ column }) => <DataGridColumnHeader title="Status" column={column} />,
         enableSorting: true,
-        cell: (info) => {                    
+        cell: (info) => {
           return (
             <span className={`badge badge-${info.row.original.status.color} shrink-0 badge-outline rounded-[30px]`}>
               <span className={`size-1.5 rounded-full bg-${info.row.original.status.color} me-1.5`}></span>
@@ -102,17 +102,17 @@ const Users = () => {
           );
         },
         meta: {
-          headerClassName: 'min-w-[180px]' 
+          headerClassName: 'min-w-[180px]'
         }
       },
       {
         accessorFn: (row) => row.location,
         id: 'location',
-        header: ({ column }) => <DataGridColumnHeader title="Location" column={column}/>,  
+        header: ({ column }) => <DataGridColumnHeader title="Location" column={column} />,
         enableSorting: true,
-        cell: (info) => {                    
+        cell: (info) => {
           return (
-            
+
             <div className="flex items-center text-gray-800 font-normal gap-1.5">
               <img
                 src={toAbsoluteUrl(`/media/flags/${info.row.original.flag}`)}
@@ -122,17 +122,17 @@ const Users = () => {
               {info.row.original.location}
             </div>
           );
-        }, 
+        },
         meta: {
-          headerClassName: 'min-w-[180px]' 
+          headerClassName: 'min-w-[180px]'
         }
-      },    
+      },
       {
         accessorFn: (row) => row.activity,
         id: 'activity',
-        header: ({ column }) => <DataGridColumnHeader title="Activity" column={column}/>,  
+        header: ({ column }) => <DataGridColumnHeader title="Activity" column={column} />,
         enableSorting: true,
-        cell: (info) => {                    
+        cell: (info) => {
           return info.row.original.activity;
         },
         meta: {
@@ -144,10 +144,10 @@ const Users = () => {
         id: 'edit',
         header: () => '',
         enableSorting: false,
-        cell: () => {                    
+        cell: () => {
           return (
             <button className="btn btn-sm btn-icon btn-clear btn-light">
-              <KeenIcon icon="dots-vertical" /> 
+              <KeenIcon icon="dots-vertical" />
             </button>
           );
         },
@@ -184,7 +184,7 @@ const Users = () => {
         <h3 className="card-title font-medium text-sm">Showing 20 of 68 users</h3>
 
         <div className="flex flex-wrap gap-2 lg:gap-5">
-        <div className="flex">
+          <div className="flex">
             <label className="input input-sm">
               <KeenIcon icon="magnifier" />
               <input
@@ -222,23 +222,23 @@ const Users = () => {
             <button className="btn btn-sm btn-outline btn-primary">
               <KeenIcon icon="setting-4" /> Filters
             </button>
-          </div> 
+          </div>
         </div>
       </div>
     );
-  }; 
+  };
 
-  return ( 
-    <DataGrid 
-      columns={columns} 
-      data={data} 
-      rowSelection={true} 
+  return (
+    <DataGrid
+      columns={columns}
+      data={data}
+      rowSelection={true}
       onRowSelectionChange={handleRowSelection}
       pagination={{ size: 5 }}
-      sorting={[{ id: 'users', desc: false }]} 
+      sorting={[{ id: 'users', desc: false }]}
       toolbar={<Toolbar />}
       layout={{ card: true }}
-    />  
+    />
   );
 };
 

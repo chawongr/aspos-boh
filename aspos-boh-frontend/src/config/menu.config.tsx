@@ -71,25 +71,10 @@ export const MENU_SIDEBAR: TMenuConfig = [
         children: [
           {
             title: 'System',
-            path: '/pos-config/system/system',
-            children: [
-              {
-                title: 'Main',
-                path: '/pos-config/system/system/main'
-              },
-              {
-                title: 'Option',
-                path: '/pos-config/system/system/option'
-              },
-              {
-                title: 'Url',
-                path: '/pos-config/system/system/url'
-              },
-            ]
+            path: '/pos-config/system',
           },
           {
             title: 'Store',
-            path: '/pos-config/system/system',
             children: [
               {
                 title: 'Hq Sync Down',
@@ -163,9 +148,19 @@ export const MENU_SIDEBAR: TMenuConfig = [
     ]
   },
   {
+    title: 'Logs',
+    icon: 'setting-2',
+    path: '/logs'
+  },
+  {
     title: 'Help',
     icon: 'setting-2',
     path: '/help'
+  },
+  {
+    title: 'Line OA',
+    icon: 'setting-2',
+    path: '/line-oa'
   },
   {
     title: 'Network',

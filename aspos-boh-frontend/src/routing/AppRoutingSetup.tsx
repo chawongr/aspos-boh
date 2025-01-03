@@ -7,6 +7,9 @@ import {
   AccountSettingsPlainPage,
   AccountUserProfilePage
 } from '@/pages/account';
+
+import { LogsPage } from '@/pages/logs-page'
+
 import {
   NetworkAppRosterPage,
   NetworkMarketAuthorsPage,
@@ -16,46 +19,42 @@ import {
   NetworkVisitorsPage
 } from '@/pages/network';
 
-import { 
-  SalesEnquiryPage, 
-  CashierEnquiryPage, 
+import {
+  SalesEnquiryPage,
+  CashierEnquiryPage,
   MajorEnquiryPage,
   InventoryEnquiryPage
 } from '@/pages/dashboards'
 
-import { 
-  HelpPage 
-} from '@/pages/help'
+import { HelpPage } from '@/pages/help'
 
-import { 
-  FamilyGroupPage, 
-  MenuItemPage, 
-  MajorGroupPage, 
+import {
+  FamilyGroupPage,
+  MenuItemPage,
+  MajorGroupPage,
   KitchenPrinterPage,
   PCTablePage,
   PrinterPage,
   ComboGroupPage,
-  SystemMainPage,
-  SystemOptionPage,
-  SystemUrlPage,
   HqSyncDownPage,
+  SystemPage
 } from '@/pages/pos-configuration'
 
-import { 
-  UserSupportPage
-} from '@/pages/support'
+import { UserSupportPage } from '@/pages/support'
+
+import { LineOAPage } from '@/pages/line-oa'
 
 import { ComboDefPage } from '@/pages/pos-configuration/menu-item/combo-def'
 
-import{
+import {
   GoodReceiptPage,
   ItemTypePage,
   ItemsPage,
   StockCountPage,
   SupplierPage
 
-  
-}from '@/pages/inventory-management'
+
+} from '@/pages/inventory-management'
 
 import { SystemSettingPage } from '@/pages/system-setting'
 
@@ -81,15 +80,17 @@ const AppRoutingSetup = (): ReactElement => {
 
 
           <Route path="/pos-config/major-group" element={<MajorGroupPage />} />
-          
+
+          <Route path="/logs" element={<LogsPage />} />
+
+          <Route path="/line-oa" element={<LineOAPage />} />
+
           <Route path="/pos-config/device/pc-table" element={<PCTablePage />} />
           <Route path="/pos-config/device/printer" element={<PrinterPage />} />
           <Route path="/pos-config/device/kitchen-printer" element={<KitchenPrinterPage />} />
-          
-          <Route path="/pos-config/system/system/main" element={<SystemMainPage />} />
-          <Route path="/pos-config/system/system/option" element={<SystemOptionPage />} />
-          <Route path="/pos-config/system/system/url" element={<SystemUrlPage />} />
+
           <Route path="/pos-config/system/store/hqSync" element={<HqSyncDownPage />} />
+          <Route path="/pos-config/system" element={<SystemPage />} />
 
           <Route path="/support/user" element={<UserSupportPage />} />
 
@@ -119,7 +120,7 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/network/user-table/saas-users" element={<NetworkSaasUsersPage />} />
           <Route path="/network/user-table/store-clients" element={<NetworkStoreClientsPage />} />
           <Route path="/network/user-table/visitors" element={<NetworkVisitorsPage />} />
-      
+
         </Route>
       </Route>
       <Route path="error/*" element={<ErrorsRouting />} />

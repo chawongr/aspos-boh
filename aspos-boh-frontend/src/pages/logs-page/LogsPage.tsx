@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 
 import { Container } from '@/components/container';
+
 import {
   Toolbar,
   ToolbarActions,
@@ -9,34 +10,34 @@ import {
   ToolbarPageTitle
 } from '@/partials/toolbar';
 
-import { SystemMainContent } from '.';
+import { LogsContent } from '.';
 import { useLayout } from '@/providers';
-import { PageNavbar } from '@/pages/pos-configuration/system';
 
-const SystemMainPage = () => {
+const LogsPage = () => {
   const { currentLayout } = useLayout();
 
   return (
     <Fragment>
-
       {currentLayout?.name === 'demo1-layout' && (
         <Container>
           <Toolbar>
             <ToolbarHeading>
-              <h1 className="text-xl font-medium leading-none text-gray-900">System</h1>
-              <ToolbarDescription>System POS Management</ToolbarDescription>
+              <ToolbarPageTitle />
+              <ToolbarDescription>
+                <div className="flex items-center flex-wrap gap-1.5 font-medium">
+                  <span className="text-md text-gray-600">Logs Management</span>
+                </div>
+              </ToolbarDescription>
             </ToolbarHeading>
           </Toolbar>
         </Container>
       )}
 
-      <PageNavbar />
-
       <Container>
-        <SystemMainContent />
+        <LogsContent/>
       </Container>
     </Fragment>
   );
 };
 
-export { SystemMainPage };
+export { LogsPage };
