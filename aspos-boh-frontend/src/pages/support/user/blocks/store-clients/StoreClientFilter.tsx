@@ -20,30 +20,26 @@ const StoreClientsFilter = () => {
                         <input className="input w-full" type="text" placeholder="Enter Name" />
                     </div>
                 </div>
-                <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-                    <span className="form-label max-w-32 w-full">In Active</span>
-                    <div className="grow min-w-48">
-                        <input className="checkbox" name="attributes" type="checkbox" value="1" readOnly />
+                <div className="flex">
+                    <div className='flex'>
+                        <input className="checkbox" type="checkbox" />
+                        <label className="form-label ml-2 my-auto">In Active</label>
                     </div>
-                    <span className="form-label max-w-32 w-full">License Register</span>
-                    <div className="grow min-w-48">
-                    <input className="checkbox" name="attributes" type="checkbox" value="1" readOnly />
+                    <div className='ml-10 flex'>
+                        <input className="checkbox" type="checkbox" />
+                        <label className="form-label ml-2 my-auto">User</label>
                     </div>
-                </div>
-                <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-                    <span className="form-label max-w-32 w-full">User</span>
-                    <div className="grow min-w-48">
-                    <input className="checkbox" name="attributes" type="checkbox" value="1" readOnly />
+                    <div className='ml-10 flex'>
+                        <input className="checkbox" type="checkbox" />
+                        <label className="form-label ml-2 my-auto">Logs</label>
                     </div>
-                    <span className="form-label max-w-32 w-full">License Connected Client</span>
-                    <div className="grow min-w-48">
-                    <input className="checkbox" name="attributes" type="checkbox" value="1" readOnly />
+                    <div className='ml-10 flex'>
+                        <input className="checkbox" type="checkbox" />
+                        <label className="form-label ml-2 my-auto">License Register</label>
                     </div>
-                </div>
-                <div className="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-                    <span className="form-label max-w-32 w-full">Logs</span>
-                    <div className="grow min-w-48">
-                        <input className="checkbox" name="attributes" type="checkbox" value="1" readOnly />
+                    <div className='ml-10 flex'>
+                        <input className="checkbox" type="checkbox" />
+                        <label className="form-label ml-2 my-auto">License Connected Client</label>
                     </div>
                 </div>
             </div>
