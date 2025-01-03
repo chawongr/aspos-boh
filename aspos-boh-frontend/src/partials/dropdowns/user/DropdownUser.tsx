@@ -39,7 +39,7 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
       <div className="flex items-center justify-between px-5 py-1.5 gap-1.5">
         <div className="flex items-center gap-2">
           <img
-            className="size-9 rounded-full border-2 border-success"
+            className="size-9 rounded-full border-2 border-[#19304A]"
             src={toAbsoluteUrl('/media/avatars/300-2.png')}
             alt=""
           />
@@ -58,7 +58,7 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
             </a>
           </div>
         </div>
-        <span className="badge badge-xs badge-primary badge-outline">Pro</span>
+        {/* <span className="badge badge-xs badge-primary badge-outline">Pro</span> */}
       </div>
     );
   };
@@ -68,7 +68,7 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
       <Fragment>
         <MenuSeparator />
         <div className="flex flex-col">
-          <MenuItem>
+          {/* <MenuItem>
             <MenuLink path="/public-profile/profiles/default">
               <MenuIcon className="menu-icon">
                 <KeenIcon icon="badge" />
@@ -77,8 +77,8 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
                 <FormattedMessage id="USER.MENU.PUBLIC_PROFILE" />
               </MenuTitle>
             </MenuLink>
-          </MenuItem>
-          <MenuItem>
+          </MenuItem> */}
+          {/* <MenuItem>
             <MenuLink path="/account/home/user-profile">
               <MenuIcon>
                 <KeenIcon icon="profile-circle" />
@@ -87,8 +87,8 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
                 <FormattedMessage id="USER.MENU.MY_PROFILE" />
               </MenuTitle>
             </MenuLink>
-          </MenuItem>
-          <MenuItem
+          </MenuItem> */}
+          {/* <MenuItem
             toggle="dropdown"
             trigger="hover"
             dropdownProps={{
@@ -178,8 +178,8 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
                 </MenuLink>
               </MenuItem>
             </MenuSub>
-          </MenuItem>
-          <MenuItem>
+          </MenuItem> */}
+          {/* <MenuItem>
             <MenuLink path="https://devs.keenthemes.com">
               <MenuIcon>
                 <KeenIcon icon="message-programming" />
@@ -188,9 +188,9 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
                 <FormattedMessage id="USER.MENU.DEV_FORUM" />
               </MenuTitle>
             </MenuLink>
-          </MenuItem>
-          <DropdownUserLanguages menuItemRef={menuItemRef} />
-          <MenuSeparator />
+          </MenuItem> */}
+          {/* <DropdownUserLanguages menuItemRef={menuItemRef} /> */}
+          {/* <MenuSeparator /> */}
         </div>
       </Fragment>
     );
@@ -199,7 +199,7 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
   const buildFooter = () => {
     return (
       <div className="flex flex-col">
-        <div className="menu-item mb-0.5">
+        {/* <div className="menu-item mb-0.5">
           <div className="menu-link">
             <span className="menu-icon">
               <KeenIcon icon="moon" />
@@ -217,7 +217,7 @@ const DropdownUser = ({ menuItemRef }: IDropdownUserProps) => {
               />
             </label>
           </div>
-        </div>
+        </div> */}
 
         <div className="menu-item px-4 py-1.5">
           <a onClick={logout} className="btn btn-sm btn-light justify-center">

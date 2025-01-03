@@ -8,6 +8,7 @@ import { toAbsoluteUrl } from '@/utils';
 import { useAuthContext } from '@/auth';
 import { useLayout } from '@/providers';
 import { Alert } from '@/components';
+import Logo from '../../../../public/media/app/aspos-logo.jpg'
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -71,62 +72,24 @@ const Login = () => {
   };
 
   return (
-    <div className="card max-w-[390px] w-full">
+    <div className="max-w-[700px] w-3/4">
       <form
         className="card-body flex flex-col gap-5 p-10"
         onSubmit={formik.handleSubmit}
         noValidate
       >
-        <div className="text-center mb-2.5">
-          <h3 className="text-lg font-semibold text-gray-900 leading-none mb-2.5">Sign in</h3>
-          <div className="flex items-center justify-center font-medium">
-            <span className="text-2sm text-gray-600 me-1.5">Need an account?</span>
-            <Link
-              to={currentLayout?.name === 'auth-branded' ? '/auth/signup' : '/auth/classic/signup'}
-              className="text-2sm link"
-            >
-              Sign up
-            </Link>
-          </div>
+        <div className='mx-auto'>
+          <img src={Logo} alt="" width={150} />
+
         </div>
-
-        <div className="grid grid-cols-2 gap-2.5">
-          <a href="#" className="btn btn-light btn-sm justify-center">
-            <img
-              src={toAbsoluteUrl('/media/brand-logos/google.svg')}
-              className="size-3.5 shrink-0"
-            />
-            Use Google
-          </a>
-
-          <a href="#" className="btn btn-light btn-sm justify-center">
-            <img
-              src={toAbsoluteUrl('/media/brand-logos/apple-black.svg')}
-              className="size-3.5 shrink-0 dark:hidden"
-            />
-            <img
-              src={toAbsoluteUrl('/media/brand-logos/apple-white.svg')}
-              className="size-3.5 shrink-0 light:hidden"
-            />
-            Use Apple
-          </a>
+        <div>
+          <div className="text-2xl font-medium text-gray-900 leading-none">Log In</div>
         </div>
-
-        <div className="flex items-center gap-2">
-          <span className="border-t border-gray-200 w-full"></span>
-          <span className="text-2xs text-gray-500 font-medium uppercase">Or</span>
-          <span className="border-t border-gray-200 w-full"></span>
-        </div>
-
-        <Alert variant="primary">
-          Use <span className="font-semibold text-gray-900">demo@keenthemes.com</span> username and{' '}
-          <span className="font-semibold text-gray-900">demo1234</span> password.
-        </Alert>
 
         {formik.status && <Alert variant="danger">{formik.status}</Alert>}
 
         <div className="flex flex-col gap-1">
-          <label className="form-label text-gray-900">Email</label>
+          <label className="text-sm text-gray-900">Username</label>
           <label className="input">
             <input
               placeholder="Enter username"
@@ -146,17 +109,13 @@ const Login = () => {
 
         <div className="flex flex-col gap-1">
           <div className="flex items-center justify-between gap-1">
-            <label className="form-label text-gray-900">Password</label>
-            <Link
-              to={
-                currentLayout?.name === 'auth-branded'
-                  ? '/auth/reset-password'
-                  : '/auth/classic/reset-password'
-              }
+          <label className="text-sm text-gray-900">Password</label>
+            {/* <Link
+              to={''}
               className="text-2sm link shrink-0"
             >
               Forgot Password?
-            </Link>
+            </Link> */}
           </div>
           <label className="input">
             <input
@@ -183,21 +142,21 @@ const Login = () => {
           )}
         </div>
 
-        <label className="checkbox-group">
+        {/* <label className="checkbox-group">
           <input
             className="checkbox checkbox-sm"
             type="checkbox"
             {...formik.getFieldProps('remember')}
           />
           <span className="checkbox-label">Remember me</span>
-        </label>
+        </label> */}
 
         <button
           type="submit"
-          className="btn btn-primary flex justify-center grow"
+          className="btn bg-[#377FD4] flex justify-center grow text-white font-semibold"
           disabled={loading || formik.isSubmitting}
         >
-          {loading ? 'Please wait...' : 'Sign In'}
+          {loading ? 'Please wait...' : 'Log In'}
         </button>
       </form>
     </div>
