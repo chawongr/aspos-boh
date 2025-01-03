@@ -9,14 +9,14 @@ export const MENU_SIDEBAR: TMenuConfig = [
         title: 'Sales Enquiry',
         path: '/'
       },
-      {
-        title: 'Cashier Enquiry',
-        path: '/dashboard/cashier-enquiry'
-      },
-      {
-        title: 'Major Enquiry',
-        path: '/dashboard/major-enquiry'
-      },
+      // {
+      //   title: 'Cashier Enquiry',
+      //   path: '/dashboard/cashier-enquiry'
+      // },
+      // {
+      //   title: 'Major Enquiry',
+      //   path: '/dashboard/major-enquiry'
+      // },
       {
         title: 'Inventory Enquiry',
         path: '/dashboard/inventory-enquiry'
