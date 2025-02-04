@@ -112,31 +112,40 @@ export const MENU_SIDEBAR: TMenuConfig = [
   //     }
   //   ],
   // },
-  // {
-  //   title: 'Inventory Management',
-  //   icon: 'setting-2',
-  //   children: [
-  //     {
-  //       title: 'Goods Receipt',
-  //       path: '/inventory-manage/goods-receipt'
-  //     },
-  //     {
-  //       title: 'Item Type',
-  //       path: '/inventory-manage/item-type'
-  //     },
-  //     {
-  //       title: 'Items',
-  //       path: '/inventory-manage/items'
-  //     },
-  //     {
-  //       title: 'Stock Count',
-  //       path: '/inventory-manage/stock-count'
-  //     },{
-  //       title: 'Supplier',
-  //       path: '/inventory-manage/supplier'
-  //     },
-  //   ]
-  // },
+  {
+    title: 'Inventory Management',
+    icon: 'setting-2',
+    children: [
+      {
+        title: 'Configuration',
+        children: [
+          {
+            title: 'Stock Master',
+            path: '/inventory-manage/configuration/stock-master'
+          },
+        ]
+      },
+      // {
+      //   title: 'Goods Receipt',
+      //   path: '/inventory-manage/goods-receipt'
+      // },
+      // {
+      //   title: 'Item Type',
+      //   path: '/inventory-manage/item-type'
+      // },
+      // {
+      //   title: 'Items',
+      //   path: '/inventory-manage/items'
+      // },
+      // {
+      //   title: 'Stock Count',
+      //   path: '/inventory-manage/stock-count'
+      // },{
+      //   title: 'Supplier',
+      //   path: '/inventory-manage/supplier'
+      // },
+    ]
+  },
   {
     title: 'Support',
     icon: 'support',

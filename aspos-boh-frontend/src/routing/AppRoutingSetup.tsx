@@ -51,9 +51,8 @@ import {
   ItemTypePage,
   ItemsPage,
   StockCountPage,
-  SupplierPage
-
-
+  SupplierPage,
+  StockMasterPage
 } from '@/pages/inventory-management'
 
 import { SystemSettingPage } from '@/pages/system-setting'
@@ -99,6 +98,10 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/system-setting" element={<SystemSettingPage />} />
           {/* <Route path="/system-setting" element={<AccountUserProfilePage />} /> */}
 
+          <Route
+            path="/inventory-manage/configuration/stock-master"
+            element={<StockMasterPage />}
+          />
           <Route path="/inventory-manage/goods-receipt" element={<GoodReceiptPage />} />
           <Route path="/inventory-manage/item-type" element={<ItemTypePage />} />
           <Route path="/inventory-manage/items" element={<ItemsPage />} />
