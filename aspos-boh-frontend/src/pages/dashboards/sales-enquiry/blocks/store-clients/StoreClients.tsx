@@ -221,19 +221,19 @@ const StoreClients = () => {
         <h3 className="card-title font-medium text-sm">Showing 10 of 49,053 users</h3>
         <div className="flex flex-wrap gap-2 lg:gap-5">
           <div className="flex flex-wrap gap-2.5">
-            <button className='btn btn-sm border border-cyan-500 text-cyan-500'>
+            <button className='btn btn-sm border border-cyan-500 text-cyan-500 hover:bg-cyan-500 hover:text-white'>
               <div className='text-xl mb-1'>
                 <KeenIcon icon="chart-simple-3" />
               </div>
               <div >Show footer</div>
             </button>
-            <button className='btn btn-sm border border-[#28A745] text-[#28A745]'>
+            <button className='btn btn-sm border border-[#28A745] text-[#28A745] hover:bg-[#28A745] hover:text-white'>
               <div className='text-xl mb-1'>
                 <KeenIcon icon="folder-up" />
               </div>
               <div>Export</div>
             </button>
-            <button className='btn btn-sm border border-[#FFA500] text-[#FFA500]'>
+            <button className='btn btn-sm border border-[#FFA500] text-[#FFA500] hover:bg-[#FFA500] hover:text-white'>
               <div className='text-xl mb-1'>
                 <KeenIcon icon="folder-down" />
               </div>

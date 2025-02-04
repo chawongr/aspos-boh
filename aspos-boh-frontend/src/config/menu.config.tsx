@@ -77,6 +77,10 @@ export const MENU_SIDEBAR: TMenuConfig = [
             title: 'Store',
             children: [
               {
+                title: 'Store Group',
+                path: '/pos-config/system/store/storeGroup'
+              },
+              {
                 title: 'Hq Sync Down',
                 path: '/pos-config/system/store/hqSync'
               },
