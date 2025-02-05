@@ -1,33 +1,25 @@
 import { type MouseEvent, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { KeenIcon } from '@/components';
-import { toAbsoluteUrl } from '@/utils';
 import { useAuthContext } from '@/auth';
 import { useLayout } from '@/providers';
 import { Alert } from '@/components';
-import Logo from '../../../../public/media/app/aspos-logo.jpg'
+import Logo from '../../../../public/media/app/aspos-logo.jpg';
 
 const loginSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Wrong email format')
+  username: Yup.string()
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
-    .required('Email is required'),
+    .required('Username is required'),
   password: Yup.string()
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
     .required('Password is required'),
   remember: Yup.boolean()
 });
-
-const initialValues = {
-  email: 'demo@keenthemes.com',
-  password: 'demo1234',
-  remember: false
-};
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -39,7 +31,11 @@ const Login = () => {
   const { currentLayout } = useLayout();
 
   const formik = useFormik({
-    initialValues,
+    initialValues: {
+      username: '',
+      password: '',
+      remember: false
+    },
     validationSchema: loginSchema,
     onSubmit: async (values, { setStatus, setSubmitting }) => {
       setLoading(true);
@@ -49,12 +45,12 @@ const Login = () => {
           throw new Error('JWTProvider is required for this form.');
         }
 
-        await login(values.email, values.password);
+        await login(values.username, values.password);
 
         if (values.remember) {
-          localStorage.setItem('email', values.email);
+          localStorage.setItem('username', values.username);
         } else {
-          localStorage.removeItem('email');
+          localStorage.removeItem('username');
         }
 
         navigate(from, { replace: true });
@@ -79,8 +75,7 @@ const Login = () => {
         noValidate
       >
         <div className='mx-auto'>
-          <img src={Logo} alt="" width={150} />
-
+          <img src={Logo} alt="App Logo" width={150} />
         </div>
         <div>
           <div className="text-2xl font-medium text-gray-900 leading-none">Log In</div>
@@ -92,37 +87,38 @@ const Login = () => {
           <label className="text-sm text-gray-900">Username</label>
           <label className="input">
             <input
+              type="text"
+              name="username"
               placeholder="Enter username"
               autoComplete="off"
-              {...formik.getFieldProps('email')}
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               className={clsx('form-control', {
-                'is-invalid': formik.touched.email && formik.errors.email
+                'is-invalid': formik.touched.username && formik.errors.username
               })}
             />
           </label>
-          {formik.touched.email && formik.errors.email && (
+          {formik.touched.username && formik.errors.username && (
             <span role="alert" className="text-danger text-xs mt-1">
-              {formik.errors.email}
+              {formik.errors.username}
             </span>
           )}
         </div>
 
         <div className="flex flex-col gap-1">
           <div className="flex items-center justify-between gap-1">
-          <label className="text-sm text-gray-900">Password</label>
-            {/* <Link
-              to={''}
-              className="text-2sm link shrink-0"
-            >
-              Forgot Password?
-            </Link> */}
+            <label className="text-sm text-gray-900">Password</label>
           </div>
           <label className="input">
             <input
               type={showPassword ? 'text' : 'password'}
+              name="password"
               placeholder="Enter Password"
               autoComplete="off"
-              {...formik.getFieldProps('password')}
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               className={clsx('form-control', {
                 'is-invalid': formik.touched.password && formik.errors.password
               })}
@@ -141,15 +137,6 @@ const Login = () => {
             </span>
           )}
         </div>
-
-        {/* <label className="checkbox-group">
-          <input
-            className="checkbox checkbox-sm"
-            type="checkbox"
-            {...formik.getFieldProps('remember')}
-          />
-          <span className="checkbox-label">Remember me</span>
-        </label> */}
 
         <button
           type="submit"

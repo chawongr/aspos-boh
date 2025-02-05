@@ -77,6 +77,10 @@ export const MENU_SIDEBAR: TMenuConfig = [
             title: 'Store',
             children: [
               {
+                title: 'Store Group',
+                path: '/pos-config/system/store/storeGroup'
+              },
+              {
                 title: 'Hq Sync Down',
                 path: '/pos-config/system/store/hqSync'
               },
@@ -162,41 +166,41 @@ export const MENU_SIDEBAR: TMenuConfig = [
     icon: 'messages',
     path: '/line-oa'
   },
-  // {
-  //   title: 'Network',
-  //   icon: 'users',
-  //   children: [
-  //     {
-  //       title: 'User Table',
-  //       children: [
-  //         {
-  //           title: 'Team Crew',
-  //           path: '/network/user-table/team-crew'
-  //         },
-  //         {
-  //           title: 'App Roster',
-  //           path: '/network/user-table/app-roster'
-  //         },
-  //         {
-  //           title: 'Market Authors',
-  //           path: '/network/user-table/market-authors'
-  //         },
-  //         {
-  //           title: 'SaaS Users',
-  //           path: '/network/user-table/saas-users'
-  //         },
-  //         {
-  //           title: 'Store Clients',
-  //           path: '/network/user-table/store-clients'
-  //         },
-  //         {
-  //           title: 'Visitors',
-  //           path: '/network/user-table/visitors'
-  //         }
-  //       ]
-  //     },
-  //   ]
-  // },
+  {
+    title: 'Network',
+    icon: 'users',
+    children: [
+      {
+        title: 'User Table',
+        children: [
+          {
+            title: 'Team Crew',
+            path: '/network/user-table/team-crew'
+          },
+          {
+            title: 'App Roster',
+            path: '/network/user-table/app-roster'
+          },
+          {
+            title: 'Market Authors',
+            path: '/network/user-table/market-authors'
+          },
+          {
+            title: 'SaaS Users',
+            path: '/network/user-table/saas-users'
+          },
+          {
+            title: 'Store Clients',
+            path: '/network/user-table/store-clients'
+          },
+          {
+            title: 'Visitors',
+            path: '/network/user-table/visitors'
+          }
+        ]
+      },
+    ]
+  },
   
 ];
 
