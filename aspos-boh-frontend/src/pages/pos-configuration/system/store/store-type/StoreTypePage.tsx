@@ -83,8 +83,8 @@ const StoreTypePage = () => {
         cell: (info) => info.row.original.name,
       },
       {
-        id: 'actions',
-        header: 'Actions',
+        id: 'edit',
+        header: 'Edit',
         cell: ({ row }) => (
           <button className="editBtn" onClick={() => handleEdit(row.original)}>Edit</button>
         ),
@@ -95,8 +95,8 @@ const StoreTypePage = () => {
         enableHiding: false,
       },
       {
-        id: 'actions',
-        header: 'Actions',
+        id: 'delete',
+        header: 'Delete',
         cell: ({ row }) => (
           <button className="deleteBtn" onClick={() => handleDelete(row.original.code)}>Delete</button>
         ),
