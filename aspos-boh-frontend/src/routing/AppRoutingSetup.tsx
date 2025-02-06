@@ -40,6 +40,7 @@ import {
   StoreGroupPage,
   StorePage,
   StoreTypePage,
+  StoreTypeAdd,
   AreaPage,
   CompanyPage,
   SystemPage
@@ -97,6 +98,7 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/pos-config/system/store/storeGroup" element={<StoreGroupPage />} />
           <Route path="/pos-config/system/store/store" element={<StorePage />} />
           <Route path="/pos-config/system/store/storeType" element={<StoreTypePage />} />
+          {/* <Route path="/pos-config/system/store/storeType/add" element={<StoreTypeAdd />} /> */}
           <Route path="/pos-config/system/store/area" element={<AreaPage />} />
           <Route path="/pos-config/system/store/company" element={<CompanyPage />} />
           <Route path="/pos-config/system/store/hqSync" element={<HqSyncDownPage />} />
