@@ -203,7 +203,7 @@ const StoreClients = () => {
   return (
     <div>
       <ToolbarDescription>
-        <div className="flex items-center flex-wrap gap-1.5 font-medium mt-8 mb-3">
+        <div className="flex items-center flex-wrap gap-1.5 font-medium mb-3">
           <span className="text-md text-[#071437]">Store List</span>
         </div>
       </ToolbarDescription>

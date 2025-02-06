@@ -158,7 +158,7 @@ const StoreClientsFilter = () => {
                             <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
                                 <span className="form-label max-w-32 w-full">Phone</span>
                                 <div className="grow min-w-24">
-                                    <input className="input w-full" type="text" placeholder="Phone" />
+                                    <input className="input w-full" type="text" placeholder="Enter Phone" />
                                 </div>
                             </div>
                             <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
