@@ -723,8 +723,10 @@ module.exports = {
         '.deleteBtn': {
           backgroundColor: '#FEB7B7',
           color: '#9B2B2B',          
-          padding: '0.5rem 1rem',   
           borderRadius: '0.5rem',  
+          fontSize: '12px',
+          height: '32px',
+          width:'70px',
           fontWeight: '500',        
           transition: 'background-color 0.2s ease-in-out',
           '&:hover': {
@@ -738,8 +740,10 @@ module.exports = {
         '.editBtn': {
           backgroundColor: '#FFF5B9',
           color: '#9F8C1F',          
-          padding: '0.5rem 0.7rem',   
+          height: '32px',
+          width:'70px',
           borderRadius: '0.5rem',  
+          fontSize: '12px',
           fontWeight: '500',        
           transition: 'background-color 0.2s ease-in-out',
           '&:hover': {
@@ -753,8 +757,10 @@ module.exports = {
         '.loadBtn': {
           backgroundColor: '#BCDBFF',
           color: '#11488B',          
-          padding: '0.5rem 0.7rem',   
           borderRadius: '0.5rem',  
+          height: '32px',
+          width:'70px',
+          fontSize: '12px',
           fontWeight: '500',        
           transition: 'background-color 0.2s ease-in-out',
           '&:hover': {

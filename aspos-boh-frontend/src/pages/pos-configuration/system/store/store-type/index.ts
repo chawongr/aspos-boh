@@ -1,2 +1,1 @@
-export * from './StoreGroupContent';
-export * from './StoreGroupPage';
+export * from './StoreTypePage';
