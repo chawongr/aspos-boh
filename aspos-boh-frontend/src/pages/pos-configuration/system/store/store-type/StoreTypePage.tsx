@@ -1,21 +1,21 @@
 import { Fragment, useEffect, useMemo, useState } from 'react';
-import { Container } from '@/components/container';
-import {
-  Toolbar,
-  ToolbarActions,
-  ToolbarDescription,
-  ToolbarHeading,
-  ToolbarPageTitle
-} from '@/partials/toolbar';
+import { toast } from 'sonner';
+import { Column, ColumnDef, RowSelectionState } from '@tanstack/react-table';
+import { Link } from 'react-router-dom';
 import {
   DataGrid,
+  TDataGridRequestParams,
+  KeenIcon,
   DataGridColumnHeader,
+  Container
 } from '@/components';
-import { ColumnDef } from '@tanstack/react-table';
-import { addStoreGroup, deleteStoreGroup, editStoreGroup, fetchStoreGroup } from '@/auth/providers/Service';
-import { KeenIcon } from '@/components';
+import axios from 'axios';
+import { addStoreGroup, deleteStoreGroup, editStoreGroup } from '@/auth/providers/Service';
+import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
-import { toast } from 'sonner';
+
+const API_URL = import.meta.env.VITE_DOMAIN;
+const token = localStorage.getItem('token');
 
 interface StoreType {
   id: string;
@@ -24,30 +24,47 @@ interface StoreType {
 }
 
 const StoreTypePage = () => {
-  const { currentLayout } = useLayout();
-  const [storeGroups, setStoreGroups] = useState<StoreType[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [searchInput, setSearchInput] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [showAddForm, setShowAddForm] = useState(false);
   const [editData, setEditData] = useState<StoreType | null>(null);
   const [formData, setFormData] = useState({ code: '', name: '' });
+  const [totalCount, setTotalCount] = useState(0);
+  const [pageIndex, setPageIndex] = useState(0); 
+  const [pageSize, setPageSize] = useState(5);  
+  const [refreshKey, setRefreshKey] = useState(0);
 
 
-  useEffect(() => {
-    const getStoreGroups = async () => {
-      try {
-        const response = await fetchStoreGroup();
-        setStoreGroups(response.data);
-      } catch (err) {
-        setError((err as Error).message);
-      } finally {
-        setLoading(false);
+  const fetchStoreGroups = async (params: TDataGridRequestParams) => {
+    try {
+      const queryParams = new URLSearchParams();
+      queryParams.set('page', String(params.pageIndex + 1));
+      queryParams.set('items_per_page', String(params.pageSize));
+
+      if (params.sorting?.[0]?.id) {
+        queryParams.set('sort', params.sorting[0].id);
+        queryParams.set('order', params.sorting[0].desc ? 'desc' : 'asc');
       }
-    };
 
-    getStoreGroups();
-  }, []);
+      if (searchQuery.trim().length > 0) {
+        queryParams.set('query', searchQuery);
+      }
+
+      const response = await axios.get(`${API_URL}/store/group?${queryParams.toString()}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        }
+      });
+      setPageIndex(params.pageIndex);
+      setPageSize(params.pageSize);
+      setTotalCount(response.data.pagination.total);      
+      return { data: response.data.data, totalCount: response.data.pagination.total };
+    } catch (error) {
+      toast.error("Error fetching store groups");
+      return { data: [], totalCount: 0 };
+    }
+  };
 
   const handleEdit = (rowData: StoreType) => {
     setEditData(rowData);
@@ -58,15 +75,31 @@ const StoreTypePage = () => {
   const handleDelete = async (code: string) => {
     try {
       await deleteStoreGroup(code);
-      const response = await fetchStoreGroup();
-      setStoreGroups(response.data);
       toast.success("Store type deleted successfully!");
+      setRefreshKey(prev => prev + 1);
     } catch (error) {
       toast.error("Error deleting store group.");
     }
   };
 
-  const columns = useMemo<ColumnDef<StoreType>[]>(
+  const handleSave = async () => {
+    try {
+      if (editData) {
+        await editStoreGroup(formData.code, formData.name);
+        toast.success("Store type updated successfully!");
+      } else {
+        await addStoreGroup(formData.code, formData.name);
+        toast.success("Store type added successfully!");
+      }
+      setShowAddForm(false);
+      setEditData(null);
+      setFormData({ code: '', name: '' });
+    } catch (error) {
+      toast.error("Failed to save store type.");
+    }
+  };
+
+  const columns = useMemo<ColumnDef<any>[]>(
     () => [
       {
         accessorKey: 'code',
@@ -110,13 +143,12 @@ const StoreTypePage = () => {
     []
   );
 
-
-
   const ToolbarTable = () => {
+    const count = Math.min((pageIndex + 1) * pageSize, totalCount); 
     return (
       <div className="card-header flex-wrap gap-2 border-b-0 px-5">
         <h3 className="card-title font-medium text-sm">
-          Showing {storeGroups.length} store types
+        Showing {count} of {totalCount} store types
         </h3>
         <div className="flex flex-wrap gap-2 lg:gap-5">
           <div className="flex flex-wrap gap-2.5">
@@ -126,8 +158,8 @@ const StoreTypePage = () => {
                 <input
                   type="text"
                   placeholder="Search store type"
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </label>
             </div>
@@ -137,33 +169,10 @@ const StoreTypePage = () => {
     );
   };
 
-
-
-  const handleSave = async () => {
-    try {
-      if (editData) {
-        await editStoreGroup(formData.code, formData.name);
-        toast.success("Store type updated successfully!");
-      } else {
-        await addStoreGroup(formData.code, formData.name);
-        toast.success("Store type added successfully!");
-      }
-      setShowAddForm(false);
-      setEditData(null);
-      setFormData({ code: '', name: '' });
-      const response = await fetchStoreGroup();
-      setStoreGroups(response.data);
-    } catch (error) {
-      toast.error("Failed to save store type.");
-    }
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  if (loading) return <p>Loading store groups...</p>;
-  if (error) return <p>Error: {error}</p>;
+  const { currentLayout } = useLayout();
 
   return (
     <Fragment>
@@ -211,9 +220,9 @@ const StoreTypePage = () => {
                   <span className="form-label max-w-32 w-full">Code</span>
                   <div className="grow min-w-24">
                     <input
-                      className="input w-full" 
+                      className="input w-full"
                       type="text"
-                      placeholder="Enter Code" 
+                      placeholder="Enter Code"
                       name="code"
                       value={formData.code}
                       onChange={handleChange}
@@ -225,7 +234,7 @@ const StoreTypePage = () => {
                   <span className="form-label max-w-32 w-full">Name</span>
                   <div className="grow min-w-24">
                     <input
-                      className="input w-full" 
+                      className="input w-full"
                       type="text"
                       placeholder="Enter Name"
                       name="name"
@@ -243,13 +252,13 @@ const StoreTypePage = () => {
         ) : (
           <div className="overflow-x-auto ">
             <DataGrid
+              key={refreshKey}
               columns={columns}
-              data={storeGroups}
+              serverSide={true}
+              onFetchData={fetchStoreGroups}
               rowSelection={true}
-              pagination={{ size: 5 }}
-              sorting={[{ id: 'code', desc: false }]}
+              pagination={{ size: pageSize }}
               toolbar={<ToolbarTable />}
-
               layout={{ card: true }}
             />
           </div>
