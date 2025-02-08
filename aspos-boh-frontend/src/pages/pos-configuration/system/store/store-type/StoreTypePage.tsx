@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
-import { Column, ColumnDef, RowSelectionState } from '@tanstack/react-table';
-import { Link } from 'react-router-dom';
+import { ColumnDef } from '@tanstack/react-table';
 import {
   DataGrid,
   TDataGridRequestParams,
@@ -29,10 +28,10 @@ const StoreTypePage = () => {
   const [editData, setEditData] = useState<StoreType | null>(null);
   const [formData, setFormData] = useState({ code: '', name: '' });
   const [totalCount, setTotalCount] = useState(0);
-  const [pageIndex, setPageIndex] = useState(0); 
-  const [pageSize, setPageSize] = useState(5);  
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageSize, setPageSize] = useState(5);
   const [refreshKey, setRefreshKey] = useState(0);
-
+  const { currentLayout } = useLayout();
 
   const fetchStoreGroups = async (params: TDataGridRequestParams) => {
     try {
@@ -58,7 +57,7 @@ const StoreTypePage = () => {
       });
       setPageIndex(params.pageIndex);
       setPageSize(params.pageSize);
-      setTotalCount(response.data.pagination.total);      
+      setTotalCount(response.data.pagination.total);
       return { data: response.data.data, totalCount: response.data.pagination.total };
     } catch (error) {
       toast.error("Error fetching store groups");
@@ -107,6 +106,11 @@ const StoreTypePage = () => {
         header: ({ column }) => <DataGridColumnHeader title="Code" column={column} />,
         enableSorting: true,
         cell: (info) => info.row.original.code,
+        meta: {
+          headerClassName: 'w-6',
+          cellClassName: 'w-6 text-center',
+          subHeaderClassName: 'flex justify-center'
+        },
       },
       {
         accessorKey: 'name',
@@ -117,13 +121,16 @@ const StoreTypePage = () => {
       },
       {
         id: 'edit',
-        header: 'Edit',
+        header: 'Modify',
         cell: ({ row }) => (
-          <button className="editBtn" onClick={() => handleEdit(row.original)}>Edit</button>
+          <button onClick={() => handleEdit(row.original)} className='bg-[var(--tw-light-active)] border border-amber-500 rounded-md font-semibold  text-amber-500 h-[1.9rem] w-[1.9rem] hover:bg-amber-500 hover:text-white'>
+            <KeenIcon icon='pencil' />
+          </button>
         ),
         meta: {
           headerClassName: 'sticky right-0 w-8',
-          cellClassName: 'sticky right-0 w-8',
+          cellClassName: 'sticky right-0 w-10',
+          subCellClassName: 'flex justify-center'
         },
         enableHiding: false,
       },
@@ -131,11 +138,14 @@ const StoreTypePage = () => {
         id: 'delete',
         header: 'Delete',
         cell: ({ row }) => (
-          <button className="deleteBtn" onClick={() => handleDelete(row.original.code)}>Delete</button>
+          <button onClick={() => handleDelete(row.original.code)} className='bg-[var(--tw-light-active)] border border-red-600 rounded-md font-semibold text-base text-red-600 h-[1.9rem] w-[1.9rem] hover:bg-red-600 hover:text-white'>
+            <KeenIcon icon='trash' />
+          </button>
         ),
         meta: {
           headerClassName: 'sticky right-0 w-8',
           cellClassName: 'sticky right-0 w-8',
+          subCellClassName: 'flex justify-center'
         },
         enableHiding: false,
       }
@@ -143,36 +153,15 @@ const StoreTypePage = () => {
     []
   );
 
-  const ToolbarTable = () => {
-    const count = Math.min((pageIndex + 1) * pageSize, totalCount); 
-    return (
-      <div className="card-header flex-wrap gap-2 border-b-0 px-5">
-        <h3 className="card-title font-medium text-sm">
-        Showing {count} of {totalCount} store types
-        </h3>
-        <div className="flex flex-wrap gap-2 lg:gap-5">
-          <div className="flex flex-wrap gap-2.5">
-            <div className="flex">
-              <label className="input input-sm">
-                <KeenIcon icon="magnifier" />
-                <input
-                  type="text"
-                  placeholder="Search store type"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+  const count = Math.min((pageIndex + 1) * pageSize, totalCount);
+
+  const handleSearchClick = () => {
+    setRefreshKey(prev => prev + 1);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const { currentLayout } = useLayout();
 
   return (
     <Fragment>
@@ -188,19 +177,15 @@ const StoreTypePage = () => {
               </ToolbarDescription>
             </ToolbarHeading>
             <ToolbarActions>
-              {showAddForm ? (
+              {!showAddForm && (
                 <button
-                  className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
-                  onClick={() => { setShowAddForm(false); setEditData(null); setFormData({ code: '', name: '' }); }}
-                >
-                  Back
-                </button>
-              ) : (
-                <button
-                  className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
+                  className="w-20 h-8 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
                   onClick={() => setShowAddForm(true)}
                 >
-                  Add
+                  <div className='flex justify-center'>
+                    <div className='text-xl mr-2 font-semibold mb-1'>+</div>
+                    <div className='my-auto'>Add</div>
+                  </div>
                 </button>
               )}
             </ToolbarActions>
@@ -245,8 +230,18 @@ const StoreTypePage = () => {
                 </div>
               </div>
             </div>
-            <div className="card-footer justify-center">
-              <button className="loadBtn h-8" onClick={handleSave}>Save</button>
+            <div className="card-footer justify-end">
+              <button className="loadBtn text-sm h-8 mr-2 bg-blue-500 hover:bg-blue-600 text-white flex justify-center items-center gap-x-1" onClick={handleSave}>
+                <div className='text-base mt-[1px]'><KeenIcon icon='folder-down' /></div>
+                <div>Save</div>
+              </button>
+              <button
+                className="cancelBtn h-8 text-sm bg-white border border-blue-500 text-primary  flex justify-center items-center gap-x-1"
+                onClick={() => { setShowAddForm(false); setEditData(null); setFormData({ code: '', name: '' }); }}
+              >
+                <div className='text-base mt-[1px]'><KeenIcon icon='cross'/></div>
+                <div>Cancel</div>
+              </button>
             </div>
           </div>
         ) : (
@@ -258,7 +253,30 @@ const StoreTypePage = () => {
               onFetchData={fetchStoreGroups}
               rowSelection={true}
               pagination={{ size: pageSize }}
-              toolbar={<ToolbarTable />}
+              toolbar={
+                <div className="card-header flex-wrap gap-2 border-b-0 px-5">
+                  <h3 className="card-title font-medium text-sm">
+                    Showing {count} of {totalCount} store types
+                  </h3>
+                  <div className="flex flex-wrap gap-2 lg:gap-5">
+                    <div className="flex flex-wrap gap-2.5">
+                      <div className="flex">
+                        <label className="input input-sm">
+                          <input
+                            type="text"
+                            placeholder="Search store type"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                          />
+                        </label>
+                        <button onClick={handleSearchClick} className='bg-[var(--tw-light-active)] border border-gray-400 rounded-md font-semibold text-lg text-gray-600 h-[2rem] w-[2.3rem] ml-2'>
+                          <KeenIcon icon='magnifier' />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
               layout={{ card: true }}
             />
           </div>

@@ -759,13 +759,24 @@ module.exports = {
           color: '#11488B',          
           borderRadius: '0.5rem',  
           height: '32px',
-          width:'70px',
+          width:'80px',
           fontSize: '12px',
           fontWeight: '500',        
           transition: 'background-color 0.2s ease-in-out',
-          '&:hover': {
-            backgroundColor: '#72AEF5',
-          },
+        },
+      });
+    },
+    function ({ addComponents }) {
+      addComponents({
+        '.cancelBtn': {
+          backgroundColor: '#bdbdbd',
+          color: '#ffffff',          
+          borderRadius: '0.5rem',  
+          height: '32px',
+          width:'80px',
+          fontSize: '12px',
+          fontWeight: '500',        
+          transition: 'background-color 0.2s ease-in-out',
         },
       });
     },

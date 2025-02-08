@@ -50,13 +50,15 @@ const DataGridTable = <TData,>() => {
                 className={cn(
                   headCellSpacing,
                   cellBorder && 'border-e',
-                  'h-12 text-left rtl:text-right align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pe-0',
+                  'h-12 text-center rtl:text-right align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pe-0',
                   header.column.columnDef.meta?.headerClassName
                 )}
               >
                 {header.isPlaceholder
                   ? null
-                  : flexRender(header.column.columnDef.header, header.getContext())}
+                  : <div className={cn(header.column.columnDef.meta?.subHeaderClassName
+                  )}>{flexRender(header.column.columnDef.header, header.getContext())}</div>
+                }
               </th>
             ))}
           </tr>
@@ -83,8 +85,7 @@ const DataGridTable = <TData,>() => {
                     cell.column.columnDef.meta?.cellClassName
                   )}
                 >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
+                  <div className={cn(cell.column.columnDef.meta?.subCellClassName)}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</div>                </td>
               ))}
             </tr>
           ))

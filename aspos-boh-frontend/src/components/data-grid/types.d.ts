@@ -7,5 +7,7 @@ declare module '@tanstack/react-table' {
     headerTitle?: string;
     headerClassName?: string;
     cellClassName?: string;
+    subHeaderClassName?: string;
+    subCellClassName?: string;
   }
 }
