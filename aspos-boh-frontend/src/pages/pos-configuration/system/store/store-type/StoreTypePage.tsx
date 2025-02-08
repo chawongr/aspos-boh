@@ -1,21 +1,20 @@
 import { Fragment, useEffect, useMemo, useState } from 'react';
-import { Container } from '@/components/container';
-import {
-  Toolbar,
-  ToolbarActions,
-  ToolbarDescription,
-  ToolbarHeading,
-  ToolbarPageTitle
-} from '@/partials/toolbar';
+import { toast } from 'sonner';
+import { ColumnDef } from '@tanstack/react-table';
 import {
   DataGrid,
+  TDataGridRequestParams,
+  KeenIcon,
   DataGridColumnHeader,
+  Container
 } from '@/components';
-import { ColumnDef } from '@tanstack/react-table';
-import { addStoreGroup, deleteStoreGroup, editStoreGroup, fetchStoreGroup } from '@/auth/providers/Service';
-import { KeenIcon } from '@/components';
+import axios from 'axios';
+import { addStoreGroup, deleteStoreGroup, editStoreGroup } from '@/auth/providers/Service';
+import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
-import { toast } from 'sonner';
+
+const API_URL = import.meta.env.VITE_DOMAIN;
+const token = localStorage.getItem('token');
 
 interface StoreType {
   id: string;
@@ -24,30 +23,47 @@ interface StoreType {
 }
 
 const StoreTypePage = () => {
-  const { currentLayout } = useLayout();
-  const [storeGroups, setStoreGroups] = useState<StoreType[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [searchInput, setSearchInput] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [showAddForm, setShowAddForm] = useState(false);
   const [editData, setEditData] = useState<StoreType | null>(null);
   const [formData, setFormData] = useState({ code: '', name: '' });
+  const [totalCount, setTotalCount] = useState(0);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageSize, setPageSize] = useState(5);
+  const [refreshKey, setRefreshKey] = useState(0);
+  const { currentLayout } = useLayout();
 
+  const fetchStoreGroups = async (params: TDataGridRequestParams) => {
+    try {
+      const queryParams = new URLSearchParams();
+      queryParams.set('page', String(params.pageIndex + 1));
+      queryParams.set('items_per_page', String(params.pageSize));
 
-  useEffect(() => {
-    const getStoreGroups = async () => {
-      try {
-        const response = await fetchStoreGroup();
-        setStoreGroups(response.data);
-      } catch (err) {
-        setError((err as Error).message);
-      } finally {
-        setLoading(false);
+      if (params.sorting?.[0]?.id) {
+        queryParams.set('sort', params.sorting[0].id);
+        queryParams.set('order', params.sorting[0].desc ? 'desc' : 'asc');
       }
-    };
 
-    getStoreGroups();
-  }, []);
+      if (searchQuery.trim().length > 0) {
+        queryParams.set('query', searchQuery);
+      }
+
+      const response = await axios.get(`${API_URL}/store/group?${queryParams.toString()}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        }
+      });
+      setPageIndex(params.pageIndex);
+      setPageSize(params.pageSize);
+      setTotalCount(response.data.pagination.total);
+      return { data: response.data.data, totalCount: response.data.pagination.total };
+    } catch (error) {
+      toast.error("Error fetching store groups");
+      return { data: [], totalCount: 0 };
+    }
+  };
 
   const handleEdit = (rowData: StoreType) => {
     setEditData(rowData);
@@ -58,86 +74,12 @@ const StoreTypePage = () => {
   const handleDelete = async (code: string) => {
     try {
       await deleteStoreGroup(code);
-      const response = await fetchStoreGroup();
-      setStoreGroups(response.data);
       toast.success("Store type deleted successfully!");
+      setRefreshKey(prev => prev + 1);
     } catch (error) {
       toast.error("Error deleting store group.");
     }
   };
-
-  const columns = useMemo<ColumnDef<StoreType>[]>(
-    () => [
-      {
-        accessorKey: 'code',
-        id: 'code',
-        header: ({ column }) => <DataGridColumnHeader title="Code" column={column} />,
-        enableSorting: true,
-        cell: (info) => info.row.original.code,
-      },
-      {
-        accessorKey: 'name',
-        id: 'name',
-        header: ({ column }) => <DataGridColumnHeader title="Name" column={column} />,
-        enableSorting: true,
-        cell: (info) => info.row.original.name,
-      },
-      {
-        id: 'edit',
-        header: 'Edit',
-        cell: ({ row }) => (
-          <button className="editBtn" onClick={() => handleEdit(row.original)}>Edit</button>
-        ),
-        meta: {
-          headerClassName: 'sticky right-0 w-8',
-          cellClassName: 'sticky right-0 w-8',
-        },
-        enableHiding: false,
-      },
-      {
-        id: 'delete',
-        header: 'Delete',
-        cell: ({ row }) => (
-          <button className="deleteBtn" onClick={() => handleDelete(row.original.code)}>Delete</button>
-        ),
-        meta: {
-          headerClassName: 'sticky right-0 w-8',
-          cellClassName: 'sticky right-0 w-8',
-        },
-        enableHiding: false,
-      }
-    ],
-    []
-  );
-
-
-
-  const ToolbarTable = () => {
-    return (
-      <div className="card-header flex-wrap gap-2 border-b-0 px-5">
-        <h3 className="card-title font-medium text-sm">
-          Showing {storeGroups.length} store types
-        </h3>
-        <div className="flex flex-wrap gap-2 lg:gap-5">
-          <div className="flex flex-wrap gap-2.5">
-            <div className="flex">
-              <label className="input input-sm">
-                <KeenIcon icon="magnifier" />
-                <input
-                  type="text"
-                  placeholder="Search store type"
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                />
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-
 
   const handleSave = async () => {
     try {
@@ -151,19 +93,75 @@ const StoreTypePage = () => {
       setShowAddForm(false);
       setEditData(null);
       setFormData({ code: '', name: '' });
-      const response = await fetchStoreGroup();
-      setStoreGroups(response.data);
     } catch (error) {
       toast.error("Failed to save store type.");
     }
   };
 
+  const columns = useMemo<ColumnDef<any>[]>(
+    () => [
+      {
+        accessorKey: 'code',
+        id: 'code',
+        header: ({ column }) => <DataGridColumnHeader title="Code" column={column} />,
+        enableSorting: true,
+        cell: (info) => info.row.original.code,
+        meta: {
+          headerClassName: 'w-6',
+          cellClassName: 'w-6 text-center',
+          subHeaderClassName: 'flex justify-center'
+        },
+      },
+      {
+        accessorKey: 'name',
+        id: 'name',
+        header: ({ column }) => <DataGridColumnHeader title="Name" column={column} />,
+        enableSorting: true,
+        cell: (info) => info.row.original.name,
+      },
+      {
+        id: 'edit',
+        header: 'Modify',
+        cell: ({ row }) => (
+          <button onClick={() => handleEdit(row.original)} className='bg-[var(--tw-light-active)] border border-amber-500 rounded-md font-semibold  text-amber-500 h-[1.9rem] w-[1.9rem] hover:bg-amber-500 hover:text-white'>
+            <KeenIcon icon='pencil' />
+          </button>
+        ),
+        meta: {
+          headerClassName: 'sticky right-0 w-8',
+          cellClassName: 'sticky right-0 w-10',
+          subCellClassName: 'flex justify-center'
+        },
+        enableHiding: false,
+      },
+      {
+        id: 'delete',
+        header: 'Delete',
+        cell: ({ row }) => (
+          <button onClick={() => handleDelete(row.original.code)} className='bg-[var(--tw-light-active)] border border-red-600 rounded-md font-semibold text-base text-red-600 h-[1.9rem] w-[1.9rem] hover:bg-red-600 hover:text-white'>
+            <KeenIcon icon='trash' />
+          </button>
+        ),
+        meta: {
+          headerClassName: 'sticky right-0 w-8',
+          cellClassName: 'sticky right-0 w-8',
+          subCellClassName: 'flex justify-center'
+        },
+        enableHiding: false,
+      }
+    ],
+    []
+  );
+
+  const count = Math.min((pageIndex + 1) * pageSize, totalCount);
+
+  const handleSearchClick = () => {
+    setRefreshKey(prev => prev + 1);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  if (loading) return <p>Loading store groups...</p>;
-  if (error) return <p>Error: {error}</p>;
 
   return (
     <Fragment>
@@ -179,19 +177,15 @@ const StoreTypePage = () => {
               </ToolbarDescription>
             </ToolbarHeading>
             <ToolbarActions>
-              {showAddForm ? (
+              {!showAddForm && (
                 <button
-                  className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
-                  onClick={() => { setShowAddForm(false); setEditData(null); setFormData({ code: '', name: '' }); }}
-                >
-                  Back
-                </button>
-              ) : (
-                <button
-                  className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
+                  className="w-20 h-8 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
                   onClick={() => setShowAddForm(true)}
                 >
-                  Add
+                  <div className='flex justify-center'>
+                    <div className='text-xl mr-2 font-semibold mb-1'>+</div>
+                    <div className='my-auto'>Add</div>
+                  </div>
                 </button>
               )}
             </ToolbarActions>
@@ -211,9 +205,9 @@ const StoreTypePage = () => {
                   <span className="form-label max-w-32 w-full">Code</span>
                   <div className="grow min-w-24">
                     <input
-                      className="input w-full" 
+                      className="input w-full"
                       type="text"
-                      placeholder="Enter Code" 
+                      placeholder="Enter Code"
                       name="code"
                       value={formData.code}
                       onChange={handleChange}
@@ -225,7 +219,7 @@ const StoreTypePage = () => {
                   <span className="form-label max-w-32 w-full">Name</span>
                   <div className="grow min-w-24">
                     <input
-                      className="input w-full" 
+                      className="input w-full"
                       type="text"
                       placeholder="Enter Name"
                       name="name"
@@ -236,20 +230,53 @@ const StoreTypePage = () => {
                 </div>
               </div>
             </div>
-            <div className="card-footer justify-center">
-              <button className="loadBtn h-8" onClick={handleSave}>Save</button>
+            <div className="card-footer justify-end">
+              <button className="loadBtn text-sm h-8 mr-2 bg-blue-500 hover:bg-blue-600 text-white flex justify-center items-center gap-x-1" onClick={handleSave}>
+                <div className='text-base mt-[1px]'><KeenIcon icon='folder-down' /></div>
+                <div>Save</div>
+              </button>
+              <button
+                className="cancelBtn h-8 text-sm bg-white border border-blue-500 text-primary  flex justify-center items-center gap-x-1"
+                onClick={() => { setShowAddForm(false); setEditData(null); setFormData({ code: '', name: '' }); }}
+              >
+                <div className='text-base mt-[1px]'><KeenIcon icon='cross'/></div>
+                <div>Cancel</div>
+              </button>
             </div>
           </div>
         ) : (
           <div className="overflow-x-auto ">
             <DataGrid
+              key={refreshKey}
               columns={columns}
-              data={storeGroups}
+              serverSide={true}
+              onFetchData={fetchStoreGroups}
               rowSelection={true}
-              pagination={{ size: 5 }}
-              sorting={[{ id: 'code', desc: false }]}
-              toolbar={<ToolbarTable />}
-
+              pagination={{ size: pageSize }}
+              toolbar={
+                <div className="card-header flex-wrap gap-2 border-b-0 px-5">
+                  <h3 className="card-title font-medium text-sm">
+                    Showing {count} of {totalCount} store types
+                  </h3>
+                  <div className="flex flex-wrap gap-2 lg:gap-5">
+                    <div className="flex flex-wrap gap-2.5">
+                      <div className="flex">
+                        <label className="input input-sm">
+                          <input
+                            type="text"
+                            placeholder="Search store type"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                          />
+                        </label>
+                        <button onClick={handleSearchClick} className='bg-[var(--tw-light-active)] border border-gray-400 rounded-md font-semibold text-lg text-gray-600 h-[2rem] w-[2.3rem] ml-2'>
+                          <KeenIcon icon='magnifier' />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
               layout={{ card: true }}
             />
           </div>
