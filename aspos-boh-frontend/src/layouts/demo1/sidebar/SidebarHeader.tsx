@@ -15,8 +15,8 @@ const SidebarHeader = forwardRef<HTMLDivElement, any>((props, ref) => {
           className="default-logo min-h-[22px] max-w-none w-[80px]"
         />
         <img
-          src={toAbsoluteUrl('/media/app/mini-logo.svg')}
-          className="small-logo min-h-[22px] max-w-none"
+          src={toAbsoluteUrl('/media/app/aspos-logo.png')}
+          className="small-logo min-h-[30px] w-[80px]"
         />
       </Link>
       <Link to="/" className="hidden dark:block">
