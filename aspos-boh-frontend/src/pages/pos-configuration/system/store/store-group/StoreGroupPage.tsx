@@ -212,7 +212,9 @@ const StoreGroupPage = () => {
             <div className="card-body grid gap-5">
               <div className="grid grid-cols-2 gap-5">
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
-                  <span className="form-label max-w-32 w-full">Code</span>
+                  <span className="form-label max-w-32 w-full">
+                    Code {!formData.code && <span className="text-red-500">*</span>}
+                  </span>
                   <div className="grow min-w-24">
                     <input
                       className="input w-full"
@@ -226,7 +228,9 @@ const StoreGroupPage = () => {
                   </div>
                 </div>
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
-                  <span className="form-label max-w-32 w-full">Name</span>
+                  <span className="form-label max-w-32 w-full">
+                    Name {!formData.name && <span className="text-red-500">*</span>}
+                  </span>
                   <div className="grow min-w-24">
                     <input
                       className="input w-full"
