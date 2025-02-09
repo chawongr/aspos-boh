@@ -85,3 +85,63 @@ export const deleteStoreGroup = async (code: string) => {
   }
 };
 
+export const addStoreType = async (code: string, type: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+    
+    const response = await axios.post(`${API_URL}/store/type`,{ code, type }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error("Error updating store type:", error);
+    throw error;
+  }
+};
+
+export const editStoreType = async (code: string, type: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+    
+    const response = await axios.put(`${API_URL}/store/type/${code}`, { type }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error("Error updating store type:", error);
+    throw error;
+  }
+};
+
+export const deleteStoreType = async (code: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+    
+    const response = await axios.delete(`${API_URL}/store/type/${code}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error("Error updating store type:", error);
+    throw error;
+  }
+};
+
