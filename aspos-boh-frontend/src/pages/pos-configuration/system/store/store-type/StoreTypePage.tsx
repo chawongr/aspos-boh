@@ -205,7 +205,7 @@ const StoreTypePage = () => {
                   <div className="grow min-w-24">
                     <input
                       className="input w-full"
-                      type="text"
+                      type="number"
                       placeholder="Enter Code"
                       name="code"
                       value={formData.code}
@@ -263,7 +263,7 @@ const StoreTypePage = () => {
                         <label className="input input-sm">
                           <input
                             type="text"
-                            placeholder="Search store type"
+                            placeholder="Search ..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                           />
