@@ -9,7 +9,7 @@ import {
   Container
 } from '@/components';
 import axios from 'axios';
-import { addStoreGroup, deleteStoreGroup, editStoreGroup } from '@/providers/Service';
+import { addStoreType, deleteStoreType, editStoreType } from '@/providers/Service';
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
 
@@ -18,21 +18,21 @@ const token = localStorage.getItem('token');
 
 interface StoreType {
   code: string;
-  name: string;
+  type: string;
 }
 
 const StoreTypePage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showAddForm, setShowAddForm] = useState(false);
   const [editData, setEditData] = useState<StoreType | null>(null);
-  const [formData, setFormData] = useState({ code: '', name: '' });
+  const [formData, setFormData] = useState({ code: '', type: '' });
   const [totalCount, setTotalCount] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(5);
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
 
-  const fetchStoreGroups = async (params: TDataGridRequestParams) => {
+  const fetchStoreType = async (params: TDataGridRequestParams) => {
     try {
       const queryParams = new URLSearchParams();
       queryParams.set('page', String(params.pageIndex + 1));
@@ -59,20 +59,20 @@ const StoreTypePage = () => {
       setTotalCount(response.data.pagination.total);
       return { data: response.data.data, totalCount: response.data.pagination.total };
     } catch (error) {
-      toast.error("Error fetching store groups");
+      toast.error("Error fetching store type");
       return { data: [], totalCount: 0 };
     }
   };
 
   const handleEdit = (rowData: StoreType) => {
     setEditData(rowData);
-    setFormData({ code: rowData.code, name: rowData.name });
+    setFormData({ code: rowData.code, type: rowData.type });
     setShowAddForm(true);
   };
 
   const handleDelete = async (code: string) => {
     try {
-      await deleteStoreGroup(code);
+      await deleteStoreType(code);
       toast.success("Store type deleted successfully!");
       setRefreshKey(prev => prev + 1);
     } catch (error) {
@@ -83,15 +83,15 @@ const StoreTypePage = () => {
   const handleSave = async () => {
     try {
       if (editData) {
-        await editStoreGroup(formData.code, formData.name);
+        await editStoreType(formData.code, formData.type);
         toast.success("Store type updated successfully!");
       } else {
-        await addStoreGroup(formData.code, formData.name);
+        await addStoreType(formData.code, formData.type);
         toast.success("Store type added successfully!");
       }
       setShowAddForm(false);
       setEditData(null);
-      setFormData({ code: '', name: '' });
+      setFormData({ code: '', type: '' });
     } catch (error) {
       toast.error("Failed to save store type.");
     }
@@ -112,11 +112,11 @@ const StoreTypePage = () => {
         },
       },
       {
-        accessorKey: 'name',
-        id: 'name',
-        header: ({ column }) => <DataGridColumnHeader title="Name" column={column} />,
+        accessorKey: 'type',
+        id: 'type',
+        header: ({ column }) => <DataGridColumnHeader title="Type" column={column} />,
         enableSorting: true,
-        cell: (info) => info.row.original.name,
+        cell: (info) => info.row.original.type,
       },
       {
         id: 'edit',
@@ -215,14 +215,14 @@ const StoreTypePage = () => {
                   </div>
                 </div>
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
-                  <span className="form-label max-w-32 w-full">Name</span>
+                  <span className="form-label max-w-32 w-full">Type</span>
                   <div className="grow min-w-24">
                     <input
                       className="input w-full"
                       type="text"
-                      placeholder="Enter Name"
-                      name="name"
-                      value={formData.name}
+                      placeholder="Enter Type"
+                      name="type"
+                      value={formData.type}
                       onChange={handleChange}
                     />
                   </div>
@@ -236,7 +236,7 @@ const StoreTypePage = () => {
               </button>
               <button
                 className="cancelBtn h-8 text-sm bg-white border border-blue-500 text-primary  flex justify-center items-center gap-x-1"
-                onClick={() => { setShowAddForm(false); setEditData(null); setFormData({ code: '', name: '' }); }}
+                onClick={() => { setShowAddForm(false); setEditData(null); setFormData({ code: '', type: '' }); }}
               >
                 <div className='text-base mt-[1px]'><KeenIcon icon='cross'/></div>
                 <div>Cancel</div>
@@ -249,7 +249,7 @@ const StoreTypePage = () => {
               key={refreshKey}
               columns={columns}
               serverSide={true}
-              onFetchData={fetchStoreGroups}
+              onFetchData={fetchStoreType}
               rowSelection={true}
               pagination={{ size: pageSize }}
               toolbar={
