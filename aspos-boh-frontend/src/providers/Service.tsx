@@ -3,7 +3,7 @@ import axios from "axios";
 let token = localStorage.getItem("token");
 const API_URL = import.meta.env.VITE_DOMAIN;
 
-
+// Store Group
 export const fetchStoreGroup = async () => {
   try {
 
@@ -85,6 +85,8 @@ export const deleteStoreGroup = async (code: string) => {
   }
 };
 
+
+// Store Type
 export const addStoreType = async (code: string, type: string) => {
   try {
     if (!token) {
