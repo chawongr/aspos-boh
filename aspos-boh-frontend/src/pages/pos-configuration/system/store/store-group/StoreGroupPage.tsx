@@ -9,7 +9,7 @@ import {
   Container
 } from '@/components';
 import axios from 'axios';
-import { addStoreGroup, deleteStoreGroup, editStoreGroup } from '@/providers/Service';
+import { addStoreGroup, deleteStoreGroup, editStoreGroup } from '@/pages/pos-configuration/system/Service';
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
 
