@@ -28,6 +28,20 @@ export const MENU_SIDEBAR: TMenuConfig = [
     icon: 'setting-2',
     children: [
       {
+        title: 'Sales',
+        children: [
+          {
+            title: 'Menu Item',
+            children: [
+              {
+                title: 'Major Group',
+                path: '/pos-config/sales/menu-item/major-group'
+              },
+            ]
+          },
+        ]
+      },
+      {
         title: 'Menu Item',
         path: '/pos-config/menu-item',
         children: [
