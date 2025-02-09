@@ -9,7 +9,7 @@ import {
   Container
 } from '@/components';
 import axios from 'axios';
-import { addStoreGroup, deleteStoreGroup, editStoreGroup } from '@/auth/providers/Service';
+import { addStoreGroup, deleteStoreGroup, editStoreGroup } from '@/providers/Service';
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
 
@@ -128,8 +128,8 @@ const StoreTypePage = () => {
           </button>
         ),
         meta: {
-          headerClassName: 'sticky right-0 w-8',
-          cellClassName: 'sticky right-0 w-10',
+          headerClassName: 'w-8',
+          cellClassName: 'w-8',
           subCellClassName: 'flex justify-center'
         },
         enableHiding: false,
@@ -143,8 +143,8 @@ const StoreTypePage = () => {
           </button>
         ),
         meta: {
-          headerClassName: 'sticky right-0 w-8',
-          cellClassName: 'sticky right-0 w-8',
+          headerClassName: 'w-8',
+          cellClassName: 'w-8',
           subCellClassName: 'flex justify-center'
         },
         enableHiding: false,

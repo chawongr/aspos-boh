@@ -8,7 +8,7 @@ import {
 import { ColumnDef, Column, RowSelectionState } from '@tanstack/react-table';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
-import { fetchStoreGroup } from '@/auth/providers/Service';
+import { fetchStoreGroup } from '@/providers/Service';
 import { KeenIcon } from '@/components';
 
 interface IColumnFilterProps<TData, TValue> {
