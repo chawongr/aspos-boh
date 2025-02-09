@@ -1,2 +1,1 @@
-export * from './CompanyContent';
-export * from './AreaPage';
+export * from './CompanyPage';

@@ -40,7 +40,6 @@ import {
   StoreGroupPage,
   StorePage,
   StoreTypePage,
-  StoreTypeAdd,
   AreaPage,
   CompanyPage,
   SystemPage
