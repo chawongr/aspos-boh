@@ -17,7 +17,6 @@ const API_URL = import.meta.env.VITE_DOMAIN;
 const token = localStorage.getItem('token');
 
 interface StoreType {
-  id: string;
   code: string;
   name: string;
 }
@@ -48,7 +47,7 @@ const StoreTypePage = () => {
         queryParams.set('query', searchQuery);
       }
 
-      const response = await axios.get(`${API_URL}/store/group?${queryParams.toString()}`, {
+      const response = await axios.get(`${API_URL}/store/type?${queryParams.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
