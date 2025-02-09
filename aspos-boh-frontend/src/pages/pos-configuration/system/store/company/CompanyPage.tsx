@@ -261,8 +261,8 @@ const CompanyPage = () => {
 
     if (name === "taxId") {
       // ตรวจสอบว่าค่าที่ป้อนเป็นตัวเลขเท่านั้น
-      const phoneRegex = /^[0-9]*$/;
-      if (!phoneRegex.test(value)) {
+      const taxRegex = /^[0-9]*$/;
+      if (!taxRegex.test(value)) {
         toast.error("Tax id can contain only numbers");
         return;
       }
