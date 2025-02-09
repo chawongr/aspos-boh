@@ -81,11 +81,12 @@ const DataGridTable = <TData,>() => {
                   className={cn(
                     bodyCellSpacing,
                     cellBorder && 'border-e',
-                    'align-middle [&:has([role=checkbox])]:pe-0',
+                    'align-middle [&:has([role=checkbox])]:pe-0 max-w-md truncate',
                     cell.column.columnDef.meta?.cellClassName
                   )}
                 >
-                  <div className={cn(cell.column.columnDef.meta?.subCellClassName)}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</div>                </td>
+                  <div className={cn(cell.column.columnDef.meta?.subCellClassName,'truncate overflow-hidden whitespace-nowrap')}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</div>                
+                  </td>
               ))}
             </tr>
           ))
