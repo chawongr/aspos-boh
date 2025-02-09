@@ -205,7 +205,7 @@ const AreaPage = () => {
                   <div className="grow min-w-24">
                     <input
                       className="input w-full"
-                      type="text"
+                      type="number"
                       placeholder="Enter Code"
                       name="code"
                       value={formData.code}
@@ -263,7 +263,7 @@ const AreaPage = () => {
                         <label className="input input-sm">
                           <input
                             type="text"
-                            placeholder="Search area"
+                            placeholder="Search ..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                           />
