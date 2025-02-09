@@ -71,13 +71,24 @@ const StoreGroupPage = () => {
   };
 
   const handleDelete = async (code: string) => {
-    try {
-      await deleteStoreGroup(code);
-      toast.success("Store group deleted successfully!");
-      setRefreshKey(prev => prev + 1);
-    } catch (error) {
-      toast.error("Error deleting store group.");
-    }
+    toast("Are you sure you want to delete this store group?", {
+      action: (
+        <button
+          onClick={async () => {
+            try {
+              await deleteStoreGroup(code);
+              toast.success("Store group deleted successfully!");
+              setRefreshKey(prev => prev + 1);
+            } catch (error) {
+              toast.error("Error deleting store group.");
+            }
+          }}
+          className="bg-red-500 text-white w-20 py-2 rounded-md hover:bg-red-600 transition font-semibold"
+        >
+          Confirm
+        </button>
+      ),
+    });
   };
 
   const handleSave = async () => {

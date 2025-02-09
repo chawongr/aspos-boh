@@ -71,14 +71,25 @@ const AreaPage = () => {
   };
 
   const handleDelete = async (code: string) => {
-    try {
-      await deleteArea(code);
-      toast.success("Area deleted successfully!");
-      setRefreshKey(prev => prev + 1);
-    } catch (error) {
-      toast.error("Error deleting area.");
-    }
-  };
+      toast("Are you sure you want to delete this area?", {
+        action: (
+          <button
+            onClick={async () => {
+              try {
+                await deleteArea(code);
+                toast.success("Area deleted successfully!");
+                setRefreshKey(prev => prev + 1);
+              } catch (error) {
+                toast.error("Error deleting area.");
+              }
+            }}
+            className="bg-red-500 text-white w-20 py-2 rounded-md hover:bg-red-600 transition font-semibold"
+          >
+            Confirm
+          </button>
+        ),
+      });
+    };
 
   const handleSave = async () => {
     try {
