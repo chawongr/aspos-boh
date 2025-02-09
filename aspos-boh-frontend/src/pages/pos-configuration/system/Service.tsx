@@ -3,6 +3,7 @@ import axios from "axios";
 let token = localStorage.getItem("token");
 const API_URL = import.meta.env.VITE_DOMAIN;
 
+////// Store
 // Store Group
 export const fetchStoreGroup = async () => {
   try {
@@ -146,4 +147,68 @@ export const deleteStoreType = async (code: string) => {
     throw error;
   }
 };
+
+
+
+// Area
+export const addArea = async (code: string, name: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+    
+    const response = await axios.post(`${API_URL}/location/area`,{ code, name }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error("Error updating area:", error);
+    throw error;
+  }
+};
+
+export const editArea = async (code: string, name: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+    
+    const response = await axios.put(`${API_URL}/location/area/${code}`, { name }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error("Error updating area:", error);
+    throw error;
+  }
+};
+
+export const deleteArea = async (code: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+    
+    const response = await axios.delete(`${API_URL}/location/area/${code}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error("Error updating area:", error);
+    throw error;
+  }
+};
+
 

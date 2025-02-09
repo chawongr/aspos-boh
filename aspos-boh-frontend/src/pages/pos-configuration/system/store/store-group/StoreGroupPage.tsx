@@ -73,7 +73,7 @@ const StoreGroupPage = () => {
   const handleDelete = async (code: string) => {
     try {
       await deleteStoreGroup(code);
-      toast.success("Store type deleted successfully!");
+      toast.success("Store group deleted successfully!");
       setRefreshKey(prev => prev + 1);
     } catch (error) {
       toast.error("Error deleting store group.");
@@ -84,16 +84,16 @@ const StoreGroupPage = () => {
     try {
       if (editData) {
         await editStoreGroup(formData.code, formData.name);
-        toast.success("Store type updated successfully!");
+        toast.success("Store group updated successfully!");
       } else {
         await addStoreGroup(formData.code, formData.name);
-        toast.success("Store type added successfully!");
+        toast.success("Store group added successfully!");
       }
       setShowAddForm(false);
       setEditData(null);
       setFormData({ code: '', name: '' });
     } catch (error) {
-      toast.error("Failed to save store type.");
+      toast.error("Failed to save store group.");
     }
   };
 
@@ -171,7 +171,7 @@ const StoreGroupPage = () => {
               <ToolbarPageTitle />
               <ToolbarDescription>
                 <div className="flex items-center flex-wrap gap-1.5 font-medium">
-                  <span className="text-md text-gray-600">Store Type Management</span>
+                  <span className="text-md text-gray-600">Store Group Management</span>
                 </div>
               </ToolbarDescription>
             </ToolbarHeading>
@@ -196,7 +196,7 @@ const StoreGroupPage = () => {
         {showAddForm ? (
           <div className="card">
             <div className="card-header" id="webhooks">
-              <h3 className="card-title">{editData ? 'Edit Store Type' : 'New Store Type'}</h3>
+              <h3 className="card-title">{editData ? 'Edit Store Group' : 'New Store Group'}</h3>
             </div>
             <div className="card-body grid gap-5">
               <div className="grid grid-cols-2 gap-5">
@@ -255,7 +255,7 @@ const StoreGroupPage = () => {
               toolbar={
                 <div className="card-header flex-wrap gap-2 border-b-0 px-5">
                   <h3 className="card-title font-medium text-sm">
-                    Showing {count} of {totalCount} store types
+                    Showing {count} of {totalCount} store groups
                   </h3>
                   <div className="flex flex-wrap gap-2 lg:gap-5">
                     <div className="flex flex-wrap gap-2.5">
@@ -263,7 +263,7 @@ const StoreGroupPage = () => {
                         <label className="input input-sm">
                           <input
                             type="text"
-                            placeholder="Search store type"
+                            placeholder="Search store group"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                           />
