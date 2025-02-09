@@ -161,7 +161,7 @@ const StoreClientsFilter = () => {
                                     <input className="input w-full" type="text" placeholder="Enter Phone" />
                                 </div>
                             </div>
-                            <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
+                            {/* <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
                                 <span className="form-label max-w-32 w-full">Store Group</span>
                                 <div className="grow min-w-24">
                                     <MultiSelect
@@ -187,7 +187,7 @@ const StoreClientsFilter = () => {
                                         onChange={handleSelectionChange}
                                     />
                                 </div>
-                            </div>
+                            </div> */}
                             
                         </div>
                     </div>
@@ -199,10 +199,10 @@ const StoreClientsFilter = () => {
                             <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
                                 <span className="form-label max-w-32 w-full">Country</span>
                                 <div className="grow min-w-24">
-                                    <MultiSelect
+                                    {/* <MultiSelect
                                         items={country}
                                         onChange={handleSelectionChange}
-                                    />
+                                    /> */}
                                 </div>
                             </div>
                             <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
@@ -237,10 +237,10 @@ const StoreClientsFilter = () => {
                             <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
                                 <span className="form-label max-w-32 w-full">Closed</span>
                                 <div className="grow min-w-24">
-                                    <MultiSelect
+                                    {/* <MultiSelect
                                         items={closed}
                                         onChange={handleSelectionChange}
-                                    />
+                                    /> */}
                                 </div>
                             </div>
                             <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
@@ -258,10 +258,10 @@ const StoreClientsFilter = () => {
                             <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
                                 <span className="form-label max-w-32 w-full">Store Type</span>
                                 <div className="grow min-w-24">
-                                    <MultiSelect
+                                    {/* <MultiSelect
                                         items={storeT}
                                         onChange={handleSelectionChange}
-                                    />
+                                    /> */}
                                 </div>
                             </div>
                             <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
