@@ -258,39 +258,21 @@ const CompanyPage = () => {
         return;
       }
     }
+
+    if (name === "taxId") {
+      // ตรวจสอบว่าค่าที่ป้อนเป็นตัวเลขเท่านั้น
+      const phoneRegex = /^[0-9]*$/;
+      if (!phoneRegex.test(value)) {
+        toast.error("Tax id can contain only numbers");
+        return;
+      }
+    }
   
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-  
-  //   if (name === "email") {
-  //     // ตรวจสอบว่าค่าเป็นอีเมลที่ถูกต้องหรือไม่
-  //     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //     if (!emailRegex.test(value)) {
-  //       toast.error("Invalid email format");
-  //       return;
-  //     }
-  //   }
-
-  //   if (name === "phone") {
-  //     // ตรวจสอบว่าค่าที่ป้อนเป็นตัวเลขเท่านั้น
-  //     const phoneRegex = /^[0-9]*$/;
-  //     if (!phoneRegex.test(value)) {
-  //       toast.error("Phone number can contain only numbers");
-  //       return;
-  //     }
-  //   }
-  
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
-  
 
   return (
     <Fragment>
@@ -331,7 +313,9 @@ const CompanyPage = () => {
             <div className="card-body grid gap-5">
               <div className="grid grid-cols-2 gap-5">
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
-                  <span className="form-label max-w-32 w-full">Code</span>
+                  <span className="form-label max-w-32 w-full">
+                    Code {!formData.code && <span className="text-red-500">*</span>}
+                  </span>
                   <div className="grow min-w-24">
                     <input
                       className="input w-full"
@@ -345,7 +329,9 @@ const CompanyPage = () => {
                   </div>
                 </div>
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
-                  <span className="form-label max-w-32 w-full">Name</span>
+                  <span className="form-label max-w-32 w-full">
+                    Name {!formData.name && <span className="text-red-500">*</span>}
+                  </span>
                   <div className="grow min-w-24">
                     <input
                       className="input w-full"
@@ -358,7 +344,9 @@ const CompanyPage = () => {
                   </div>
                 </div>
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
-                  <span className="form-label max-w-32 w-full">Address 1</span>
+                  <span className="form-label max-w-32 w-full">
+                    Address 1 {!formData.address1 && <span className="text-red-500">*</span>}
+                  </span>
                   <div className="grow min-w-24">
                     <input
                       className="input w-full"
@@ -371,7 +359,9 @@ const CompanyPage = () => {
                   </div>
                 </div>
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
-                  <span className="form-label max-w-32 w-full">Address 2</span>
+                  <span className="form-label max-w-32 w-full">
+                    Address 2
+                  </span>
                   <div className="grow min-w-24">
                     <input
                       className="input w-full"
@@ -384,7 +374,9 @@ const CompanyPage = () => {
                   </div>
                 </div>
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
-                  <span className="form-label max-w-32 w-full">Address 3</span>
+                  <span className="form-label max-w-32 w-full">
+                    Address 3
+                  </span>
                   <div className="grow min-w-24">
                     <input
                       className="input w-full"
@@ -397,7 +389,9 @@ const CompanyPage = () => {
                   </div>
                 </div>
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
-                  <span className="form-label max-w-32 w-full">Email</span>
+                  <span className="form-label max-w-32 w-full">
+                    Email
+                  </span>
                   <div className="grow min-w-24">
                     <input
                       className="input w-full"
@@ -418,7 +412,9 @@ const CompanyPage = () => {
                   </div>
                 </div>
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
-                  <span className="form-label max-w-32 w-full">Phone</span>
+                  <span className="form-label max-w-32 w-full">
+                    Phone
+                  </span>
                   <div className="grow min-w-24">
                     <input
                       className="input w-full"
@@ -431,7 +427,9 @@ const CompanyPage = () => {
                   </div>
                 </div>
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
-                  <span className="form-label max-w-32 w-full">Tax Id</span>
+                  <span className="form-label max-w-32 w-full">
+                    Tax Id {!formData.taxId && <span className="text-red-500">*</span>}
+                  </span>
                   <div className="grow min-w-24">
                     <input
                       className="input w-full"
