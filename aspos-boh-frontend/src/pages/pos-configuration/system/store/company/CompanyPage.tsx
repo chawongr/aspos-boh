@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState } from 'react';
+import React,{ Fragment, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { ColumnDef } from '@tanstack/react-table';
 import {
@@ -12,6 +12,7 @@ import axios from 'axios';
 import { addCompany, deleteCompany, editCompany } from '@/pages/pos-configuration/system/Service';
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
+import { boolean } from 'yup';
 
 const API_URL = import.meta.env.VITE_DOMAIN;
 const token = localStorage.getItem('token');
@@ -37,6 +38,7 @@ const CompanyPage = () => {
   const [pageSize, setPageSize] = useState(5);
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
+  const [isFormat, setIsFormat] = useState(true);
 
   const fetchCompany = async (params: TDataGridRequestParams) => {
     try {
@@ -97,34 +99,38 @@ const CompanyPage = () => {
 
   const handleSave = async () => {
     try {
-      if (editData) {
-        await editCompany(
-          formData.code, 
-          formData.name,
-          formData.address1, 
-          formData.address2,
-          formData.address3, 
-          formData.email,
-          formData.phone, 
-          formData.taxId,
-        );
-        toast.success("Company updated successfully!");
-      } else {
-        await addCompany(
-          formData.code, 
-          formData.name,
-          formData.address1, 
-          formData.address2,
-          formData.address3, 
-          formData.email,
-          formData.phone, 
-          formData.taxId,
-        );
-        toast.success("Company added successfully!");
+      if(isFormat){
+        if (editData) {
+          await editCompany(
+            formData.code, 
+            formData.name,
+            formData.address1, 
+            formData.address2,
+            formData.address3, 
+            formData.email,
+            formData.phone, 
+            formData.taxId,
+          );
+          toast.success("Company updated successfully!");
+        } else {
+          await addCompany(
+            formData.code, 
+            formData.name,
+            formData.address1, 
+            formData.address2,
+            formData.address3, 
+            formData.email,
+            formData.phone, 
+            formData.taxId,
+          );
+          toast.success("Company added successfully!");
+        }
+        setShowAddForm(false);
+        setEditData(null);
+        setFormData({ code: '', name: '',address1: '', address2: '',address3: '', email: '',phone: '', taxId: '' });
+      }else{
+        toast.error("Some inputs have an invalid format.");
       }
-      setShowAddForm(false);
-      setEditData(null);
-      setFormData({ code: '', name: '',address1: '', address2: '',address3: '', email: '',phone: '', taxId: '' });
     } catch (error) {
       toast.error("Failed to save company.");
     }
@@ -242,7 +248,21 @@ const CompanyPage = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+  
+    if (name === "phone") {
+      // ตรวจสอบว่าค่าที่ป้อนเป็นตัวเลขเท่านั้น
+      const phoneRegex = /^[0-9]*$/;
+      if (!phoneRegex.test(value)) {
+        toast.error("Phone number can contain only numbers");
+        return;
+      }
+    }
+  
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
   // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   const { name, value } = e.target;
@@ -386,7 +406,14 @@ const CompanyPage = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                     
+                      onBlur={(e) => {
+                        if (!e.target.checkValidity()) {
+                          toast.error("Invalid email format");
+                          setIsFormat(false);
+                        }else{
+                          setIsFormat(true);
+                        }
+                      }}
                     />
                   </div>
                 </div>
