@@ -9,14 +9,14 @@ import {
   Container
 } from '@/components';
 import axios from 'axios';
-import { addStore, deleteStore, editStore, fetchStoreGroup } from '@/pages/pos-configuration/system/Service';
+import { addStore, deleteStore, editStore } from '@/pages/pos-configuration/system/Service';
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
-import { Dropdown, MultiSelect } from '@/components/ui/select';
+import { Dropdown } from '@/components/ui/select';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 import { Calendar } from '@/components/ui/calendar';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 const API_URL = import.meta.env.VITE_DOMAIN;
 const token = localStorage.getItem('token');
@@ -58,7 +58,7 @@ const StorePage = () => {
     region: '',
     country: '',
     opendate: '',
-    closed: '',
+    closed: 'N',
     accountcode: '',
     costcentre: '',
     storetype: '',
@@ -69,14 +69,8 @@ const StorePage = () => {
   const [pageSize, setPageSize] = useState(5);
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
-  const [date, setDate] = useState<Date | undefined>(new Date());
-  const [storeGroups, setStoreGroups] = useState<{ value: string; label: string }[]>([]);
 
   const [isFormat, setIsFormat] = useState(true);
-
-  const [selectedStoreGroup, setSelectedStoreGroup] = useState<{ value: string; label: string } | null>(null);
-
-
 
   const fetchStore = async (params: TDataGridRequestParams) => {
     try {
@@ -155,7 +149,6 @@ const StorePage = () => {
     });
   };
 
-
   const handleSave = async () => {
     console.log("formData>>>", formData)
     try {
@@ -217,7 +210,7 @@ const StorePage = () => {
         region: '',
         country: '',
         opendate: '',
-        closed: '',
+        closed: 'N',
         accountcode: '',
         costcentre: '',
         storetype: '',
@@ -449,13 +442,6 @@ const StorePage = () => {
     }));
   };
 
-  useEffect(() => {
-    if (formData.stroregroup && storeGroups.length > 0) {
-      const matchingGroup = storeGroups.find(group => group.value === formData.stroregroup);
-      setSelectedStoreGroup(matchingGroup || null);
-    }
-  }, [formData.stroregroup, storeGroups])
-
   return (
     <Fragment>
       {currentLayout?.name === 'demo1-layout' && (
@@ -660,20 +646,24 @@ const StorePage = () => {
                           id="date"
                           className={cn(
                             'input data-[state=open]:border-primary',
-                            !date && 'text-muted-foreground'
+                            !formData.opendate && 'text-muted-foreground'
                           )}
                         >
                           <KeenIcon icon="calendar" className="-ms-0.5" />
-                          {date ? format(date, 'LLL dd, y') : <span>Pick a date</span>}
+                          {formData.opendate ? format(parseISO(formData.opendate), 'yyyy-MM-dd HH:mm:ss') : <span>Pick a date</span>}
                         </button>
                       </PopoverTrigger>
                       <PopoverContent className="w-auto p-0" align="start">
                         <Calendar
-                          initialFocus
                           mode="single"
-                          defaultMonth={date}
-                          selected={date}
-                          onSelect={setDate}
+                          selected={formData.opendate ? new Date(formData.opendate) : undefined} // ✅ Convert string to Date object
+                          onSelect={(date) => {
+                            if (date) {
+                              // ✅ Adjust for local timezone
+                              const formattedDate = format(date, "yyyy-MM-dd'T'HH:mm:ss");
+                              setFormData((prev) => ({ ...prev, opendate: formattedDate }));
+                            }
+                          }}
                           numberOfMonths={1}
                         />
                       </PopoverContent>
@@ -738,7 +728,14 @@ const StorePage = () => {
                     <label className="form-label max-w-32"></label>
                     <div className="switch switch-sm grow flex justify-start">
                       <span className="text-gray-800 text-sm">Closed</span>
-                      <input type="checkbox" value="1" name="check" defaultChecked readOnly />
+                      <input
+                        type="checkbox"
+                        checked={formData.closed === 'Y'} // ✅ Checked if value is "Y"
+                        onChange={(e) => setFormData(prev => ({
+                          ...prev,
+                          closed: e.target.checked ? 'Y' : 'N' // ✅ Toggle between "Y" and "N"
+                        }))}
+                      />
                     </div>
                   </div>
                 </div>
@@ -765,7 +762,7 @@ const StorePage = () => {
                     region: '',
                     country: '',
                     opendate: '',
-                    closed: '',
+                    closed: 'N',
                     accountcode: '',
                     costcentre: '',
                     storetype: '',

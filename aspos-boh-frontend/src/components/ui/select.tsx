@@ -362,14 +362,12 @@ const Dropdown = ({
   isLabel,
   value,
   setSelectedItem,
-  // setData
 }: {
   apiEndpoint: string;
   queryParam?: string;
   isLabel: string;
   value?: string;
   setSelectedItem: (item: { value: string; label: string } | null) => void;
-  // setData?: (groups: { value: string; label: string }[]) => void;
 }) => {
   const [items, setItems] = useState<{ value: string; label: string }[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -388,7 +386,6 @@ const Dropdown = ({
   useEffect(() => {
     if (value && !selectedItemState) {
       const foundItem = items.find((item) => item.value === value.toString());
-      console.log(items.find((item) => item.value === value.toString()),">>>",value)
 
       if (foundItem) {
         setSelectedItemState(foundItem);
@@ -418,7 +415,6 @@ const Dropdown = ({
         }));
 
         setItems(formattedData);
-        // if (setData) setData(formattedData);
       } catch (error) {
         console.error("Error fetching items:", error);
       } finally {
@@ -429,28 +425,13 @@ const Dropdown = ({
     fetchItems();
   }, [debouncedSearchTerm, apiEndpoint, queryParam, token]);
 
-  // ✅ Close dropdown on outside click
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  useEffect(()=>{
-    console.log("selectedItemState>>>",selectedItemState)
-  })
-
   const selectedLabel = selectedItemState?.label || "Select Store Group";
 
   // ✅ Handle item selection & persist selected value
   const handleSelectItem = useCallback(
     (item: { value: string; label: string }) => {
       setSelectedItem(item);
-      setSelectedItemState(item); 
+      setSelectedItemState(item);
       setDropdownOpen(false);
     },
     [setSelectedItem]
