@@ -362,14 +362,14 @@ const Dropdown = ({
   isLabel,
   value,
   setSelectedItem,
-  setStoreGroups
+  // setData
 }: {
   apiEndpoint: string;
   queryParam?: string;
   isLabel: string;
   value?: string;
   setSelectedItem: (item: { value: string; label: string } | null) => void;
-  setStoreGroups?: (groups: { value: string; label: string }[]) => void;
+  // setData?: (groups: { value: string; label: string }[]) => void;
 }) => {
   const [items, setItems] = useState<{ value: string; label: string }[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -418,7 +418,7 @@ const Dropdown = ({
         }));
 
         setItems(formattedData);
-        if (setStoreGroups) setStoreGroups(formattedData);
+        // if (setData) setData(formattedData);
       } catch (error) {
         console.error("Error fetching items:", error);
       } finally {

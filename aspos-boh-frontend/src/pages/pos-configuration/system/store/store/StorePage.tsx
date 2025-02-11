@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { ColumnDef } from '@tanstack/react-table';
 import {
@@ -14,18 +14,9 @@ import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPag
 import { useLayout } from '@/providers';
 import { Dropdown, MultiSelect } from '@/components/ui/select';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
-import OutsideClickHandler from 'react-outside-click-handler';
-
 
 const API_URL = import.meta.env.VITE_DOMAIN;
 const token = localStorage.getItem('token');
@@ -78,15 +69,11 @@ const StorePage = () => {
   const [pageSize, setPageSize] = useState(5);
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
-  const [activeTab, setActiveTab] = useState("Criteria 1");
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [storeGroups, setStoreGroups] = useState<{ value: string; label: string }[]>([]);
-  const [selectedStoreGroups, setSelectedStoreGroups] = useState([]); // Stores selected value(s)
+
   const [isFormat, setIsFormat] = useState(true);
 
-  const [selectedGroup, setSelectedGroup] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
   const [selectedStoreGroup, setSelectedStoreGroup] = useState<{ value: string; label: string } | null>(null);
 
 
@@ -122,30 +109,6 @@ const StorePage = () => {
       return { data: [], totalCount: 0 };
     }
   };
-
-  useEffect(() => {
-    const getStoreGroups = async () => {
-      setLoading(true);
-      try {
-        const response = await fetchStoreGroup(searchTerm ? `?Query=${searchTerm}` : "");
-        console.log("API Response:", response);
-
-        if (Array.isArray(response)) {
-          setStoreGroups(response);
-        }
-      } catch (error) {
-        console.error("Error loading store groups:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    // Debounce API calls (300ms delay)
-    const delaySearch = setTimeout(getStoreGroups, 300);
-    return () => clearTimeout(delaySearch);
-  }, [searchTerm]);
-
-
 
   const handleEdit = (rowData: Store) => {
     setEditData(rowData);
@@ -194,8 +157,6 @@ const StorePage = () => {
 
 
   const handleSave = async () => {
-    // formData.storetype=selectedStoreGroup
-    console.log("selectedStoreGroup>>>", selectedStoreGroup)
     console.log("formData>>>", formData)
     try {
       if (editData) {
@@ -475,7 +436,6 @@ const StorePage = () => {
     const { name, value } = e.target;
 
     if (name === "phone") {
-      // ตรวจสอบว่าค่าที่ป้อนเป็นตัวเลขเท่านั้น
       const phoneRegex = /^[0-9]*$/;
       if (!phoneRegex.test(value)) {
         toast.error("Phone number can contain only numbers");
@@ -635,58 +595,59 @@ const StorePage = () => {
                     />
                   </div>
                 </div>
-
-
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
                   <span className="form-label max-w-32 w-full">Store Group</span>
                   <div className="grow min-w-24">
-
                     <Dropdown
                       apiEndpoint={`${API_URL}/store/group`}
                       queryParam="Query"
                       isLabel="name"
                       value={formData.stroregroup}
                       setSelectedItem={(item) => {
-                        setSelectedStoreGroup(item); // ✅ Updates dropdown selection
                         setFormData(prev => ({ ...prev, stroregroup: item?.value || "" })); // ✅ Syncs with formData.storegroup
                       }}
-                      setStoreGroups={setStoreGroups} // ✅ Store groups for lookup
                     />
-
                   </div>
                 </div>
-
-
-
-
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
                   <span className="form-label max-w-32 w-full">Area</span>
                   <div className="grow min-w-24">
-                    <MultiSelect
+                    <Dropdown
                       apiEndpoint={`${API_URL}/location/area`}
                       queryParam="Query"
                       isLabel="name"
+                      value={formData.area}
+                      setSelectedItem={(item) => {
+                        setFormData(prev => ({ ...prev, area: item?.value || "" }));
+                      }}
                     />
                   </div>
                 </div>
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
                   <span className="form-label max-w-32 w-full">Region</span>
                   <div className="grow min-w-24">
-                    <MultiSelect
+                    <Dropdown
                       apiEndpoint={`${API_URL}/location/region`}
                       queryParam="Query"
                       isLabel="name"
-
+                      value={formData.region}
+                      setSelectedItem={(item) => {
+                        setFormData(prev => ({ ...prev, region: item?.value || "" }));
+                      }}
                     />
                   </div>
                 </div>
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
                   <span className="form-label max-w-32 w-full">Country</span>
                   <div className="grow min-w-24">
-                    <MultiSelect
+                    <Dropdown
                       apiEndpoint={`${API_URL}/location/country`}
                       queryParam="Query"
                       isLabel="name"
+                      value={formData.country}
+                      setSelectedItem={(item) => {
+                        setFormData(prev => ({ ...prev, country: item?.value || "" }));
+                      }}
                     />
                   </div>
                 </div>
@@ -748,10 +709,14 @@ const StorePage = () => {
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
                   <span className="form-label max-w-32 w-full">Store Type</span>
                   <div className="grow min-w-24">
-                    <MultiSelect
+                    <Dropdown
                       apiEndpoint={`${API_URL}/store/type`}
                       queryParam="Query"
                       isLabel="type"
+                      value={formData.storetype}
+                      setSelectedItem={(item) => {
+                        setFormData(prev => ({ ...prev, storetype: item?.value || "" }));
+                      }}
                     />
                   </div>
                 </div>
