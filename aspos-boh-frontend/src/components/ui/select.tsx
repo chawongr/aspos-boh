@@ -388,7 +388,6 @@ const Dropdown = ({
   useEffect(() => {
     if (value && !selectedItemState) {
       const foundItem = items.find((item) => item.value === value.toString());
-      console.log(items.find((item) => item.value === value.toString()),">>>",value)
 
       if (foundItem) {
         setSelectedItemState(foundItem);
@@ -439,10 +438,6 @@ const Dropdown = ({
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  useEffect(()=>{
-    console.log("selectedItemState>>>",selectedItemState)
-  })
 
   const selectedLabel = selectedItemState?.label || "Select Store Group";
 

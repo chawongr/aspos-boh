@@ -57,8 +57,8 @@ const StorePage = () => {
     area: '',
     region: '',
     country: '',
-    opendate: '',
-    closed: '',
+    opendate: '2021-03-01T00:00:00',
+    closed: 'N',
     accountcode: '',
     costcentre: '',
     storetype: '',
@@ -70,13 +70,8 @@ const StorePage = () => {
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [storeGroups, setStoreGroups] = useState<{ value: string; label: string }[]>([]);
 
   const [isFormat, setIsFormat] = useState(true);
-
-  const [selectedStoreGroup, setSelectedStoreGroup] = useState<{ value: string; label: string } | null>(null);
-
-
 
   const fetchStore = async (params: TDataGridRequestParams) => {
     try {
@@ -155,7 +150,6 @@ const StorePage = () => {
     });
   };
 
-
   const handleSave = async () => {
     console.log("formData>>>", formData)
     try {
@@ -216,8 +210,8 @@ const StorePage = () => {
         area: '',
         region: '',
         country: '',
-        opendate: '',
-        closed: '',
+        opendate: '2021-03-01T00:00:00',
+        closed: 'N',
         accountcode: '',
         costcentre: '',
         storetype: '',
@@ -448,13 +442,6 @@ const StorePage = () => {
       [name]: value,
     }));
   };
-
-  useEffect(() => {
-    if (formData.stroregroup && storeGroups.length > 0) {
-      const matchingGroup = storeGroups.find(group => group.value === formData.stroregroup);
-      setSelectedStoreGroup(matchingGroup || null);
-    }
-  }, [formData.stroregroup, storeGroups])
 
   return (
     <Fragment>
