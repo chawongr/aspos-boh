@@ -5,6 +5,8 @@ import * as SelectPrimitive from '@radix-ui/react-select';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import OutsideClickHandler from 'react-outside-click-handler';
+import { useState, useEffect, useRef, useMemo, useCallback } from "react";
+
 
 import { cn } from '@/lib/utils';
 import { Checkbox } from './checkbox';
@@ -229,7 +231,7 @@ const MultiSelect = ({
 
     const debounceTimeout = setTimeout(fetchItems, 300);
     return () => clearTimeout(debounceTimeout);
-  }, [searchTerm, apiEndpoint, queryParam, token]);
+  }, [searchTerm, apiEndpoint, queryParam]);
 
   const toggleSelection = (value: string, label: string) => {
     const existingIndex = selectedItems.findIndex((item) => item.value === value);
@@ -342,7 +344,173 @@ const MultiSelect = ({
   );
 };
 
-export default MultiSelect;
+
+function useDebounce(value: string, delay = 300) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => setDebouncedValue(value), delay);
+    return () => clearTimeout(handler);
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+const Dropdown = ({
+  apiEndpoint,
+  queryParam = "Query",
+  isLabel,
+  value,
+  setSelectedItem,
+  // setData
+}: {
+  apiEndpoint: string;
+  queryParam?: string;
+  isLabel: string;
+  value?: string;
+  setSelectedItem: (item: { value: string; label: string } | null) => void;
+  // setData?: (groups: { value: string; label: string }[]) => void;
+}) => {
+  const [items, setItems] = useState<{ value: string; label: string }[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+  const [selectedItemState, setSelectedItemState] = useState<{ value: string; label: string } | null>(null);
+
+  // ✅ Memoized token retrieval
+  const token = useMemo(() => localStorage.getItem("token"), []);
+
+  // ✅ Debounce API calls
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
+
+  useEffect(() => {
+    if (value && !selectedItemState) {
+      const foundItem = items.find((item) => item.value === value.toString());
+      console.log(items.find((item) => item.value === value.toString()),">>>",value)
+
+      if (foundItem) {
+        setSelectedItemState(foundItem);
+      }
+    }
+  }, [value, items, selectedItemState]);
+
+  // ✅ Fetch store groups from API
+  useEffect(() => {
+    const fetchItems = async () => {
+      if (!apiEndpoint) return;
+
+      setLoading(true);
+      try {
+        const url = debouncedSearchTerm
+          ? `${apiEndpoint}?${queryParam}=${debouncedSearchTerm}`
+          : apiEndpoint;
+
+        const response = await axios.get(url, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const data = Array.isArray(response.data) ? response.data : response.data.data;
+        const formattedData = data.map((item: any, index: number) => ({
+          value: item.code?.toString() || `fallback-${index}`,
+          label: item[isLabel],
+        }));
+
+        setItems(formattedData);
+        // if (setData) setData(formattedData);
+      } catch (error) {
+        console.error("Error fetching items:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchItems();
+  }, [debouncedSearchTerm, apiEndpoint, queryParam, token]);
+
+  // ✅ Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(()=>{
+    console.log("selectedItemState>>>",selectedItemState)
+  })
+
+  const selectedLabel = selectedItemState?.label || "Select Store Group";
+
+  // ✅ Handle item selection & persist selected value
+  const handleSelectItem = useCallback(
+    (item: { value: string; label: string }) => {
+      setSelectedItem(item);
+      setSelectedItemState(item); 
+      setDropdownOpen(false);
+    },
+    [setSelectedItem]
+  );
+
+  return (
+    <div className="relative w-full" ref={dropdownRef}>
+      {/* ✅ Trigger Box */}
+      <div
+        className="h-10 px-3 py-1 flex bg-white w-full items-center justify-between rounded-md border border-gray-300 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 font-medium cursor-pointer"
+        onClick={() => setDropdownOpen((prev) => !prev)}
+      >
+        <span>{selectedLabel}</span>
+        <ChevronDown className="h-4 w-4 opacity-50" />
+      </div>
+
+      {/* ✅ Dropdown List */}
+      {dropdownOpen && (
+        <OutsideClickHandler onOutsideClick={() => setDropdownOpen(false)}>
+          <div className="absolute left-0 mt-1 w-full max-h-60 min-w-[8rem] overflow-hidden rounded-md border bg-white text-gray-800 shadow-md z-10">
+            {/* ✅ Search Input */}
+            <div className="sticky top-0 bg-white p-2 z-10">
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none"
+              />
+            </div>
+
+            {/* ✅ Items List */}
+            <div className="max-h-52 overflow-y-auto px-2">
+              {loading ? (
+                <div className="p-2 text-sm text-gray-500">Loading...</div>
+              ) : items.length > 0 ? (
+                items.map((item) => (
+                  <div
+                    key={item.value}
+                    className="flex items-center space-x-2 p-2 rounded-md cursor-pointer hover:bg-gray-100"
+                    onClick={() => handleSelectItem(item)}
+                  >
+                    {selectedItemState?.value === item.value ? (
+                      <Check className="h-4 w-4" />
+                    ) : (
+                      <div className="h-4 w-4" />
+                    )}
+                    <span className="text-sm">{item.label}</span>
+                  </div>
+                ))
+              ) : (
+                <div className="p-2 text-sm text-gray-500">No store groups found</div>
+              )}
+            </div>
+          </div>
+        </OutsideClickHandler>
+      )}
+    </div>
+  );
+};
 
 
 export {
@@ -357,5 +525,6 @@ export {
   SelectScrollUpButton,
   SelectScrollDownButton,
   SelectTitle,
-  MultiSelect
+  MultiSelect,
+  Dropdown
 };

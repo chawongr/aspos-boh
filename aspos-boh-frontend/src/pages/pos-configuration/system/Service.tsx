@@ -5,21 +5,33 @@ const API_URL = import.meta.env.VITE_DOMAIN;
 
 // ============================ Store ==============================
 // Store Group
-export const fetchStoreGroup = async () => {
+export const fetchStoreGroup = async (searchTerm:string) => {
   try {
 
     if (!token) {
       throw new Error("No token found. Please log in.");
     }
 
-    const response = await axios.get(`${API_URL}/store/group`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const url = searchTerm
+          ? `${API_URL}/store/group${searchTerm}`
+          : `${API_URL}/store/group`;
 
-    return response.data;
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = Array.isArray(response.data) ? response.data : response.data.data;
+
+        const formattedData = data.map((item: any, index: number) => ({
+          value: item.code ? item.code.toString() : `fallback-${index}`,
+          label: item.name,
+
+        }));
+
+
+    return formattedData;
   } catch (error) {
     console.error("Error fetching store groups:", error);
     throw error;
