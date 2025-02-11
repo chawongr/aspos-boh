@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useMemo, useState } from 'react';
+import React, { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { ColumnDef } from '@tanstack/react-table';
 import {
@@ -9,10 +9,10 @@ import {
   Container
 } from '@/components';
 import axios from 'axios';
-import { addStore, deleteStore, editStore } from '@/pages/pos-configuration/system/Service';
+import { addStore, deleteStore, editStore, fetchStoreGroup } from '@/pages/pos-configuration/system/Service';
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
-import { MultiSelect } from '@/components/ui/select';
+import { Dropdown, MultiSelect } from '@/components/ui/select';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import {
   Select,
@@ -24,6 +24,7 @@ import {
 import { cn } from '@/lib/utils';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 
 const API_URL = import.meta.env.VITE_DOMAIN;
@@ -79,9 +80,14 @@ const StorePage = () => {
   const { currentLayout } = useLayout();
   const [activeTab, setActiveTab] = useState("Criteria 1");
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [storeGroups, setStoreGroups] = useState([]);
+  const [storeGroups, setStoreGroups] = useState<{ value: string; label: string }[]>([]);
   const [selectedStoreGroups, setSelectedStoreGroups] = useState([]); // Stores selected value(s)
   const [isFormat, setIsFormat] = useState(true);
+
+  const [selectedGroup, setSelectedGroup] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedStoreGroup, setSelectedStoreGroup] = useState<{ value: string; label: string } | null>(null);
 
 
 
@@ -116,6 +122,30 @@ const StorePage = () => {
       return { data: [], totalCount: 0 };
     }
   };
+
+  useEffect(() => {
+    const getStoreGroups = async () => {
+      setLoading(true);
+      try {
+        const response = await fetchStoreGroup(searchTerm ? `?Query=${searchTerm}` : "");
+        console.log("API Response:", response);
+
+        if (Array.isArray(response)) {
+          setStoreGroups(response);
+        }
+      } catch (error) {
+        console.error("Error loading store groups:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // Debounce API calls (300ms delay)
+    const delaySearch = setTimeout(getStoreGroups, 300);
+    return () => clearTimeout(delaySearch);
+  }, [searchTerm]);
+
+
 
   const handleEdit = (rowData: Store) => {
     setEditData(rowData);
@@ -162,43 +192,11 @@ const StorePage = () => {
     });
   };
 
-  const handleSelectionChange = (selectedItems: Set<string>) => {
-    // console.log('Selected Items:', Array.from(selectedItems));
-  };
-
-  const storeT = [
-    { value: 'Store 1', label: 'Store Type 1' },
-    { value: 'Store 2', label: 'Store Type 2' },
-    { value: 'Store 3', label: 'Store Type 3' },
-    { value: 'Store 4', label: 'Store Type 4' },
-    { value: 'Store 5', label: 'Store Type 5' },
-  ];
-
-  const area = [
-    { value: '1', label: 'Area 1' },
-    { value: '2', label: 'Area 2' },
-    { value: '3', label: 'Area 3' },
-  ];
-
-  const region = [
-    { value: '1', label: 'Region 1' },
-    { value: '2', label: 'Region 2' },
-    { value: '3', label: 'Region 3' },
-  ];
-
-  const country = [
-    { value: '1', label: 'Country 1' },
-    { value: '2', label: 'Country 2' },
-    { value: '3', label: 'Country 3' },
-  ];
-
-  const closed = [
-    { value: '1', label: 'Closed 1' },
-    { value: '2', label: 'Closed 2' },
-    { value: '3', label: 'Closed 3' },
-  ];
 
   const handleSave = async () => {
+    // formData.storetype=selectedStoreGroup
+    console.log("selectedStoreGroup>>>", selectedStoreGroup)
+    console.log("formData>>>", formData)
     try {
       if (editData) {
         await editStore(
@@ -491,6 +489,13 @@ const StorePage = () => {
     }));
   };
 
+  useEffect(() => {
+    if (formData.stroregroup && storeGroups.length > 0) {
+      const matchingGroup = storeGroups.find(group => group.value === formData.stroregroup);
+      setSelectedStoreGroup(matchingGroup || null);
+    }
+  }, [formData.stroregroup, storeGroups])
+
   return (
     <Fragment>
       {currentLayout?.name === 'demo1-layout' && (
@@ -630,17 +635,30 @@ const StorePage = () => {
                     />
                   </div>
                 </div>
+
+
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
                   <span className="form-label max-w-32 w-full">Store Group</span>
                   <div className="grow min-w-24">
-                    <MultiSelect
+
+                    <Dropdown
                       apiEndpoint={`${API_URL}/store/group`}
                       queryParam="Query"
                       isLabel="name"
-
+                      value={formData.stroregroup}
+                      setSelectedItem={(item) => {
+                        setSelectedStoreGroup(item); // ✅ Updates dropdown selection
+                        setFormData(prev => ({ ...prev, stroregroup: item?.value || "" })); // ✅ Syncs with formData.storegroup
+                      }}
+                      setStoreGroups={setStoreGroups} // ✅ Store groups for lookup
                     />
+
                   </div>
                 </div>
+
+
+
+
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
                   <span className="form-label max-w-32 w-full">Area</span>
                   <div className="grow min-w-24">
@@ -648,7 +666,6 @@ const StorePage = () => {
                       apiEndpoint={`${API_URL}/location/area`}
                       queryParam="Query"
                       isLabel="name"
-
                     />
                   </div>
                 </div>
