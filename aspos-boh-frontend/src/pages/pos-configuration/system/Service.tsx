@@ -767,3 +767,65 @@ export const deleteSalesType = async (code: string) => {
     throw error;
   }
 };
+
+
+// Customer
+export const addCustomer = async (customerCode: string, name: string, contactp: string,address1: string,address2: string,address3: string, email: string, phone: string, taxId: string, location: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.post(`${API_URL}/customer`, { customerCode, name,contactp,address1,address2,address3,email,phone,taxId,location }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating customer:", error);
+    throw error;
+  }
+};
+
+export const editCustomer = async (customerCode: string, name: string, contactp: string,address1: string,address2: string,address3: string, email: string, phone: string, taxId: string, location: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.put(`${API_URL}/customer/${customerCode}`, { name,contactp,address1,address2,address3,email,phone,taxId,location }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating customer:", error);
+    throw error;
+  }
+};
+
+export const deleteCustomer = async (customerCode: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.delete(`${API_URL}/customer/${customerCode}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating customer:", error);
+    throw error;
+  }
+};

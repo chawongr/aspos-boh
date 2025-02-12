@@ -35,7 +35,7 @@ export const MENU_SIDEBAR: TMenuConfig = [
             children: [
               {
                 title: 'Major Group',
-                path: '/pos-config/sales/menu-item/major-group'
+                path: '/'//'/pos-config/sales/menu-item/major-group'
               },
               {
                 title: 'Family Group',
