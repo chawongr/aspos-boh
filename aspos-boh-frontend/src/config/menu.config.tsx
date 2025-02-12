@@ -41,6 +41,10 @@ export const MENU_SIDEBAR: TMenuConfig = [
                 title: 'Family Group',
                 path: '/pos-config/sales/menu-item/family-group'
               },
+              {
+                title: 'Report Group',
+                path: '/pos-config/sales/menu-item/report-group'
+              },
             ]
           },
         ]
