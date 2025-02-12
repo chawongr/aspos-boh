@@ -16,7 +16,10 @@ import { Dropdown } from '@/components/ui/select';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 import { Calendar } from '@/components/ui/calendar';
-import { format, parseISO } from 'date-fns';
+import { format, parseISO, setHours, setMinutes } from 'date-fns';
+import { CalendarIcon, Clock } from 'lucide-react';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Button } from '@/components/ui/button';
 
 const API_URL = import.meta.env.VITE_DOMAIN;
 const token = localStorage.getItem('token');
@@ -69,6 +72,12 @@ const StorePage = () => {
   const [pageSize, setPageSize] = useState(5);
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
+  const selectedDate = formData.opendate ? parseISO(formData.opendate) : new Date();
+
+  const hours = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0'));
+  const minutes = Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0'));
+  const [isOpen, setIsOpen] = useState(false);
+
 
   const [isFormat, setIsFormat] = useState(true);
 
@@ -640,34 +649,81 @@ const StorePage = () => {
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
                   <span className="form-label max-w-32 w-full">Open Date</span>
                   <div className="grow min-w-24">
-                    <Popover>
+                    <Popover open={isOpen} onOpenChange={setIsOpen}>
                       <PopoverTrigger asChild>
-                        <button
-                          id="date"
-                          className={cn(
-                            'input data-[state=open]:border-primary',
-                            !formData.opendate && 'text-muted-foreground'
-                          )}
-                        >
-                          <KeenIcon icon="calendar" className="-ms-0.5" />
-                          {formData.opendate ? format(parseISO(formData.opendate), 'yyyy-MM-dd HH:mm:ss') : <span>Pick a date</span>}
-                        </button>
+                        <Button variant="outline" className="flex justify-start items-center gap-2 w-full">
+                          <KeenIcon icon="calendar" className="text-lg text-gray-500" />
+                          {formData.opendate
+                            ? format(parseISO(formData.opendate), 'yyyy-MM-dd HH:mm')
+                            : <span className="text-gray-500">Pick a date & time</span>}
+                        </Button>
                       </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={formData.opendate ? new Date(formData.opendate) : undefined} // ✅ Convert string to Date object
-                          onSelect={(date) => {
-                            if (date) {
-                              // ✅ Adjust for local timezone
-                              const formattedDate = format(date, "yyyy-MM-dd'T'HH:mm:ss");
-                              setFormData((prev) => ({ ...prev, opendate: formattedDate }));
-                            }
-                          }}
-                          numberOfMonths={1}
-                        />
-                      </PopoverContent>
+                      <div>
+                        <PopoverContent className="w-[420px] p-3 rounded-lg shadow-lg bg-white flex">
+                          <div >
+                            <Calendar
+                              mode="single"
+                              selected={selectedDate}
+                              onSelect={(date) => {
+                                if (date) {
+                                  setFormData((prev) => ({
+                                    ...prev,
+                                    opendate: format(setHours(setMinutes(date, selectedDate.getMinutes()), selectedDate.getHours()), "yyyy-MM-dd'T'HH:mm:ss"),
+                                  }));
+                                }
+                              }}
+                              numberOfMonths={1}
+                            />
+                          </div>
+
+                          {/* Time Picker Section */}
+                          <div className="mt-11">
+                            <div className="flex items-center gap-2 mt-2 border rounded-lg p-2">
+                              {/* Scrollable Hours */}
+                              <ScrollArea className="h-52 w-1/2 overflow-y-auto">
+                                {hours.map((hour) => (
+                                  <Button
+                                    key={hour}
+                                    variant={selectedDate.getHours() === parseInt(hour) ? "default" : "ghost"}
+                                    className="w-full text-center"
+                                    onClick={() => {
+                                      const updatedDate = setHours(selectedDate, parseInt(hour));
+                                      setFormData((prev) => ({
+                                        ...prev,
+                                        opendate: format(updatedDate, "yyyy-MM-dd'T'HH:mm:ss"),
+                                      }));
+                                    }}
+                                  >
+                                    {hour}
+                                  </Button>
+                                ))}
+                              </ScrollArea>
+
+                              {/* Scrollable Minutes */}
+                              <ScrollArea className="h-52 w-1/2 overflow-y-auto">
+                                {minutes.map((minute) => (
+                                  <Button
+                                    key={minute}
+                                    variant={selectedDate.getMinutes() === parseInt(minute) ? "default" : "ghost"}
+                                    className="w-full text-center"
+                                    onClick={() => {
+                                      const updatedDate = setMinutes(selectedDate, parseInt(minute));
+                                      setFormData((prev) => ({
+                                        ...prev,
+                                        opendate: format(updatedDate, "yyyy-MM-dd'T'HH:mm:ss"),
+                                      }));
+                                    }}
+                                  >
+                                    {minute}
+                                  </Button>
+                                ))}
+                              </ScrollArea>
+                            </div>
+                          </div>
+                        </PopoverContent>
+                      </div>
                     </Popover>
+
                   </div>
                 </div>
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
