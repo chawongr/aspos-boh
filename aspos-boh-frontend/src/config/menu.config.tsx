@@ -103,6 +103,10 @@ export const MENU_SIDEBAR: TMenuConfig = [
             path: '/pos-config/region',
           },
           {
+            title: 'Language',
+            path: '/pos-config/language',
+          },
+          {
             title: 'Store',
             children: [
               {

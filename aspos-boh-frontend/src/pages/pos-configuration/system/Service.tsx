@@ -521,3 +521,65 @@ export const deleteRegion = async (code: string) => {
     throw error;
   }
 };
+
+
+// Language
+export const addLanguage = async (code: string, language: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.post(`${API_URL}/config/language`, { code, language }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating language:", error);
+    throw error;
+  }
+};
+
+export const editLanguage = async (code: string, language: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.put(`${API_URL}/config/language/${code}`, { language }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating language:", error);
+    throw error;
+  }
+};
+
+export const deleteLanguage = async (code: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.delete(`${API_URL}/config/language/${code}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating language:", error);
+    throw error;
+  }
+};
