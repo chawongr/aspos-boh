@@ -115,6 +115,10 @@ export const MENU_SIDEBAR: TMenuConfig = [
             path: '/pos-config/system/tax',
           },
           {
+            title: 'Sales Type',
+            path: '/pos-config/system/sales-type',
+          },
+          {
             title: 'Member',
             path: '/pos-config/system/member',
           },
@@ -123,7 +127,7 @@ export const MENU_SIDEBAR: TMenuConfig = [
             children: [
               {
                 title: 'Store Group',
-                path: '/pos-config/system/store/storeGroup'
+                path: '/pos-config/system/store/store-group'
               },
               {
                 title: 'Store',
@@ -131,7 +135,7 @@ export const MENU_SIDEBAR: TMenuConfig = [
               },
               {
                 title: 'Store Type',
-                path: '/pos-config/system/store/storeType'
+                path: '/pos-config/system/store/store-type'
               },
               {
                 title: 'Area',
