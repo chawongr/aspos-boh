@@ -1,28 +1,28 @@
 import { type TMenuConfig } from '@/components/menu';
 
 export const MENU_SIDEBAR: TMenuConfig = [
-  {
-    title: 'Dashboards',
-    icon: 'element-11',
-    children: [
-      {
-        title: 'Sales Enquiry',
-        path: '/'
-      },
-      // {
-      //   title: 'Cashier Enquiry',
-      //   path: '/dashboard/cashier-enquiry'
-      // },
-      // {
-      //   title: 'Major Enquiry',
-      //   path: '/dashboard/major-enquiry'
-      // },
-      {
-        title: 'Inventory Enquiry',
-        path: '/dashboard/inventory-enquiry'
-      },
-    ]
-  },
+  // {
+  //   title: 'Dashboards',
+  //   icon: 'element-11',
+  //   children: [
+  //     {
+  //       title: 'Sales Enquiry',
+  //       path: '/'
+  //     },
+  //     // {
+  //     //   title: 'Cashier Enquiry',
+  //     //   path: '/dashboard/cashier-enquiry'
+  //     // },
+  //     // {
+  //     //   title: 'Major Enquiry',
+  //     //   path: '/dashboard/major-enquiry'
+  //     // },
+  //     {
+  //       title: 'Inventory Enquiry',
+  //       path: '/dashboard/inventory-enquiry'
+  //     },
+  //   ]
+  // },
   {
     title: 'POS Configuration',
     icon: 'setting-2',
@@ -45,20 +45,27 @@ export const MENU_SIDEBAR: TMenuConfig = [
           },
         ]
       },
-      {
-        title: 'Menu Item',
-        path: '/pos-config/menu-item',
-        children: [
-          {
-            title: 'Combo Group',
-            path: '/pos-config/menu-item/combo-group'
-          },
-          {
-            title: 'Combo Definition',
-            path: '/pos-config/menu-item/combo-def'
-          },
-        ]
-      },
+
+
+
+      // {
+      //   title: 'Menu Item',
+      //   path: '/pos-config/menu-item',
+      //   children: [
+      //     {
+      //       title: 'Combo Group',
+      //       path: '/pos-config/menu-item/combo-group'
+      //     },
+      //     {
+      //       title: 'Combo Definition',
+      //       path: '/pos-config/menu-item/combo-def'
+      //     },
+      //   ]
+      // },
+
+
+
+      
       // {
       //   title: 'Device',
       //   children: [
@@ -79,9 +86,17 @@ export const MENU_SIDEBAR: TMenuConfig = [
       {
         title: 'System',
         children: [
+          // {
+          //   title: 'System',
+          //   path: '/pos-config/system',
+          // },
           {
-            title: 'System',
-            path: '/pos-config/system',
+            title: 'Country',
+            path: '/pos-config/country',
+          },
+          {
+            title: 'Region',
+            path: '/pos-config/region',
           },
           {
             title: 'Store',
@@ -106,10 +121,10 @@ export const MENU_SIDEBAR: TMenuConfig = [
                 title: 'Company',
                 path: '/pos-config/system/store/company'
               },
-              {
-                title: 'Hq Sync Down',
-                path: '/pos-config/system/store/hqSync'
-              },
+              // {
+              //   title: 'Hq Sync Down',
+              //   path: '/pos-config/system/store/hqSync'
+              // },
             ]
           },
         ]
@@ -167,66 +182,70 @@ export const MENU_SIDEBAR: TMenuConfig = [
   //     },
   //   ]
   // },
-  {
-    title: 'Support',
-    icon: 'support',
-    children: [
-      {
-        title: 'User',
-        path: '/support/user'
-      },
-    ]
-  },
-  {
-    title: 'Logs',
-    icon: 'notepad',
-    path: '/logs'
-  },
-  {
-    title: 'Help',
-    icon: 'question-2',
-    path: '/help'
-  },
-  {
-    title: 'Line OA',
-    icon: 'messages',
-    path: '/line-oa'
-  },
-  {
-    title: 'Network',
-    icon: 'users',
-    children: [
-      {
-        title: 'User Table',
-        children: [
-          {
-            title: 'Team Crew',
-            path: '/network/user-table/team-crew'
-          },
-          {
-            title: 'App Roster',
-            path: '/network/user-table/app-roster'
-          },
-          {
-            title: 'Market Authors',
-            path: '/network/user-table/market-authors'
-          },
-          {
-            title: 'SaaS Users',
-            path: '/network/user-table/saas-users'
-          },
-          {
-            title: 'Store Clients',
-            path: '/network/user-table/store-clients'
-          },
-          {
-            title: 'Visitors',
-            path: '/network/user-table/visitors'
-          }
-        ]
-      },
-    ]
-  },
+
+
+  // {
+  //   title: 'Support',
+  //   icon: 'support',
+  //   children: [
+  //     {
+  //       title: 'User',
+  //       path: '/support/user'
+  //     },
+  //   ]
+  // },
+
+
+  // {
+  //   title: 'Logs',
+  //   icon: 'notepad',
+  //   path: '/logs'
+  // },
+  // {
+  //   title: 'Help',
+  //   icon: 'question-2',
+  //   path: '/help'
+  // },
+  // {
+  //   title: 'Line OA',
+  //   icon: 'messages',
+  //   path: '/line-oa'
+  // },
+  // {
+  //   title: 'Network',
+  //   icon: 'users',
+  //   children: [
+  //     {
+  //       title: 'User Table',
+  //       children: [
+  //         {
+  //           title: 'Team Crew',
+  //           path: '/network/user-table/team-crew'
+  //         },
+  //         {
+  //           title: 'App Roster',
+  //           path: '/network/user-table/app-roster'
+  //         },
+  //         {
+  //           title: 'Market Authors',
+  //           path: '/network/user-table/market-authors'
+  //         },
+  //         {
+  //           title: 'SaaS Users',
+  //           path: '/network/user-table/saas-users'
+  //         },
+  //         {
+  //           title: 'Store Clients',
+  //           path: '/network/user-table/store-clients'
+  //         },
+  //         {
+  //           title: 'Visitors',
+  //           path: '/network/user-table/visitors'
+  //         }
+  //       ]
+  //     },
+  //   ]
+  // },
   
 ];
 
