@@ -48,7 +48,8 @@ import {
   RegionPage,
   LanguagePage,
   TenderGroupPage,
-  TaxPage
+  TaxPage,
+  SalesTypePage,
 } from '@/pages/pos-configuration'
 
 import { UserSupportPage } from '@/pages/support'
@@ -105,9 +106,9 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/pos-config/device/printer" element={<PrinterPage />} />
           <Route path="/pos-config/device/kitchen-printer" element={<KitchenPrinterPage />} />
 
-          <Route path="/pos-config/system/store/storeGroup" element={<StoreGroupPage />} />
+          <Route path="/pos-config/system/store/store-group" element={<StoreGroupPage />} />
           <Route path="/pos-config/system/store/store" element={<StorePage />} />
-          <Route path="/pos-config/system/store/storeType" element={<StoreTypePage />} />
+          <Route path="/pos-config/system/store/store-type" element={<StoreTypePage />} />
           {/* <Route path="/pos-config/system/store/storeType/add" element={<StoreTypeAdd />} /> */}
           <Route path="/pos-config/system/store/area" element={<AreaPage />} />
           <Route path="/pos-config/system/store/company" element={<CompanyPage />} />
@@ -117,6 +118,7 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/pos-config/system/region" element={<RegionPage />} />
           <Route path="/pos-config/system/language" element={<LanguagePage />} />
           <Route path="/pos-config/system/tax" element={<TaxPage />} />
+          <Route path="/pos-config/system/sale-types" element={<SalesTypePage />} />
 
 
 

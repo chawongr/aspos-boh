@@ -95,7 +95,7 @@ const LanguagePage = () => {
     try {
       if (editData) {
         await editLanguage(formData.code, formData.language1);
-        toast.success("Languageea updated successfully!");
+        toast.success("Language updated successfully!");
       } else {
         await addLanguage(formData.code, formData.language1);
         toast.success("Language added successfully!");
