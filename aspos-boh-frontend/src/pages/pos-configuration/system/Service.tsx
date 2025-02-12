@@ -646,16 +646,14 @@ export const deleteTax = async (code: string) => {
   }
 };
 
-
-
 // Member
-export const addMember = async (memberCode: string, name: string, address1: string, address2: string, address3: string, email: string, phone: string, point: string, startdate: string, expiredate: string) => {
+export const addMember = async (memberCode: string, name: string, address1: string, address2: string, address3: string, email: string, point: string, phone: string, startdate: string, expiredate: string) => {
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
     }
 
-    const response = await axios.post(`${API_URL}/member`, { memberCode, name, address1, address2, address3, email, phone, point, startdate, expiredate }, {
+    const response = await axios.post(`${API_URL}/member`, { memberCode, name, address1, address2, address3, email, point, phone, startdate, expiredate }, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -669,13 +667,13 @@ export const addMember = async (memberCode: string, name: string, address1: stri
   }
 };
 
-export const editMember = async (memberCode: string, name: string, address1: string, address2: string, address3: string, email: string, phone: string, point: string, startdate: string, expiredate: string) => {
+export const editMember = async (memberCode: string, name: string, address1: string, address2: string, address3: string, email: string, point: string, phone: string, startdate: string, expiredate: string) => {
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
     }
 
-    const response = await axios.put(`${API_URL}/member/${memberCode}`, { name, address1, address2, address3, email, phone, point, startdate, expiredate }, {
+    const response = await axios.put(`${API_URL}/member/${memberCode}`, { name, address1, address2, address3, email, point, phone, startdate, expiredate }, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
