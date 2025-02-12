@@ -6,5 +6,7 @@ export * from './language';
 export * from './tax';
 export * from './sales-type';
 export * from './member';
+export * from './customer';
+
 
 

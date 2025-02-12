@@ -50,7 +50,8 @@ import {
   TenderGroupPage,
   TaxPage,
   MemberPage,
-  SalesTypePage
+  SalesTypePage,
+  CustomerPage,
 } from '@/pages/pos-configuration'
 
 import { UserSupportPage } from '@/pages/support'
@@ -121,6 +122,7 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/pos-config/system/tax" element={<TaxPage />} />
           <Route path="/pos-config/system/member" element={<MemberPage />} />
           <Route path="/pos-config/system/sales-type" element={<SalesTypePage />} />
+          <Route path="/pos-config/system/customer" element={<CustomerPage />} />
 
 
 
