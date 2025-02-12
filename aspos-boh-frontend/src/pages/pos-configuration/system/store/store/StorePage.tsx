@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useMemo, useState } from 'react';
+import React, { Fragment, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { ColumnDef } from '@tanstack/react-table';
 import {
@@ -14,10 +14,8 @@ import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPag
 import { useLayout } from '@/providers';
 import { Dropdown } from '@/components/ui/select';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
 import { Calendar } from '@/components/ui/calendar';
 import { format, parseISO, setHours, setMinutes } from 'date-fns';
-import { CalendarIcon, Clock } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 
@@ -159,72 +157,76 @@ const StorePage = () => {
   };
 
   const handleSave = async () => {
-    console.log("formData>>>", formData)
     try {
-      if (editData) {
-        await editStore(
-          formData.storeNo,
-          formData.name,
-          formData.address1,
-          formData.address2,
-          formData.address3,
-          formData.email,
-          formData.phone,
-          formData.stroregroup,
-          formData.area,
-          formData.region,
-          formData.country,
-          formData.opendate,
-          formData.closed,
-          formData.accountcode,
-          formData.costcentre,
-          formData.storetype,
-          formData.ipaddress
-        );
-        toast.success("Store updated successfully!");
-      } else {
-        await addStore(
-          formData.storeNo,
-          formData.name,
-          formData.address1,
-          formData.address2,
-          formData.address3,
-          formData.email,
-          formData.phone,
-          formData.stroregroup,
-          formData.area,
-          formData.region,
-          formData.country,
-          formData.opendate,
-          formData.closed,
-          formData.accountcode,
-          formData.costcentre,
-          formData.storetype,
-          formData.ipaddress
-        );
-        toast.success("Store added successfully!");
+      if (isFormat) {
+        if (editData) {
+          await editStore(
+            formData.storeNo,
+            formData.name,
+            formData.address1,
+            formData.address2,
+            formData.address3,
+            formData.email,
+            formData.phone,
+            formData.stroregroup,
+            formData.area,
+            formData.region,
+            formData.country,
+            formData.opendate,
+            formData.closed,
+            formData.accountcode,
+            formData.costcentre,
+            formData.storetype,
+            formData.ipaddress
+          );
+          toast.success("Store updated successfully!");
+        } else {
+          await addStore(
+            formData.storeNo,
+            formData.name,
+            formData.address1,
+            formData.address2,
+            formData.address3,
+            formData.email,
+            formData.phone,
+            formData.stroregroup,
+            formData.area,
+            formData.region,
+            formData.country,
+            formData.opendate,
+            formData.closed,
+            formData.accountcode,
+            formData.costcentre,
+            formData.storetype,
+            formData.ipaddress
+          );
+          toast.success("Store added successfully!");
+        }
+        setShowAddForm(false);
+        setEditData(null);
+        setFormData({
+          storeNo: '',
+          name: '',
+          address1: '',
+          address2: '',
+          address3: '',
+          email: '',
+          phone: '',
+          stroregroup: '',
+          area: '',
+          region: '',
+          country: '',
+          opendate: '',
+          closed: 'N',
+          accountcode: '',
+          costcentre: '',
+          storetype: '',
+          ipaddress: ''
+        });
       }
-      setShowAddForm(false);
-      setEditData(null);
-      setFormData({
-        storeNo: '',
-        name: '',
-        address1: '',
-        address2: '',
-        address3: '',
-        email: '',
-        phone: '',
-        stroregroup: '',
-        area: '',
-        region: '',
-        country: '',
-        opendate: '',
-        closed: 'N',
-        accountcode: '',
-        costcentre: '',
-        storetype: '',
-        ipaddress: ''
-      });
+      else {
+        toast.error("Some inputs have an invalid format.");
+      }
     } catch (error) {
       toast.error("Failed to save store.");
     }
@@ -370,6 +372,10 @@ const StorePage = () => {
         header: ({ column }) => <DataGridColumnHeader title="Cost Centre" column={column} />,
         enableSorting: true,
         cell: (info) => info.row.original.costcentre,
+        meta: {
+          cellClassName: 'text-center',
+          subHeaderClassName: 'flex justify-center'
+        },
       },
       {
         accessorKey: 'storetype',
@@ -654,7 +660,7 @@ const StorePage = () => {
                         <Button variant="outline" className="flex justify-start items-center gap-2 w-full">
                           <KeenIcon icon="calendar" className="text-lg text-gray-500" />
                           {formData.opendate
-                            ? format(parseISO(formData.opendate), 'yyyy-MM-dd HH:mm')
+                            ? format(parseISO(formData.opendate), 'LLL dd, y HH:mm')
                             : <span className="text-gray-500">Pick a date & time</span>}
                         </Button>
                       </PopoverTrigger>
