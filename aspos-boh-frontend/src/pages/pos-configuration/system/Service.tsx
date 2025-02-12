@@ -399,3 +399,125 @@ export const deleteStore = async (storeNo: string) => {
     throw error;
   }
 };
+
+// Country
+export const addCountry = async (code: string, name: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.post(`${API_URL}/location/country`, { code, name }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating country:", error);
+    throw error;
+  }
+};
+
+export const editCountry = async (code: string, name: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.put(`${API_URL}/location/country/${code}`, { name }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating country:", error);
+    throw error;
+  }
+};
+
+export const deleteCountry = async (code: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.delete(`${API_URL}/location/country/${code}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating country:", error);
+    throw error;
+  }
+};
+
+// Region
+export const addRegion = async (code: string, name: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.post(`${API_URL}/location/region`, { code, name }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating region:", error);
+    throw error;
+  }
+};
+
+export const editRegion = async (code: string, name: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.put(`${API_URL}/location/region/${code}`, { name }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating region:", error);
+    throw error;
+  }
+};
+
+export const deleteRegion = async (code: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.delete(`${API_URL}/location/region/${code}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating region:", error);
+    throw error;
+  }
+};
