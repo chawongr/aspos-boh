@@ -47,7 +47,7 @@ const HqSyncDownPage = () => {
         queryParams.set('query', searchQuery);
       }
 
-      const response = await axios.get(`${API_URL}/location/area?${queryParams.toString()}`, {
+      const response = await axios.get(`${API_URL}/system/hq-sync?${queryParams.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -111,11 +111,11 @@ const HqSyncDownPage = () => {
   const columns = useMemo<ColumnDef<any>[]>(
     () => [
       {
-        accessorKey: 'code',
-        id: 'code',
-        header: ({ column }) => <DataGridColumnHeader title="Code" column={column} />,
+        accessorKey: 'storeNo',
+        id: 'storeNo',
+        header: ({ column }) => <DataGridColumnHeader title="Store No" column={column} />,
         enableSorting: true,
-        cell: (info) => info.row.original.code,
+        cell: (info) => info.row.original.storeNo,
         meta: {
           headerClassName: 'w-6',
           cellClassName: 'w-6 text-center',
@@ -136,19 +136,25 @@ const HqSyncDownPage = () => {
         enableSorting: true,
         cell: ({ row }) => (
           <div className="flex items-baseline flex-wrap gap-2.5">
-            <label className="form-label max-w-32"></label>
             <div className="switch switch-sm grow flex justify-start">
               <input
                 type="checkbox"
-                // checked={formData.name === 'Y'} 
-                onChange={(e) => setFormData(prev => ({
-                  ...prev,
-                  closed: e.target.checked ? 'Y' : null
-                }))}
+                value={row.original.menuitem}
+                checked={row.original.menuitem === 'Y'} 
+                // onChange={(e) => setFormData(prev => ({
+                //   ...prev,
+                //   closed: e.target.checked ? 'Y' : null
+                // }))}
               />
             </div>
           </div>
-        )
+        ),
+        meta: {
+          headerClassName: 'w-8',
+          subCellClassName: 'flex justify-center',
+          subHeaderClassName: 'flex justify-center'
+
+        },
       },
       {
         id: 'edit',
