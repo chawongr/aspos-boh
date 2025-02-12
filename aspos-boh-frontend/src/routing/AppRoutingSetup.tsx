@@ -32,6 +32,7 @@ import {
   FamilyGroupPage,
   MenuItemPage,
   MajorGroupPage,
+  ReportGroupPage,
   KitchenPrinterPage,
   PCTablePage,
   PrinterPage,
@@ -89,6 +90,7 @@ const AppRoutingSetup = (): ReactElement => {
 
           <Route path="/pos-config/sales/menu-item/major-group" element={<MajorGroupPage />} />
           <Route path="/pos-config/sales/menu-item/family-group" element={<FamilyGroupPage />} />
+          <Route path="/pos-config/sales/menu-item/report-group" element={<ReportGroupPage />} />
 
           <Route path="/logs" element={<LogsPage />} />
 

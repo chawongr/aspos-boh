@@ -167,3 +167,87 @@ export const deleteFamilyGroup = async (code: string) => {
     throw error;
   }
 };
+
+
+
+// Report Group
+export const fetchReportGroup = async () => {
+  try {
+
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.get(`${API_URL}/config/menu/report-group`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching report groups:", error);
+    throw error;
+  }
+};
+
+export const addReportGroup = async (code: string, name: string,accountcode:string,inactive:string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+    
+    const response = await axios.post(`${API_URL}/config/menu/report-group`,{ code, name,accountcode,inactive }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error("Error updating report group:", error);
+    throw error;
+  }
+};
+
+export const editReportGroup = async (code: string, name: string,accountcode:string,inactive:string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+    
+    const response = await axios.put(`${API_URL}/config/menu/report-group/${code}`, { name,accountcode,inactive }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error("Error updating report group:", error);
+    throw error;
+  }
+};
+
+export const deleteReportGroup = async (code: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+    
+    const response = await axios.delete(`${API_URL}/config/menu/report-group/${code}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error("Error updating report group:", error);
+    throw error;
+  }
+};
