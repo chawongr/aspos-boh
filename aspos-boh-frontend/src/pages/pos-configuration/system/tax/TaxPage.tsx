@@ -1,4 +1,4 @@
-import React,{ Fragment, useEffect, useMemo, useState } from 'react';
+import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { ColumnDef } from '@tanstack/react-table';
 import {
@@ -9,30 +9,41 @@ import {
   Container
 } from '@/components';
 import axios from 'axios';
-import { addArea, deleteArea, editArea } from '@/pages/pos-configuration/system/Service';
+import { addTax, deleteTax, editTax } from '@/pages/pos-configuration/system/Service';
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 const API_URL = import.meta.env.VITE_DOMAIN;
 const token = localStorage.getItem('token');
 
-interface Area {
+interface Tax {
   code: string;
   name: string;
+  percent: string;
+  type: string;
+  startamount: string;
+  accountcode: string;
 }
 
 const TaxPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showAddForm, setShowAddForm] = useState(false);
-  const [editData, setEditData] = useState<Area | null>(null);
-  const [formData, setFormData] = useState({ code: '', name: '' });
+  const [editData, setEditData] = useState<Tax | null>(null);
+  const [formData, setFormData] = useState({ code: '', name: '', percent: '', type: '', startamount: '', accountcode: '' });
   const [totalCount, setTotalCount] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(5);
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
 
-  const fetchArea = async (params: TDataGridRequestParams) => {
+  const fetchTax = async (params: TDataGridRequestParams) => {
     try {
       const queryParams = new URLSearchParams();
       queryParams.set('page', String(params.pageIndex + 1));
@@ -47,7 +58,7 @@ const TaxPage = () => {
         queryParams.set('query', searchQuery);
       }
 
-      const response = await axios.get(`${API_URL}/location/area?${queryParams.toString()}`, {
+      const response = await axios.get(`${API_URL}/config/tax?${queryParams.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -59,52 +70,52 @@ const TaxPage = () => {
       setTotalCount(response.data.pagination.total);
       return { data: response.data.data, totalCount: response.data.pagination.total };
     } catch (error) {
-      toast.error("Error fetching area");
+      toast.error("Error fetching tax");
       return { data: [], totalCount: 0 };
     }
   };
 
-  const handleEdit = (rowData: Area) => {
+  const handleEdit = (rowData: Tax) => {
     setEditData(rowData);
-    setFormData({ code: rowData.code, name: rowData.name });
+    setFormData({ code: rowData.code, name: rowData.name, percent: rowData.percent, type: rowData.type, startamount: rowData.startamount, accountcode: rowData.accountcode });
     setShowAddForm(true);
   };
 
   const handleDelete = async (code: string) => {
-      toast("Are you sure you want to delete this area?", {
-        action: (
-          <button
-            onClick={async () => {
-              try {
-                await deleteArea(code);
-                toast.success("Area deleted successfully!");
-                setRefreshKey(prev => prev + 1);
-              } catch (error) {
-                toast.error("Error deleting area.");
-              }
-            }}
-            className="bg-red-500 text-white w-20 py-2 rounded-md hover:bg-red-600 transition font-semibold"
-          >
-            Confirm
-          </button>
-        ),
-      });
-    };
+    toast("Are you sure you want to delete this tax?", {
+      action: (
+        <button
+          onClick={async () => {
+            try {
+              await deleteTax(code);
+              toast.success("Tax deleted successfully!");
+              setRefreshKey(prev => prev + 1);
+            } catch (error) {
+              toast.error("Error deleting tax.");
+            }
+          }}
+          className="bg-red-500 text-white w-20 py-2 rounded-md hover:bg-red-600 transition font-semibold"
+        >
+          Confirm
+        </button>
+      ),
+    });
+  };
 
   const handleSave = async () => {
     try {
       if (editData) {
-        await editArea(formData.code, formData.name);
-        toast.success("Area updated successfully!");
+        await editTax(formData.code, formData.name, formData.percent, formData.type, formData.startamount, formData.accountcode);
+        toast.success("Tax updated successfully!");
       } else {
-        await addArea(formData.code, formData.name);
-        toast.success("Area added successfully!");
+        await addTax(formData.code, formData.name, formData.percent, formData.type, formData.startamount, formData.accountcode);
+        toast.success("Tax added successfully!");
       }
       setShowAddForm(false);
       setEditData(null);
-      setFormData({ code: '', name: '' });
+      setFormData({ code: '', name: '', percent: '', type: '', startamount: '', accountcode: '' });
     } catch (error) {
-      toast.error("Failed to save area.");
+      toast.error("Failed to save tax.");
     }
   };
 
@@ -182,7 +193,7 @@ const TaxPage = () => {
               <ToolbarPageTitle />
               <ToolbarDescription>
                 <div className="flex items-center flex-wrap gap-1.5 font-medium">
-                  <span className="text-md text-gray-600">Area Management</span>
+                  <span className="text-md text-gray-600">Tax Management</span>
                 </div>
               </ToolbarDescription>
             </ToolbarHeading>
@@ -207,7 +218,7 @@ const TaxPage = () => {
         {showAddForm ? (
           <div className="card">
             <div className="card-header" id="webhooks">
-              <h3 className="card-title">{editData ? 'Edit Area' : 'New Area'}</h3>
+              <h3 className="card-title">{editData ? 'Edit Tax' : 'New Tax'}</h3>
             </div>
             <div className="card-body grid gap-5">
               <div className="grid grid-cols-2 gap-5">
@@ -218,7 +229,7 @@ const TaxPage = () => {
                   <div className="grow min-w-24">
                     <input
                       className="input w-full"
-                      type="number"
+                      type="text"
                       placeholder="Enter Code"
                       name="code"
                       value={formData.code}
@@ -242,6 +253,82 @@ const TaxPage = () => {
                     />
                   </div>
                 </div>
+
+
+                <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
+                  <span className="form-label max-w-32 w-full">
+                    Type {!formData.type && <span className="text-red-500">*</span>}
+                  </span>
+                  <div className="grow min-w-24">
+                    <Select
+                      value={formData.type?.toString()}
+                      onValueChange={(value) => {
+                        setFormData((prev) => ({ ...prev, type: value }));
+                      }}
+                    >
+                      <SelectTrigger size="md">
+                        <SelectValue placeholder="Select..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="0">No Tax</SelectItem>
+                        <SelectItem value="1">Include Tax</SelectItem>
+                        <SelectItem value="2">Exclude Tax</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
+                  <span className="form-label max-w-32 w-full">
+                    Account Code {!formData.accountcode && <span className="text-red-500">*</span>}
+                  </span>
+                  <div className="grow min-w-24">
+                    <input
+                      className="input w-full"
+                      type="text"
+                      placeholder="Enter Account Code"
+                      name="accountcode"
+                      value={formData.accountcode}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+
+
+                <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
+                  <span className="form-label max-w-32 w-full">
+                    Percent {!formData.percent && <span className="text-red-500">*</span>}
+                  </span>
+                  <div className="grow min-w-24">
+                    <input
+                      className="input w-full"
+                      type="text"
+                      placeholder="Enter Percent"
+                      name="percent"
+                      value={formData.percent}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+
+
+                <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
+                  <span className="form-label max-w-32 w-full">
+                    Start Amount {!formData.startamount && <span className="text-red-500">*</span>}
+                  </span>
+                  <div className="grow min-w-24">
+                    <input
+                      className="input w-full"
+                      type="text"
+                      placeholder="Enter Start Amount"
+                      name="startamount"
+                      value={formData.startamount}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+
+
               </div>
             </div>
             <div className="card-footer justify-end">
@@ -251,9 +338,9 @@ const TaxPage = () => {
               </button>
               <button
                 className="cancelBtn h-8 text-sm bg-white border border-blue-500 text-primary  flex justify-center items-center gap-x-1"
-                onClick={() => { setShowAddForm(false); setEditData(null); setFormData({ code: '', name: '' }); }}
+                onClick={() => { setShowAddForm(false); setEditData(null); setFormData({ code: '', name: '', percent: '', type: '', startamount: '', accountcode: '' }); }}
               >
-                <div className='text-base mt-[1px]'><KeenIcon icon='cross'/></div>
+                <div className='text-base mt-[1px]'><KeenIcon icon='cross' /></div>
                 <div>Cancel</div>
               </button>
             </div>
@@ -264,13 +351,13 @@ const TaxPage = () => {
               key={refreshKey}
               columns={columns}
               serverSide={true}
-              onFetchData={fetchArea}
+              onFetchData={fetchTax}
               rowSelection={true}
               pagination={{ size: pageSize }}
               toolbar={
                 <div className="card-header flex-wrap gap-2 border-b-0 px-5">
                   <h3 className="card-title font-medium text-sm">
-                    Showing {count} of {totalCount} areas
+                    Showing {count} of {totalCount} tax
                   </h3>
                   <div className="flex flex-wrap gap-2 lg:gap-5">
                     <div className="flex flex-wrap gap-2.5">

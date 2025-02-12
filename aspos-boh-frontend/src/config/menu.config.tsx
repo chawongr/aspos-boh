@@ -119,6 +119,10 @@ export const MENU_SIDEBAR: TMenuConfig = [
             path: '/pos-config/system/sale-types',
           },
           {
+            title: 'Member',
+            path: '/pos-config/system/member',
+          },
+          {
             title: 'Store',
             children: [
               {

@@ -251,3 +251,66 @@ export const deleteReportGroup = async (code: string) => {
     throw error;
   }
 };
+
+
+
+// Tender Group
+export const addTenderGroup = async (code: string, name: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.post(`${API_URL}/config/tender/group`, { code, name }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating tender group:", error);
+    throw error;
+  }
+};
+
+export const editTenderGroup = async (code: string, name: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.put(`${API_URL}/config/tender/group/${code}`, { name }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating tender group:", error);
+    throw error;
+  }
+};
+
+export const deleteTenderGroup = async (code: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.delete(`${API_URL}/config/tender/group/${code}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating tender group:", error);
+    throw error;
+  }
+};

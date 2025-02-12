@@ -9,22 +9,22 @@ import {
   Container
 } from '@/components';
 import axios from 'axios';
-import { addTenderGroup, deleteTenderGroup, editTenderGroup } from '@/pages/pos-configuration/sales/Service';
+import { addArea, deleteArea, editArea } from '@/pages/pos-configuration/system/Service';
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
 
 const API_URL = import.meta.env.VITE_DOMAIN;
 const token = localStorage.getItem('token');
 
-interface TenderGroup {
+interface Area {
   code: string;
   name: string;
 }
 
-const TenderGroupPage = () => {
+const MemberPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showAddForm, setShowAddForm] = useState(false);
-  const [editData, setEditData] = useState<TenderGroup | null>(null);
+  const [editData, setEditData] = useState<Area | null>(null);
   const [formData, setFormData] = useState({ code: '', name: '' });
   const [totalCount, setTotalCount] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
@@ -32,7 +32,7 @@ const TenderGroupPage = () => {
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
 
-  const fetchTenderGroup = async (params: TDataGridRequestParams) => {
+  const fetchArea = async (params: TDataGridRequestParams) => {
     try {
       const queryParams = new URLSearchParams();
       queryParams.set('page', String(params.pageIndex + 1));
@@ -47,7 +47,7 @@ const TenderGroupPage = () => {
         queryParams.set('query', searchQuery);
       }
 
-      const response = await axios.get(`${API_URL}/config/tender/group?${queryParams.toString()}`, {
+      const response = await axios.get(`${API_URL}/location/area?${queryParams.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -59,28 +59,28 @@ const TenderGroupPage = () => {
       setTotalCount(response.data.pagination.total);
       return { data: response.data.data, totalCount: response.data.pagination.total };
     } catch (error) {
-      toast.error("Error fetching tender group");
+      toast.error("Error fetching area");
       return { data: [], totalCount: 0 };
     }
   };
 
-  const handleEdit = (rowData: TenderGroup) => {
+  const handleEdit = (rowData: Area) => {
     setEditData(rowData);
     setFormData({ code: rowData.code, name: rowData.name });
     setShowAddForm(true);
   };
 
   const handleDelete = async (code: string) => {
-      toast("Are you sure you want to delete this tender group?", {
+      toast("Are you sure you want to delete this area?", {
         action: (
           <button
             onClick={async () => {
               try {
-                await deleteTenderGroup(code);
-                toast.success("Tender group deleted successfully!");
+                await deleteArea(code);
+                toast.success("Area deleted successfully!");
                 setRefreshKey(prev => prev + 1);
               } catch (error) {
-                toast.error("Error deleting tender group.");
+                toast.error("Error deleting area.");
               }
             }}
             className="bg-red-500 text-white w-20 py-2 rounded-md hover:bg-red-600 transition font-semibold"
@@ -94,17 +94,17 @@ const TenderGroupPage = () => {
   const handleSave = async () => {
     try {
       if (editData) {
-        await editTenderGroup(formData.code, formData.name);
-        toast.success("Tender group updated successfully!");
+        await editArea(formData.code, formData.name);
+        toast.success("Area updated successfully!");
       } else {
-        await addTenderGroup(formData.code, formData.name);
-        toast.success("Tender group added successfully!");
+        await addArea(formData.code, formData.name);
+        toast.success("Area added successfully!");
       }
       setShowAddForm(false);
       setEditData(null);
       setFormData({ code: '', name: '' });
     } catch (error) {
-      toast.error("Failed to save tender group.");
+      toast.error("Failed to save area.");
     }
   };
 
@@ -182,7 +182,7 @@ const TenderGroupPage = () => {
               <ToolbarPageTitle />
               <ToolbarDescription>
                 <div className="flex items-center flex-wrap gap-1.5 font-medium">
-                  <span className="text-md text-gray-600">Tender group Management</span>
+                  <span className="text-md text-gray-600">Area Management</span>
                 </div>
               </ToolbarDescription>
             </ToolbarHeading>
@@ -207,7 +207,7 @@ const TenderGroupPage = () => {
         {showAddForm ? (
           <div className="card">
             <div className="card-header" id="webhooks">
-              <h3 className="card-title">{editData ? 'Edit Tender group' : 'New Tender group'}</h3>
+              <h3 className="card-title">{editData ? 'Edit Area' : 'New Area'}</h3>
             </div>
             <div className="card-body grid gap-5">
               <div className="grid grid-cols-2 gap-5">
@@ -264,13 +264,13 @@ const TenderGroupPage = () => {
               key={refreshKey}
               columns={columns}
               serverSide={true}
-              onFetchData={fetchTenderGroup}
+              onFetchData={fetchArea}
               rowSelection={true}
               pagination={{ size: pageSize }}
               toolbar={
                 <div className="card-header flex-wrap gap-2 border-b-0 px-5">
                   <h3 className="card-title font-medium text-sm">
-                    Showing {count} of {totalCount} tender groups
+                    Showing {count} of {totalCount} areas
                   </h3>
                   <div className="flex flex-wrap gap-2 lg:gap-5">
                     <div className="flex flex-wrap gap-2.5">
@@ -300,4 +300,4 @@ const TenderGroupPage = () => {
   );
 };
 
-export { TenderGroupPage };
+export { MemberPage };
