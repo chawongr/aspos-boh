@@ -32,12 +32,26 @@ import {
   FamilyGroupPage,
   MenuItemPage,
   MajorGroupPage,
+  ReportGroupPage,
   KitchenPrinterPage,
   PCTablePage,
   PrinterPage,
   ComboGroupPage,
   HqSyncDownPage,
-  SystemPage
+  StoreGroupPage,
+  StorePage,
+  StoreTypePage,
+  AreaPage,
+  CompanyPage,
+  SystemPage,
+  CountryPage,
+  RegionPage,
+  LanguagePage,
+  TenderGroupPage,
+  TaxPage,
+  MemberPage,
+  SalesTypePage,
+  CustomerPage,
 } from '@/pages/pos-configuration'
 
 import { UserSupportPage } from '@/pages/support'
@@ -45,6 +59,7 @@ import { UserSupportPage } from '@/pages/support'
 import { LineOAPage } from '@/pages/line-oa'
 
 import { ComboDefPage } from '@/pages/pos-configuration/menu-item/combo-def'
+
 
 import {
   GoodReceiptPage,
@@ -68,7 +83,7 @@ const AppRoutingSetup = (): ReactElement => {
     <Routes>
       <Route element={<RequireAuth />}>
         <Route element={<Demo1Layout />}>
-          <Route path="/" element={<SalesEnquiryPage />} />
+          <Route path="/" element={<MajorGroupPage />} />
           <Route path="/dashboard/cashier-enquiry" element={<CashierEnquiryPage />} />
           <Route path="/dashboard/major-enquiry" element={<MajorEnquiryPage />} />
           <Route path="/dashboard/inventory-enquiry" element={<InventoryEnquiryPage />} />
@@ -79,7 +94,11 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/pos-config/menu-item/combo-def" element={<ComboDefPage />} />
 
 
-          <Route path="/pos-config/major-group" element={<MajorGroupPage />} />
+          <Route path="/pos-config/sales/menu-item/major-group" element={<MajorGroupPage />} />
+          <Route path="/pos-config/sales/menu-item/family-group" element={<FamilyGroupPage />} />
+          <Route path="/pos-config/sales/menu-item/report-group" element={<ReportGroupPage />} />
+          <Route path="/pos-config/sales/tender-group" element={<TenderGroupPage />} />
+
 
           <Route path="/logs" element={<LogsPage />} />
 
@@ -89,8 +108,24 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/pos-config/device/printer" element={<PrinterPage />} />
           <Route path="/pos-config/device/kitchen-printer" element={<KitchenPrinterPage />} />
 
+          <Route path="/pos-config/system/store/store-group" element={<StoreGroupPage />} />
+          <Route path="/pos-config/system/store/store" element={<StorePage />} />
+          <Route path="/pos-config/system/store/store-type" element={<StoreTypePage />} />
+          {/* <Route path="/pos-config/system/store/storeType/add" element={<StoreTypeAdd />} /> */}
+          <Route path="/pos-config/system/store/area" element={<AreaPage />} />
+          <Route path="/pos-config/system/store/company" element={<CompanyPage />} />
           <Route path="/pos-config/system/store/hqSync" element={<HqSyncDownPage />} />
           <Route path="/pos-config/system" element={<SystemPage />} />
+          <Route path="/pos-config/system/country" element={<CountryPage />} />
+          <Route path="/pos-config/system/region" element={<RegionPage />} />
+          <Route path="/pos-config/system/language" element={<LanguagePage />} />
+          <Route path="/pos-config/system/tax" element={<TaxPage />} />
+          <Route path="/pos-config/system/member" element={<MemberPage />} />
+          <Route path="/pos-config/system/sales-type" element={<SalesTypePage />} />
+          <Route path="/pos-config/system/customer" element={<CustomerPage />} />
+
+
+
 
           <Route path="/support/user" element={<UserSupportPage />} />
 

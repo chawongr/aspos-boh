@@ -1,54 +1,79 @@
 import { type TMenuConfig } from '@/components/menu';
 
 export const MENU_SIDEBAR: TMenuConfig = [
-  {
-    title: 'Dashboards',
-    icon: 'element-11',
-    children: [
-      {
-        title: 'Sales Enquiry',
-        path: '/'
-      },
-      // {
-      //   title: 'Cashier Enquiry',
-      //   path: '/dashboard/cashier-enquiry'
-      // },
-      // {
-      //   title: 'Major Enquiry',
-      //   path: '/dashboard/major-enquiry'
-      // },
-      {
-        title: 'Inventory Enquiry',
-        path: '/dashboard/inventory-enquiry'
-      },
-    ]
-  },
+  // {
+  //   title: 'Dashboards',
+  //   icon: 'element-11',
+  //   children: [
+  //     {
+  //       title: 'Sales Enquiry',
+  //       path: '/'
+  //     },
+  //     // {
+  //     //   title: 'Cashier Enquiry',
+  //     //   path: '/dashboard/cashier-enquiry'
+  //     // },
+  //     // {
+  //     //   title: 'Major Enquiry',
+  //     //   path: '/dashboard/major-enquiry'
+  //     // },
+  //     {
+  //       title: 'Inventory Enquiry',
+  //       path: '/dashboard/inventory-enquiry'
+  //     },
+  //   ]
+  // },
   {
     title: 'POS Configuration',
     icon: 'setting-2',
     children: [
       {
-        title: 'Menu Item',
-        path: '/pos-config/menu-item',
+        title: 'Sales',
         children: [
           {
-            title: 'Combo Group',
-            path: '/pos-config/menu-item/combo-group'
+            title: 'Menu Item',
+            children: [
+              {
+                title: 'Major Group',
+                path: '/'//'/pos-config/sales/menu-item/major-group'
+              },
+              {
+                title: 'Family Group',
+                path: '/pos-config/sales/menu-item/family-group'
+              },
+              {
+                title: 'Report Group',
+                path: '/pos-config/sales/menu-item/report-group'
+              },
+            ]
           },
           {
-            title: 'Combo Definition',
-            path: '/pos-config/menu-item/combo-def'
+            title: 'Tender Group',
+            path: '/pos-config/sales/tender-group'
           },
         ]
       },
-      {
-        title: 'Major Group',
-        path: '/pos-config/major-group'
-      },
-      {
-        title: 'Family Group',
-        path: '/pos-config/family-group'
-      },
+
+
+
+      // {
+      //   title: 'Menu Item',
+      //   path: '/pos-config/menu-item',
+      //   children: [
+      //     {
+      //       title: 'Combo Group',
+      //       path: '/pos-config/menu-item/combo-group'
+      //     },
+      //     {
+      //       title: 'Combo Definition',
+      //       path: '/pos-config/menu-item/combo-def'
+      //     },
+      //   ]
+      // },
+
+
+
+      
       // {
       //   title: 'Device',
       //   children: [
@@ -69,17 +94,65 @@ export const MENU_SIDEBAR: TMenuConfig = [
       {
         title: 'System',
         children: [
+          // {
+          //   title: 'System',
+          //   path: '/pos-config/system',
+          // },
           {
-            title: 'System',
-            path: '/pos-config/system',
+            title: 'Country',
+            path: '/pos-config/system/country',
+          },
+          {
+            title: 'Region',
+            path: '/pos-config/system/region',
+          },
+          {
+            title: 'Language',
+            path: '/pos-config/system/language',
+          },
+          {
+            title: 'Tax',
+            path: '/pos-config/system/tax',
+          },
+          {
+            title: 'Sales Type',
+            path: '/pos-config/system/sales-type',
+          },
+          {
+            title: 'Member',
+            path: '/pos-config/system/member',
+          },
+          {
+            title: 'Customer',
+            path: '/pos-config/system/customer',
           },
           {
             title: 'Store',
             children: [
               {
-                title: 'Hq Sync Down',
-                path: '/pos-config/system/store/hqSync'
+                title: 'Store Group',
+                path: '/pos-config/system/store/store-group'
               },
+              {
+                title: 'Store',
+                path: '/pos-config/system/store/store'
+              },
+              {
+                title: 'Store Type',
+                path: '/pos-config/system/store/store-type'
+              },
+              {
+                title: 'Area',
+                path: '/pos-config/system/store/area'
+              },
+              {
+                title: 'Company',
+                path: '/pos-config/system/store/company'
+              },
+              // {
+              //   title: 'Hq Sync Down',
+              //   path: '/pos-config/system/store/hqSync'
+              // },
             ]
           },
         ]
@@ -137,31 +210,35 @@ export const MENU_SIDEBAR: TMenuConfig = [
   //     },
   //   ]
   // },
-  {
-    title: 'Support',
-    icon: 'support',
-    children: [
-      {
-        title: 'User',
-        path: '/support/user'
-      },
-    ]
-  },
-  {
-    title: 'Logs',
-    icon: 'notepad',
-    path: '/logs'
-  },
-  {
-    title: 'Help',
-    icon: 'question-2',
-    path: '/help'
-  },
-  {
-    title: 'Line OA',
-    icon: 'messages',
-    path: '/line-oa'
-  },
+
+
+  // {
+  //   title: 'Support',
+  //   icon: 'support',
+  //   children: [
+  //     {
+  //       title: 'User',
+  //       path: '/support/user'
+  //     },
+  //   ]
+  // },
+
+
+  // {
+  //   title: 'Logs',
+  //   icon: 'notepad',
+  //   path: '/logs'
+  // },
+  // {
+  //   title: 'Help',
+  //   icon: 'question-2',
+  //   path: '/help'
+  // },
+  // {
+  //   title: 'Line OA',
+  //   icon: 'messages',
+  //   path: '/line-oa'
+  // },
   // {
   //   title: 'Network',
   //   icon: 'users',
