@@ -47,6 +47,8 @@ import {
   CountryPage,
   RegionPage,
   LanguagePage,
+  TenderGroupPage,
+  TaxPage
 } from '@/pages/pos-configuration'
 
 import { UserSupportPage } from '@/pages/support'
@@ -92,6 +94,8 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/pos-config/sales/menu-item/major-group" element={<MajorGroupPage />} />
           <Route path="/pos-config/sales/menu-item/family-group" element={<FamilyGroupPage />} />
           <Route path="/pos-config/sales/menu-item/report-group" element={<ReportGroupPage />} />
+          <Route path="/pos-config/sales/tender-group" element={<TenderGroupPage />} />
+
 
           <Route path="/logs" element={<LogsPage />} />
 
@@ -109,9 +113,11 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/pos-config/system/store/company" element={<CompanyPage />} />
           <Route path="/pos-config/system/store/hqSync" element={<HqSyncDownPage />} />
           <Route path="/pos-config/system" element={<SystemPage />} />
-          <Route path="/pos-config/country" element={<CountryPage />} />
-          <Route path="/pos-config/region" element={<RegionPage />} />
-          <Route path="/pos-config/language" element={<LanguagePage />} />
+          <Route path="/pos-config/system/country" element={<CountryPage />} />
+          <Route path="/pos-config/system/region" element={<RegionPage />} />
+          <Route path="/pos-config/system/language" element={<LanguagePage />} />
+          <Route path="/pos-config/system/tax" element={<TaxPage />} />
+
 
 
           <Route path="/support/user" element={<UserSupportPage />} />

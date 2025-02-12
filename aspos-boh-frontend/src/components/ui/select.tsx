@@ -425,7 +425,7 @@ const Dropdown = ({
     fetchItems();
   }, [debouncedSearchTerm, apiEndpoint, queryParam, token]);
 
-  const selectedLabel = selectedItemState?.label || "Select Store Group";
+  const selectedLabel = selectedItemState?.label || "Select...";
 
   // ✅ Handle item selection & persist selected value
   const handleSelectItem = useCallback(
