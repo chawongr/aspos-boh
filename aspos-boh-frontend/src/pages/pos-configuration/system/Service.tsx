@@ -5,7 +5,7 @@ const API_URL = import.meta.env.VITE_DOMAIN;
 
 // ============================ Store ==============================
 // Store Group
-export const fetchStoreGroup = async (searchTerm:string) => {
+export const fetchStoreGroup = async (searchTerm: string) => {
   try {
 
     if (!token) {
@@ -13,22 +13,22 @@ export const fetchStoreGroup = async (searchTerm:string) => {
     }
 
     const url = searchTerm
-          ? `${API_URL}/store/group${searchTerm}`
-          : `${API_URL}/store/group`;
+      ? `${API_URL}/store/group${searchTerm}`
+      : `${API_URL}/store/group`;
 
-        const response = await axios.get(url, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-        const data = Array.isArray(response.data) ? response.data : response.data.data;
+    const data = Array.isArray(response.data) ? response.data : response.data.data;
 
-        const formattedData = data.map((item: any, index: number) => ({
-          value: item.code ? item.code.toString() : `fallback-${index}`,
-          label: item.name,
+    const formattedData = data.map((item: any, index: number) => ({
+      value: item.code ? item.code.toString() : `fallback-${index}`,
+      label: item.name,
 
-        }));
+    }));
 
 
     return formattedData;
@@ -580,6 +580,68 @@ export const deleteLanguage = async (code: string) => {
     return response.data;
   } catch (error) {
     console.error("Error updating language:", error);
+    throw error;
+  }
+};
+
+
+// Tax
+export const addTax = async (code: string, name: string, percent: string, type: string, startamount: string, accountcode: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.post(`${API_URL}/config/tax`, { code, name, percent, type, startamount, accountcode }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating tax:", error);
+    throw error;
+  }
+};
+
+export const editTax = async (code: string, name: string, percent: string, type: string, startamount: string, accountcode: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.put(`${API_URL}/config/tax/${code}`, { name, percent, type, startamount, accountcode }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating tax:", error);
+    throw error;
+  }
+};
+
+export const deleteTax = async (code: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.delete(`${API_URL}/config/tax/${code}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating tax:", error);
     throw error;
   }
 };
