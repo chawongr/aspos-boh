@@ -47,6 +47,10 @@ export const MENU_SIDEBAR: TMenuConfig = [
               },
             ]
           },
+          {
+            title: 'Tender Group',
+            path: '/pos-config/sales/tender-group'
+          },
         ]
       },
 
@@ -96,15 +100,19 @@ export const MENU_SIDEBAR: TMenuConfig = [
           // },
           {
             title: 'Country',
-            path: '/pos-config/country',
+            path: '/pos-config/system/country',
           },
           {
             title: 'Region',
-            path: '/pos-config/region',
+            path: '/pos-config/system/region',
           },
           {
             title: 'Language',
-            path: '/pos-config/language',
+            path: '/pos-config/system/language',
+          },
+          {
+            title: 'Tax',
+            path: '/pos-config/system/tax',
           },
           {
             title: 'Store',
