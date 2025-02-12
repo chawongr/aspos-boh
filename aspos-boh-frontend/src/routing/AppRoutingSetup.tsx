@@ -42,7 +42,9 @@ import {
   StoreTypePage,
   AreaPage,
   CompanyPage,
-  SystemPage
+  SystemPage,
+  CountryPage,
+  RegionPage
 } from '@/pages/pos-configuration'
 
 import { UserSupportPage } from '@/pages/support'
@@ -104,6 +106,9 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/pos-config/system/store/company" element={<CompanyPage />} />
           <Route path="/pos-config/system/store/hqSync" element={<HqSyncDownPage />} />
           <Route path="/pos-config/system" element={<SystemPage />} />
+          <Route path="/pos-config/country" element={<CountryPage />} />
+          <Route path="/pos-config/region" element={<RegionPage />} />
+
 
           <Route path="/support/user" element={<UserSupportPage />} />
 
