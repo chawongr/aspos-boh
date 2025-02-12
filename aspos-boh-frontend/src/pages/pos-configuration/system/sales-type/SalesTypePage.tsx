@@ -33,6 +33,7 @@ interface SalesType {
   mainlevel: string;
 }
 
+
 const SalesTypePage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showAddForm, setShowAddForm] = useState(false);

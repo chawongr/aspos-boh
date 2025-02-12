@@ -583,3 +583,189 @@ export const deleteLanguage = async (code: string) => {
     throw error;
   }
 };
+
+
+// Tax
+export const addTax = async (code: string, name: string, percent: string, type: string, startamount: string, accountcode: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.post(`${API_URL}/config/tax`, { code, name, percent, type, startamount, accountcode }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating tax:", error);
+    throw error;
+  }
+};
+
+export const editTax = async (code: string, name: string, percent: string, type: string, startamount: string, accountcode: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.put(`${API_URL}/config/tax/${code}`, { name, percent, type, startamount, accountcode }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating tax:", error);
+    throw error;
+  }
+};
+
+export const deleteTax = async (code: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.delete(`${API_URL}/config/tax/${code}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating tax:", error);
+    throw error;
+  }
+};
+
+
+
+// Member
+export const addMember = async (memberCode: string, name: string, address1: string, address2: string, address3: string, email: string, phone: string, point: string, startdate: string, expiredate: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.post(`${API_URL}/member`, { memberCode, name, address1, address2, address3, email, phone, point, startdate, expiredate }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating member:", error);
+    throw error;
+  }
+};
+
+export const editMember = async (memberCode: string, name: string, address1: string, address2: string, address3: string, email: string, phone: string, point: string, startdate: string, expiredate: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.put(`${API_URL}/member/${memberCode}`, { name, address1, address2, address3, email, phone, point, startdate, expiredate }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating member:", error);
+    throw error;
+  }
+};
+
+export const deleteMember = async (memberCode: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.delete(`${API_URL}/member/${memberCode}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating member:", error);
+    throw error;
+  }
+};
+
+// Sales Type
+export const addSalesType = async (code: string, name1: string, name2: string,name3: string,suffix: string,pricelevel: string, mainlevel: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.post(`${API_URL}/config/sales-type`, { code, name1,name2,name3,suffix,pricelevel,mainlevel }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating language:", error);
+    throw error;
+  }
+};
+
+export const editSalesType = async (code: string, name1: string, name2: string,name3: string,suffix: string,pricelevel: string, mainlevel: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.put(`${API_URL}/config/sales-type/${code}`, { name1,name2,name3,suffix,pricelevel,mainlevel }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating language:", error);
+    throw error;
+  }
+};
+
+export const deleteSalesType = async (code: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.delete(`${API_URL}/config/sales-type/${code}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating language:", error);
+    throw error;
+  }
+};
