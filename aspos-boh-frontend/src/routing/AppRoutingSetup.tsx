@@ -31,7 +31,7 @@ import { HelpPage } from '@/pages/help'
 import {
   FamilyGroupPage,
   MenuItemPage,
-  // MajorGroupPage,
+  MajorGroupPage,
   KitchenPrinterPage,
   PCTablePage,
   PrinterPage,
@@ -51,7 +51,6 @@ import { LineOAPage } from '@/pages/line-oa'
 
 import { ComboDefPage } from '@/pages/pos-configuration/menu-item/combo-def'
 
-import { MajorGroupPage } from '@/pages/pos-configuration/sales/menu-item/major-group';
 
 import {
   GoodReceiptPage,
@@ -86,8 +85,8 @@ const AppRoutingSetup = (): ReactElement => {
           <Route path="/pos-config/menu-item/combo-def" element={<ComboDefPage />} />
 
 
-          {/* <Route path="/pos-config/major-group" element={<MajorGroupPage />} /> */}
           <Route path="/pos-config/sales/menu-item/major-group" element={<MajorGroupPage />} />
+          <Route path="/pos-config/sales/menu-item/family-group" element={<FamilyGroupPage />} />
 
           <Route path="/logs" element={<LogsPage />} />
 

@@ -37,6 +37,10 @@ export const MENU_SIDEBAR: TMenuConfig = [
                 title: 'Major Group',
                 path: '/pos-config/sales/menu-item/major-group'
               },
+              {
+                title: 'Family Group',
+                path: '/pos-config/sales/menu-item/family-group'
+              },
             ]
           },
         ]
@@ -54,14 +58,6 @@ export const MENU_SIDEBAR: TMenuConfig = [
             path: '/pos-config/menu-item/combo-def'
           },
         ]
-      },
-      {
-        title: 'Major Group',
-        path: '/pos-config/major-group'
-      },
-      {
-        title: 'Family Group',
-        path: '/pos-config/family-group'
       },
       // {
       //   title: 'Device',

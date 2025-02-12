@@ -9,24 +9,24 @@ import {
   Container
 } from '@/components';
 import axios from 'axios';
-import { addMajorGroup, deleteMajorGroup, editMajorGroup } from '@/pages/pos-configuration/sales/Service';
+import { addFamilyGroup, deleteFamilyGroup, editFamilyGroup } from '@/pages/pos-configuration/sales/Service';
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
 
 const API_URL = import.meta.env.VITE_DOMAIN;
 const token = localStorage.getItem('token');
 
-interface MajorGroup {
+interface FamilyGroup {
   code: string;
   name: string;
   accountcode: string;
   inactive: string;
 }
 
-const MajorGroupPage = () => {
+const FamilyGroupPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showAddForm, setShowAddForm] = useState(false);
-  const [editData, setEditData] = useState<MajorGroup | null>(null);
+  const [editData, setEditData] = useState<FamilyGroup | null>(null);
   const [formData, setFormData] = useState({ code: '', name: '',accountcode:'',inactive:'0' });
   const [totalCount, setTotalCount] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
@@ -34,7 +34,7 @@ const MajorGroupPage = () => {
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
 
-  const fetchMajorGroup = async (params: TDataGridRequestParams) => {
+  const fetchFamilyGroup = async (params: TDataGridRequestParams) => {
     try {
       const queryParams = new URLSearchParams();
       queryParams.set('page', String(params.pageIndex + 1));
@@ -49,7 +49,7 @@ const MajorGroupPage = () => {
         queryParams.set('query', searchQuery);
       }
 
-      const response = await axios.get(`${API_URL}/config/menu/major-group?${queryParams.toString()}`, {
+      const response = await axios.get(`${API_URL}/config/menu/family-group?${queryParams.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -61,12 +61,12 @@ const MajorGroupPage = () => {
       setTotalCount(response.data.pagination.total);
       return { data: response.data.data, totalCount: response.data.pagination.total };
     } catch (error) {
-      toast.error("Error fetching major group");
+      toast.error("Error fetching family group");
       return { data: [], totalCount: 0 };
     }
   };
 
-  const handleEdit = (rowData: MajorGroup) => {
+  const handleEdit = (rowData: FamilyGroup) => {
     setEditData(rowData);
     setFormData({ 
       code: rowData.code, 
@@ -78,16 +78,16 @@ const MajorGroupPage = () => {
   };
 
   const handleDelete = async (code: string) => {
-      toast("Are you sure you want to delete this major group?", {
+      toast("Are you sure you want to delete this family group?", {
         action: (
           <button
             onClick={async () => {
               try {
-                await deleteMajorGroup(code);
-                toast.success("Major Group deleted successfully!");
+                await deleteFamilyGroup(code);
+                toast.success("Family Group deleted successfully!");
                 setRefreshKey(prev => prev + 1);
               } catch (error) {
-                toast.error("Error deleting major group.");
+                toast.error("Error deleting family group.");
               }
             }}
             className="bg-red-500 text-white w-20 py-2 rounded-md hover:bg-red-600 transition font-semibold"
@@ -101,26 +101,26 @@ const MajorGroupPage = () => {
   const handleSave = async () => {
     try {
       if (editData) {
-        await editMajorGroup(
+        await editFamilyGroup(
           formData.code, 
           formData.name,
           formData.accountcode,
           formData.inactive
         );
-        toast.success("Major Group updated successfully!");
+        toast.success("Family Group updated successfully!");
       } else {
-        await addMajorGroup(
+        await addFamilyGroup(
           formData.code, 
           formData.name,
           formData.accountcode,
           formData.inactive);
-        toast.success("Major Group added successfully!");
+        toast.success("Family Group added successfully!");
       }
       setShowAddForm(false);
       setEditData(null);
       setFormData({ code: '', name: '',accountcode:'',inactive:'0' });
     } catch (error) {
-      toast.error("Failed to save major Group.");
+      toast.error("Failed to save family Group.");
     }
   };
 
@@ -258,7 +258,7 @@ const MajorGroupPage = () => {
               <ToolbarPageTitle />
               <ToolbarDescription>
                 <div className="flex items-center flex-wrap gap-1.5 font-medium">
-                  <span className="text-md text-gray-600">Major Group Management</span>
+                  <span className="text-md text-gray-600">Family Group Management</span>
                 </div>
               </ToolbarDescription>
             </ToolbarHeading>
@@ -283,7 +283,7 @@ const MajorGroupPage = () => {
         {showAddForm ? (
           <div className="card">
             <div className="card-header" id="webhooks">
-              <h3 className="card-title">{editData ? 'Edit Major Group' : 'New Major Group'}</h3>
+              <h3 className="card-title">{editData ? 'Edit Family Group' : 'New Family Group'}</h3>
             </div>
             <div className="card-body grid gap-5">
               <div className="grid grid-cols-2 gap-5">
@@ -370,13 +370,13 @@ const MajorGroupPage = () => {
               key={refreshKey}
               columns={columns}
               serverSide={true}
-              onFetchData={fetchMajorGroup}
+              onFetchData={fetchFamilyGroup}
               rowSelection={true}
               pagination={{ size: pageSize }}
               toolbar={
                 <div className="card-header flex-wrap gap-2 border-b-0 px-5">
                   <h3 className="card-title font-medium text-sm">
-                    Showing {count} of {totalCount} major groups
+                    Showing {count} of {totalCount} family groups
                   </h3>
                   <div className="flex flex-wrap gap-2 lg:gap-5">
                     <div className="flex flex-wrap gap-2.5">
@@ -406,4 +406,4 @@ const MajorGroupPage = () => {
   );
 };
 
-export { MajorGroupPage };
+export { FamilyGroupPage };
