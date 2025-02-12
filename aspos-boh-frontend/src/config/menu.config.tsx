@@ -115,6 +115,10 @@ export const MENU_SIDEBAR: TMenuConfig = [
             path: '/pos-config/system/tax',
           },
           {
+            title: 'Member',
+            path: '/pos-config/system/member',
+          },
+          {
             title: 'Store',
             children: [
               {

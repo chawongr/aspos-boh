@@ -645,3 +645,66 @@ export const deleteTax = async (code: string) => {
     throw error;
   }
 };
+
+
+
+// Member
+export const addMember = async (memberCode: string, name: string, address1: string, address2: string, address3: string, email: string, phone: string, point: string, startdate: string, expiredate: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.post(`${API_URL}/member`, { memberCode, name, address1, address2, address3, email, phone, point, startdate, expiredate }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating member:", error);
+    throw error;
+  }
+};
+
+export const editMember = async (memberCode: string, name: string, address1: string, address2: string, address3: string, email: string, phone: string, point: string, startdate: string, expiredate: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.put(`${API_URL}/member/${memberCode}`, { name, address1, address2, address3, email, phone, point, startdate, expiredate }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating member:", error);
+    throw error;
+  }
+};
+
+export const deleteMember = async (memberCode: string) => {
+  try {
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const response = await axios.delete(`${API_URL}/member/${memberCode}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating member:", error);
+    throw error;
+  }
+};
