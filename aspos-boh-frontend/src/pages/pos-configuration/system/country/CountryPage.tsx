@@ -9,14 +9,14 @@ import {
   Container
 } from '@/components';
 import axios from 'axios';
-import { addArea, deleteArea, editArea } from '@/pages/pos-configuration/system/Service';
+import { addCountry, deleteCountry, editCountry } from '@/pages/pos-configuration/system/Service';
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
 
 const API_URL = import.meta.env.VITE_DOMAIN;
 const token = localStorage.getItem('token');
 
-interface Area {
+interface Country {
   code: string;
   name: string;
 }
@@ -24,7 +24,7 @@ interface Area {
 const CountryPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showAddForm, setShowAddForm] = useState(false);
-  const [editData, setEditData] = useState<Area | null>(null);
+  const [editData, setEditData] = useState<Country | null>(null);
   const [formData, setFormData] = useState({ code: '', name: '' });
   const [totalCount, setTotalCount] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
@@ -32,7 +32,7 @@ const CountryPage = () => {
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
 
-  const fetchArea = async (params: TDataGridRequestParams) => {
+  const fetchCountry = async (params: TDataGridRequestParams) => {
     try {
       const queryParams = new URLSearchParams();
       queryParams.set('page', String(params.pageIndex + 1));
@@ -47,7 +47,7 @@ const CountryPage = () => {
         queryParams.set('query', searchQuery);
       }
 
-      const response = await axios.get(`${API_URL}/location/area?${queryParams.toString()}`, {
+      const response = await axios.get(`${API_URL}/location/country?${queryParams.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -59,28 +59,28 @@ const CountryPage = () => {
       setTotalCount(response.data.pagination.total);
       return { data: response.data.data, totalCount: response.data.pagination.total };
     } catch (error) {
-      toast.error("Error fetching area");
+      toast.error("Error fetching country");
       return { data: [], totalCount: 0 };
     }
   };
 
-  const handleEdit = (rowData: Area) => {
+  const handleEdit = (rowData: Country) => {
     setEditData(rowData);
     setFormData({ code: rowData.code, name: rowData.name });
     setShowAddForm(true);
   };
 
   const handleDelete = async (code: string) => {
-      toast("Are you sure you want to delete this area?", {
+      toast("Are you sure you want to delete this country?", {
         action: (
           <button
             onClick={async () => {
               try {
-                await deleteArea(code);
-                toast.success("Area deleted successfully!");
+                await deleteCountry(code);
+                toast.success("Country deleted successfully!");
                 setRefreshKey(prev => prev + 1);
               } catch (error) {
-                toast.error("Error deleting area.");
+                toast.error("Error deleting country.");
               }
             }}
             className="bg-red-500 text-white w-20 py-2 rounded-md hover:bg-red-600 transition font-semibold"
@@ -94,17 +94,17 @@ const CountryPage = () => {
   const handleSave = async () => {
     try {
       if (editData) {
-        await editArea(formData.code, formData.name);
-        toast.success("Area updated successfully!");
+        await editCountry(formData.code, formData.name);
+        toast.success("Country updated successfully!");
       } else {
-        await addArea(formData.code, formData.name);
-        toast.success("Area added successfully!");
+        await addCountry(formData.code, formData.name);
+        toast.success("Country added successfully!");
       }
       setShowAddForm(false);
       setEditData(null);
       setFormData({ code: '', name: '' });
     } catch (error) {
-      toast.error("Failed to save area.");
+      toast.error("Failed to save country.");
     }
   };
 
@@ -182,7 +182,7 @@ const CountryPage = () => {
               <ToolbarPageTitle />
               <ToolbarDescription>
                 <div className="flex items-center flex-wrap gap-1.5 font-medium">
-                  <span className="text-md text-gray-600">Area Management</span>
+                  <span className="text-md text-gray-600">Country Management</span>
                 </div>
               </ToolbarDescription>
             </ToolbarHeading>
@@ -207,7 +207,7 @@ const CountryPage = () => {
         {showAddForm ? (
           <div className="card">
             <div className="card-header" id="webhooks">
-              <h3 className="card-title">{editData ? 'Edit Area' : 'New Area'}</h3>
+              <h3 className="card-title">{editData ? 'Edit Country' : 'New Country'}</h3>
             </div>
             <div className="card-body grid gap-5">
               <div className="grid grid-cols-2 gap-5">
@@ -264,13 +264,13 @@ const CountryPage = () => {
               key={refreshKey}
               columns={columns}
               serverSide={true}
-              onFetchData={fetchArea}
+              onFetchData={fetchCountry}
               rowSelection={true}
               pagination={{ size: pageSize }}
               toolbar={
                 <div className="card-header flex-wrap gap-2 border-b-0 px-5">
                   <h3 className="card-title font-medium text-sm">
-                    Showing {count} of {totalCount} areas
+                    Showing {count} of {totalCount} countries
                   </h3>
                   <div className="flex flex-wrap gap-2 lg:gap-5">
                     <div className="flex flex-wrap gap-2.5">
