@@ -9,30 +9,39 @@ import {
   Container
 } from '@/components';
 import axios from 'axios';
-import { addCompany, deleteCompany, editCompany } from '@/pages/pos-configuration/system/Service';
+import { addCustomer, deleteCustomer, editCustomer } from '@/pages/pos-configuration/system/Service';
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
 import { boolean } from 'yup';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue
+  } from '@/components/ui/select';
 
 const API_URL = import.meta.env.VITE_DOMAIN;
 const token = localStorage.getItem('token');
 
-interface Company {
-  code: string;
-  name: string;
-  address1: string;
-  address2: string;
-  address3: string;
-  email: string;
-  phone: string;
-  taxId: string;
+interface Customer {
+    customerCode: string;
+    name: string;
+    contactp: string;
+    address1: string,
+    address2:string;
+    address3: string;
+    email: string;
+    phone: string;
+    taxId: string;
+    location: string;
 }
 
 const CustomerPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showAddForm, setShowAddForm] = useState(false);
-  const [editData, setEditData] = useState<Company | null>(null);
-  const [formData, setFormData] = useState({ code: '', name: '',address1: '', address2: '',address3: '', email: '',phone: '', taxId: '' });
+  const [editData, setEditData] = useState<Customer | null>(null);
+  const [formData, setFormData] = useState({ customerCode: '', name: '',contactp: '',address1: '', address2: '',address3: '', email: '',phone: '', taxId: '', location: '0' });
   const [totalCount, setTotalCount] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(5);
@@ -40,7 +49,7 @@ const CustomerPage = () => {
   const { currentLayout } = useLayout();
   const [isFormat, setIsFormat] = useState(true);
 
-  const fetchCompany = async (params: TDataGridRequestParams) => {
+  const fetchCustomer = async (params: TDataGridRequestParams) => {
     try {
       const queryParams = new URLSearchParams();
       queryParams.set('page', String(params.pageIndex + 1));
@@ -55,7 +64,7 @@ const CustomerPage = () => {
         queryParams.set('query', searchQuery);
       }
 
-      const response = await axios.get(`${API_URL}/location/company?${queryParams.toString()}`, {
+      const response = await axios.get(`${API_URL}/customer?${queryParams.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -67,42 +76,56 @@ const CustomerPage = () => {
       setTotalCount(response.data.pagination.total);
       return { data: response.data.data, totalCount: response.data.pagination.total };
     } catch (error) {
-      toast.error("Error fetching company");
+      toast.error("Error fetching customer");
       return { data: [], totalCount: 0 };
     }
   };
 
-  const handleEdit = (rowData: Company) => {
+  const handleEdit = (rowData: Customer) => {
     setEditData(rowData);
     setFormData({ 
-      code: rowData.code, 
+      customerCode: rowData.customerCode, 
       name: rowData.name,
+      contactp: rowData.contactp,
       address1: rowData.address1, 
       address2: rowData.address2 ,
       address3: rowData.address3 ,
       email: rowData.email ,
       phone: rowData.phone ,
       taxId: rowData.taxId ,
+      location:rowData.location
     });
     setShowAddForm(true);
   };
 
-  const handleDelete = async (code: string) => {
-    try {
-      await deleteCompany(code);
-      toast.success("Company deleted successfully!");
-      setRefreshKey(prev => prev + 1);
-    } catch (error) {
-      toast.error("Error deleting store group.");
-    }
+  const handleDelete = async (customerCode: string) => {
+    toast("Are you sure you want to delete this customer?", {
+        action: (
+        <button 
+        onClick={async () => {
+            try {   
+                await deleteCustomer(customerCode);
+                toast.success("Customer deleted successfully!");
+                setRefreshKey(prev => prev + 1);
+            } catch (error) {
+                toast.error("Error deleting customer.");
+            }
+        }}
+        className="bg-red-500 text-white w-20 py-2 rounded-md hover:bg-red-600 transition font-semibold"
+        >
+            Confirm
+        </button>
+    ),
+    });
   };
 
   const handleSave = async () => {
     try {
       if(isFormat){
         if (editData) {
-          await editCompany(
-            formData.code, 
+          await editCustomer(
+            formData.customerCode, 
+            formData.contactp,
             formData.name,
             formData.address1, 
             formData.address2,
@@ -110,11 +133,13 @@ const CustomerPage = () => {
             formData.email,
             formData.phone, 
             formData.taxId,
+            formData.location
           );
-          toast.success("Company updated successfully!");
+          toast.success("Customer updated successfully!");
         } else {
-          await addCompany(
-            formData.code, 
+          await addCustomer(
+            formData.customerCode, 
+            formData.contactp,
             formData.name,
             formData.address1, 
             formData.address2,
@@ -122,28 +147,29 @@ const CustomerPage = () => {
             formData.email,
             formData.phone, 
             formData.taxId,
+            formData.location
           );
-          toast.success("Company added successfully!");
+          toast.success("Customer added successfully!");
         }
         setShowAddForm(false);
         setEditData(null);
-        setFormData({ code: '', name: '',address1: '', address2: '',address3: '', email: '',phone: '', taxId: '' });
+        setFormData({ customerCode: '', name: '',contactp: '',address1: '', address2: '',address3: '', email: '',phone: '', taxId: '', location: '0' });
       }else{
         toast.error("Some inputs have an invalid format.");
       }
     } catch (error) {
-      toast.error("Failed to save company.");
+      toast.error("Failed to save customer.");
     }
   };
 
   const columns = useMemo<ColumnDef<any>[]>(
     () => [
       {
-        accessorKey: 'code',
-        id: 'code',
-        header: ({ column }) => <DataGridColumnHeader title="Code" column={column} />,
+        accessorKey: 'customerCode',
+        id: 'customerCode',
+        header: ({ column }) => <DataGridColumnHeader title="Customer Code" column={column} />,
         enableSorting: true,
-        cell: (info) => info.row.original.code,
+        cell: (info) => info.row.original.customerCode,
         meta: {
           headerClassName: 'w-6',
           cellClassName: 'w-6 text-center',
@@ -156,6 +182,13 @@ const CustomerPage = () => {
         header: ({ column }) => <DataGridColumnHeader title="Name" column={column} />,
         enableSorting: true,
         cell: (info) => info.row.original.name,
+      },
+      {
+        accessorKey: 'contactp',
+        id: 'contactp',
+        header: ({ column }) => <DataGridColumnHeader title="Contact People" column={column} />,
+        enableSorting: true,
+        cell: (info) => info.row.original.contactp,
       },
       {
         accessorKey: 'address1',
@@ -208,6 +241,17 @@ const CustomerPage = () => {
         },
       },
       {
+        accessorKey: 'location',
+        id: 'location',
+        header: ({ column }) => <DataGridColumnHeader title="Location" column={column} />,
+        enableSorting: true,
+        cell: (info) => info.row.original.location=="0"?"สำนักงานใหญ่":"สาขา",
+        meta: {
+          cellClassName: 'text-center',
+          subHeaderClassName: 'flex justify-center'
+        },
+      },
+      {
         id: 'edit',
         header: 'Modify',
         cell: ({ row }) => (
@@ -226,7 +270,7 @@ const CustomerPage = () => {
         id: 'delete',
         header: 'Delete',
         cell: ({ row }) => (
-          <button onClick={() => handleDelete(row.original.code)} className='bg-[var(--tw-light-active)] border border-red-600 rounded-md font-semibold text-base text-red-600 h-[1.9rem] w-[1.9rem] hover:bg-red-600 hover:text-white'>
+          <button onClick={() => handleDelete(row.original.customerCode)} className='bg-[var(--tw-light-active)] border border-red-600 rounded-md font-semibold text-base text-red-600 h-[1.9rem] w-[1.9rem] hover:bg-red-600 hover:text-white'>
             <KeenIcon icon='trash' />
           </button>
         ),
@@ -283,7 +327,7 @@ const CustomerPage = () => {
               <ToolbarPageTitle />
               <ToolbarDescription>
                 <div className="flex items-center flex-wrap gap-1.5 font-medium">
-                  <span className="text-md text-gray-600">Company Management</span>
+                  <span className="text-md text-gray-600">Customer Management</span>
                 </div>
               </ToolbarDescription>
             </ToolbarHeading>
@@ -308,21 +352,21 @@ const CustomerPage = () => {
         {showAddForm ? (
           <div className="card">
             <div className="card-header" id="webhooks">
-              <h3 className="card-title">{editData ? 'Edit Company' : 'New Company'}</h3>
+              <h3 className="card-title">{editData ? 'Edit Customer' : 'New Customer'}</h3>
             </div>
             <div className="card-body grid gap-5">
               <div className="grid grid-cols-2 gap-5">
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
                   <span className="form-label max-w-32 w-full">
-                    Code {!formData.code && <span className="text-red-500">*</span>}
+                    Customer Code {!formData.customerCode && <span className="text-red-500">*</span>}
                   </span>
                   <div className="grow min-w-24">
                     <input
                       className="input w-full"
                       type="text"
-                      placeholder="Enter Code"
-                      name="code"
-                      value={formData.code}
+                      placeholder="Enter Customer Code"
+                      name="customerCode"
+                      value={formData.customerCode}
                       onChange={handleChange}
                       disabled={!!editData}
                     />
@@ -345,7 +389,22 @@ const CustomerPage = () => {
                 </div>
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
                   <span className="form-label max-w-32 w-full">
-                    Address 1 {!formData.address1 && <span className="text-red-500">*</span>}
+                   Contact People {!formData.contactp && <span className="text-red-500">*</span>}
+                  </span>
+                  <div className="grow min-w-24">
+                    <input
+                      className="input w-full"
+                      type="text"
+                      placeholder="Enter Contact People"
+                      name="contactp"
+                      value={formData.contactp}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+                <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
+                  <span className="form-label max-w-32 w-full">
+                    Address 1 
                   </span>
                   <div className="grow min-w-24">
                     <input
@@ -428,7 +487,7 @@ const CustomerPage = () => {
                 </div>
                 <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
                   <span className="form-label max-w-32 w-full">
-                    Tax Id {!formData.taxId && <span className="text-red-500">*</span>}
+                    Tax Id 
                   </span>
                   <div className="grow min-w-24">
                     <input
@@ -441,6 +500,27 @@ const CustomerPage = () => {
                     />
                   </div>
                 </div>
+                <div className="items-center flex-wrap lg:flex-nowrap gap-2.5">
+                  <span className="form-label max-w-32 w-full">
+                    Location {!formData.location && <span className="text-red-500">*</span>}
+                  </span>
+                  <div className="grow min-w-24">
+                    <Select
+                            value={formData.location} // Bind value to state
+                        onValueChange={(value) => 
+                            setFormData((prevData) => ({ ...prevData, location: value }
+                        ))}
+                    >
+                      <SelectTrigger size="md">
+                        <SelectValue placeholder="Select..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="0">สำนักงานใหญ่</SelectItem>
+                        <SelectItem value="1">สาขา</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="card-footer justify-end">
@@ -450,7 +530,7 @@ const CustomerPage = () => {
               </button>
               <button
                 className="cancelBtn h-8 text-sm bg-white border border-blue-500 text-primary  flex justify-center items-center gap-x-1"
-                onClick={() => { setShowAddForm(false); setEditData(null); setFormData({ code: '', name: '',address1: '', address2: '',address3: '', email: '',phone: '', taxId: '' }); }}
+                onClick={() => { setShowAddForm(false); setEditData(null); setFormData({ customerCode: '', name: '',contactp: '',address1: '', address2: '',address3: '', email: '',phone: '', taxId: '', location: '0' }); }}
               >
                 <div className='text-base mt-[1px]'><KeenIcon icon='cross'/></div>
                 <div>Cancel</div>
@@ -463,7 +543,7 @@ const CustomerPage = () => {
               key={refreshKey}
               columns={columns}
               serverSide={true}
-              onFetchData={fetchCompany}
+              onFetchData={fetchCustomer}
               rowSelection={true}
               pagination={{ size: pageSize }}
               toolbar={

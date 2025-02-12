@@ -83,7 +83,7 @@ const AppRoutingSetup = (): ReactElement => {
     <Routes>
       <Route element={<RequireAuth />}>
         <Route element={<Demo1Layout />}>
-          <Route path="/" element={<SalesEnquiryPage />} />
+          <Route path="/" element={<MajorGroupPage />} />
           <Route path="/dashboard/cashier-enquiry" element={<CashierEnquiryPage />} />
           <Route path="/dashboard/major-enquiry" element={<MajorEnquiryPage />} />
           <Route path="/dashboard/inventory-enquiry" element={<InventoryEnquiryPage />} />
