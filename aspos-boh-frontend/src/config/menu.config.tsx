@@ -123,6 +123,10 @@ export const MENU_SIDEBAR: TMenuConfig = [
             path: '/pos-config/system/member',
           },
           {
+            title: 'Customer',
+            path: '/pos-config/system/customer',
+          },
+          {
             title: 'Store',
             children: [
               {
