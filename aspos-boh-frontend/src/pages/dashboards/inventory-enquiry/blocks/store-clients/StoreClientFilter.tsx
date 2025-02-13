@@ -91,46 +91,46 @@ const StoreClientsFilter = () => {
                         <div className="flex items-baseline flex-wrap gap-2.5">
                             <label className="form-label max-w-32">Company</label>
                             <div className="grid gap-5 grow items-start">
-                                <MultiSelect
+                                {/* <MultiSelect
                                     items={companies}
                                     onChange={handleSelectionChange}
-                                />
+                                /> */}
                             </div>
                         </div>
                         <div className="flex items-baseline flex-wrap gap-2.5">
                             <label className="form-label max-w-32">Store Group</label>
                             <div className="grid gap-5 grow items-start">
-                                <MultiSelect
+                                {/* <MultiSelect
                                     items={storeG}
                                     onChange={handleSelectionChange}
-                                />
+                                /> */}
                             </div>
                         </div>
                         <div className="flex items-baseline flex-wrap gap-2.5">
                             <label className="form-label max-w-32">Store</label>
                             <div className="grid gap-5 grow items-start">
-                                <MultiSelect
+                                {/* <MultiSelect
                                     items={stores}
                                     onChange={handleSelectionChange}
-                                />
+                                /> */}
                             </div>
                         </div>
                         <div className="flex items-baseline flex-wrap gap-2.5">
                             <label className="form-label max-w-32">RVC</label>
                             <div className="grid gap-5 grow items-start">
-                                <MultiSelect
+                                {/* <MultiSelect
                                     items={rvc}
                                     onChange={handleSelectionChange}
-                                />
+                                /> */}
                             </div>
                         </div>
                         <div className="flex items-baseline flex-wrap gap-2.5">
                             <label className="form-label max-w-32">PC</label>
                             <div className="grid gap-5 grow items-start">
-                                <MultiSelect
+                                {/* <MultiSelect
                                     items={pc}
                                     onChange={handleSelectionChange}
-                                />
+                                /> */}
                             </div>
                         </div>
                     </div>
@@ -230,10 +230,10 @@ const StoreClientsFilter = () => {
                         <div className="flex items-baseline flex-wrap gap-2.5">
                             <label className="form-label max-w-32 my-auto">Group By</label>
                             <div className="grid gap-5 grow items-start">
-                                <MultiSelect
+                                {/* <MultiSelect
                                     items={groupby}
                                     onChange={handleSelectionChange}
-                                />
+                                /> */}
                             </div>
                         </div>
                         <div className="flex">
