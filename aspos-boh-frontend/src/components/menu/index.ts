@@ -1,4 +1,4 @@
-export * from './Menu';
+export { Menu, useMenu } from './Menu';
 export * from './MenuBullet';
 export * from './MenuSeparator';
 export * from './MenuHeading';

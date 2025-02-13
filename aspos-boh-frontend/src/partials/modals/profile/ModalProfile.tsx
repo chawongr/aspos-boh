@@ -10,14 +10,14 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog';
-import {
-  About,
-  CommunityBadges,
-  Connections,
-  Contributions,
-  Projects,
-  WorkExperience
-} from '@/pages/public-profile/profiles/default';
+// import {
+//   About,
+//   CommunityBadges,
+//   Connections,
+//   Contributions,
+//   Projects,
+//   WorkExperience
+// } from '@/pages/public-profile/profiles/default';
 
 interface IModalProfileProps {
   open: boolean;
@@ -120,7 +120,7 @@ const ModalProfile = ({ open, onOpenChange }: IModalProfileProps) => {
             </button>
           </DialogHeader>
           <DialogBody className="scrollable-y py-0 mb-5 ps-6 pe-3 me-3">
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 lg:gap-7.5">
+            {/* <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 lg:gap-7.5">
               <div className="col-span-1">
                 <div className="grid gap-5 lg:gap-7.5">
                   <CommunityBadges title="Community Badges" />
@@ -137,7 +137,7 @@ const ModalProfile = ({ open, onOpenChange }: IModalProfileProps) => {
                   <Projects />
                 </div>
               </div>
-            </div>
+            </div> */}
           </DialogBody>
         </DialogContent>
       </Dialog>
