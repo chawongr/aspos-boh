@@ -147,7 +147,26 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
   const logout = () => {
     saveAuth(undefined);
     setCurrentUser(undefined);
+    localStorage.removeItem('token');
   };
+
+   // Set up Axios interceptor to handle 401 errors
+   useEffect(() => {
+    const axiosInterceptor = axios.interceptors.response.use(
+      response => response, // Handle successful responses
+      (error) => {
+        if (error.response?.status === 401) {
+          // Only trigger logout if 401 is due to invalid token or expired token
+          logout();
+        }
+        return Promise.reject(error); // Propagate error
+      }
+    );
+
+    return () => {
+      axios.interceptors.response.eject(axiosInterceptor);
+    };
+  }, []);
 
   return (
     <AuthContext.Provider
