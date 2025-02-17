@@ -19,9 +19,6 @@ import { format, parseISO, setHours, setMinutes } from 'date-fns';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 
-const API_URL = import.meta.env.VITE_DOMAIN;
-const token = localStorage.getItem('token');
-
 interface Store {
   storeNo: string;
   name: string;
@@ -75,6 +72,8 @@ const StorePage = () => {
   const hours = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0'));
   const minutes = Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0'));
   const [isOpen, setIsOpen] = useState(false);
+  const API_URL = import.meta.env.VITE_DOMAIN;
+  const token = localStorage.getItem('token');
 
 
   const [isFormat, setIsFormat] = useState(true);

@@ -13,9 +13,6 @@ import { addArea, deleteArea, editArea } from '@/pages/pos-configuration/system/
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
 
-const API_URL = import.meta.env.VITE_DOMAIN;
-const token = localStorage.getItem('token');
-
 interface Area {
   code: string;
   name: string;
@@ -31,7 +28,9 @@ const AreaPage = () => {
   const [pageSize, setPageSize] = useState(5);
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
-
+  const API_URL = import.meta.env.VITE_DOMAIN;
+  const token = localStorage.getItem('token');
+  
   const fetchArea = async (params: TDataGridRequestParams) => {
     try {
       const queryParams = new URLSearchParams();
