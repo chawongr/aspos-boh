@@ -20,9 +20,6 @@ import {
     SelectValue
   } from '@/components/ui/select';
 
-const API_URL = import.meta.env.VITE_DOMAIN;
-const token = localStorage.getItem('token');
-
 interface SalesType {
   code: string;
   name1: string;
@@ -44,7 +41,9 @@ const SalesTypePage = () => {
   const [pageSize, setPageSize] = useState(5);
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
-
+  const API_URL = import.meta.env.VITE_DOMAIN;
+  const token = localStorage.getItem('token');
+  
   const fetchSalesType = async (params: TDataGridRequestParams) => {
     try {
       const queryParams = new URLSearchParams();

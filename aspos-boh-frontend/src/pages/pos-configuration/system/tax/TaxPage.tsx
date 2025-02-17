@@ -20,9 +20,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-const API_URL = import.meta.env.VITE_DOMAIN;
-const token = localStorage.getItem('token');
-
 interface Tax {
   code: string;
   name: string;
@@ -42,7 +39,8 @@ const TaxPage = () => {
   const [pageSize, setPageSize] = useState(5);
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
-
+  const API_URL = import.meta.env.VITE_DOMAIN;
+  const token = localStorage.getItem('token');
   const fetchTax = async (params: TDataGridRequestParams) => {
     try {
       const queryParams = new URLSearchParams();

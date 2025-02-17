@@ -13,9 +13,6 @@ import { addFamilyGroup, deleteFamilyGroup, editFamilyGroup } from '@/pages/pos-
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
 
-const API_URL = import.meta.env.VITE_DOMAIN;
-const token = localStorage.getItem('token');
-
 interface FamilyGroup {
   code: string;
   name: string;
@@ -33,6 +30,8 @@ const FamilyGroupPage = () => {
   const [pageSize, setPageSize] = useState(5);
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
+  const API_URL = import.meta.env.VITE_DOMAIN;
+  const token = localStorage.getItem('token');
 
   const fetchFamilyGroup = async (params: TDataGridRequestParams) => {
     try {

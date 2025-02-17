@@ -13,9 +13,6 @@ import { addCountry, deleteCountry, editCountry } from '@/pages/pos-configuratio
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
 
-const API_URL = import.meta.env.VITE_DOMAIN;
-const token = localStorage.getItem('token');
-
 interface Country {
   code: string;
   name: string;
@@ -31,6 +28,8 @@ const CountryPage = () => {
   const [pageSize, setPageSize] = useState(5);
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
+  const API_URL = import.meta.env.VITE_DOMAIN;
+  const token = localStorage.getItem('token');
 
   const fetchCountry = async (params: TDataGridRequestParams) => {
     try {

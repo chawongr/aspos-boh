@@ -21,9 +21,6 @@ import {
     SelectValue
   } from '@/components/ui/select';
 
-const API_URL = import.meta.env.VITE_DOMAIN;
-const token = localStorage.getItem('token');
-
 interface Customer {
     customerCode: string;
     name: string;
@@ -48,6 +45,8 @@ const CustomerPage = () => {
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
   const [isFormat, setIsFormat] = useState(true);
+    const API_URL = import.meta.env.VITE_DOMAIN;
+    const token = localStorage.getItem('token');
 
   const fetchCustomer = async (params: TDataGridRequestParams) => {
     try {

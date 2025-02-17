@@ -13,9 +13,6 @@ import { addTenderGroup, deleteTenderGroup, editTenderGroup } from '@/pages/pos-
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
 
-const API_URL = import.meta.env.VITE_DOMAIN;
-const token = localStorage.getItem('token');
-
 interface TenderGroup {
   code: string;
   name: string;
@@ -31,6 +28,8 @@ const TenderGroupPage = () => {
   const [pageSize, setPageSize] = useState(5);
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
+  const API_URL = import.meta.env.VITE_DOMAIN;
+  const token = localStorage.getItem('token');
 
   const fetchTenderGroup = async (params: TDataGridRequestParams) => {
     try {
