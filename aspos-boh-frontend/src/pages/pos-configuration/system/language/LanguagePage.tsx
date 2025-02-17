@@ -13,9 +13,6 @@ import { addLanguage, deleteLanguage, editLanguage } from '@/pages/pos-configura
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
 
-const API_URL = import.meta.env.VITE_DOMAIN;
-const token = localStorage.getItem('token');
-
 interface Language {
   code: string;
   language1: string;
@@ -31,7 +28,8 @@ const LanguagePage = () => {
   const [pageSize, setPageSize] = useState(5);
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
-
+  const API_URL = import.meta.env.VITE_DOMAIN;
+  const token = localStorage.getItem('token');
   const fetchLanguage = async (params: TDataGridRequestParams) => {
     try {
       const queryParams = new URLSearchParams();

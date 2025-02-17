@@ -13,9 +13,6 @@ import { addStoreGroup, deleteStoreGroup, editStoreGroup } from '@/pages/pos-con
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
 
-const API_URL = import.meta.env.VITE_DOMAIN;
-const token = localStorage.getItem('token');
-
 interface StoreType {
   code: string;
   name: string;
@@ -31,6 +28,8 @@ const StoreGroupPage = () => {
   const [pageSize, setPageSize] = useState(5);
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
+  const API_URL = import.meta.env.VITE_DOMAIN;
+  const token = localStorage.getItem('token');
 
   const fetchStoreGroups = async (params: TDataGridRequestParams) => {
     try {

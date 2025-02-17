@@ -17,9 +17,6 @@ import { Calendar } from '@/components/ui/calendar';
 import { cn } from '@/lib/utils';
 import { format, parseISO } from 'date-fns';
 
-const API_URL = import.meta.env.VITE_DOMAIN;
-const token = localStorage.getItem('token');
-
 interface Member {
   memberCode: string;
   name: string;
@@ -44,7 +41,8 @@ const MemberPage = () => {
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
   const [isFormat, setIsFormat] = useState(true);
-
+  const API_URL = import.meta.env.VITE_DOMAIN;
+  const token = localStorage.getItem('token');
 
   const fetchMember = async (params: TDataGridRequestParams) => {
     try {

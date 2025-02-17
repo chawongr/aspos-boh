@@ -14,9 +14,6 @@ import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPag
 import { useLayout } from '@/providers';
 import { boolean } from 'yup';
 
-const API_URL = import.meta.env.VITE_DOMAIN;
-const token = localStorage.getItem('token');
-
 interface Company {
   code: string;
   name: string;
@@ -39,6 +36,8 @@ const CompanyPage = () => {
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
   const [isFormat, setIsFormat] = useState(true);
+  const API_URL = import.meta.env.VITE_DOMAIN;
+  const token = localStorage.getItem('token');
 
   const fetchCompany = async (params: TDataGridRequestParams) => {
     try {

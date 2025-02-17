@@ -13,9 +13,6 @@ import { addStoreType, deleteStoreType, editStoreType } from '@/pages/pos-config
 import { Toolbar, ToolbarActions, ToolbarDescription, ToolbarHeading, ToolbarPageTitle } from '@/partials/toolbar';
 import { useLayout } from '@/providers';
 
-const API_URL = import.meta.env.VITE_DOMAIN;
-const token = localStorage.getItem('token');
-
 interface StoreType {
   code: string;
   type: string;
@@ -31,6 +28,8 @@ const StoreTypePage = () => {
   const [pageSize, setPageSize] = useState(5);
   const [refreshKey, setRefreshKey] = useState(0);
   const { currentLayout } = useLayout();
+  const API_URL = import.meta.env.VITE_DOMAIN;
+  const token = localStorage.getItem('token');
 
   const fetchStoreType = async (params: TDataGridRequestParams) => {
     try {
