@@ -1,11 +1,10 @@
 import axios from "axios";
 
-let token = localStorage.getItem("token");
-const API_URL = import.meta.env.VITE_DOMAIN;
-
 // ============================ Store ==============================
 // Store Group
 export const fetchStoreGroup = async (searchTerm: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
 
     if (!token) {
@@ -39,6 +38,8 @@ export const fetchStoreGroup = async (searchTerm: string) => {
 };
 
 export const addStoreGroup = async (code: string, name: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -59,6 +60,8 @@ export const addStoreGroup = async (code: string, name: string) => {
 };
 
 export const editStoreGroup = async (code: string, name: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -79,6 +82,8 @@ export const editStoreGroup = async (code: string, name: string) => {
 };
 
 export const deleteStoreGroup = async (code: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -101,6 +106,8 @@ export const deleteStoreGroup = async (code: string) => {
 
 // Store Type
 export const addStoreType = async (code: string, type: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -121,6 +128,8 @@ export const addStoreType = async (code: string, type: string) => {
 };
 
 export const editStoreType = async (code: string, type: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -141,6 +150,8 @@ export const editStoreType = async (code: string, type: string) => {
 };
 
 export const deleteStoreType = async (code: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -163,6 +174,8 @@ export const deleteStoreType = async (code: string) => {
 
 // Area
 export const addArea = async (code: string, name: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -183,6 +196,8 @@ export const addArea = async (code: string, name: string) => {
 };
 
 export const editArea = async (code: string, name: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -203,6 +218,8 @@ export const editArea = async (code: string, name: string) => {
 };
 
 export const deleteArea = async (code: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -235,6 +252,8 @@ export const addCompany = async (
   taxId: string
 ) => {
   try {
+    let token = localStorage.getItem("token");
+    const API_URL = import.meta.env.VITE_DOMAIN;
     if (!token) {
       throw new Error("No token found. Please log in.");
     }
@@ -264,6 +283,8 @@ export const editCompany = async (
   taxId: string
 ) => {
   try {
+    let token = localStorage.getItem("token");
+    const API_URL = import.meta.env.VITE_DOMAIN;
     if (!token) {
       throw new Error("No token found. Please log in.");
     }
@@ -283,6 +304,8 @@ export const editCompany = async (
 };
 
 export const deleteCompany = async (code: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -324,6 +347,8 @@ export const addStore = async (
   ipaddress: string,
 ) => {
   try {
+    let token = localStorage.getItem("token");
+    const API_URL = import.meta.env.VITE_DOMAIN;
     if (!token) {
       throw new Error("No token found. Please log in.");
     }
@@ -361,6 +386,8 @@ export const editStore = async (
   storetype: string,
   ipaddress: string,
 ) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -381,6 +408,8 @@ export const editStore = async (
 };
 
 export const deleteStore = async (storeNo: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -402,6 +431,8 @@ export const deleteStore = async (storeNo: string) => {
 
 // Country
 export const addCountry = async (code: string, name: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -422,6 +453,8 @@ export const addCountry = async (code: string, name: string) => {
 };
 
 export const editCountry = async (code: string, name: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -442,6 +475,8 @@ export const editCountry = async (code: string, name: string) => {
 };
 
 export const deleteCountry = async (code: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -463,6 +498,8 @@ export const deleteCountry = async (code: string) => {
 
 // Region
 export const addRegion = async (code: string, name: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -483,6 +520,8 @@ export const addRegion = async (code: string, name: string) => {
 };
 
 export const editRegion = async (code: string, name: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -503,6 +542,8 @@ export const editRegion = async (code: string, name: string) => {
 };
 
 export const deleteRegion = async (code: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -525,6 +566,8 @@ export const deleteRegion = async (code: string) => {
 
 // Language
 export const addLanguage = async (code: string, language: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -545,6 +588,8 @@ export const addLanguage = async (code: string, language: string) => {
 };
 
 export const editLanguage = async (code: string, language: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -565,6 +610,8 @@ export const editLanguage = async (code: string, language: string) => {
 };
 
 export const deleteLanguage = async (code: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -587,6 +634,8 @@ export const deleteLanguage = async (code: string) => {
 
 // Tax
 export const addTax = async (code: string, name: string, percent: string, type: string, startamount: string, accountcode: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -607,6 +656,8 @@ export const addTax = async (code: string, name: string, percent: string, type: 
 };
 
 export const editTax = async (code: string, name: string, percent: string, type: string, startamount: string, accountcode: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -627,6 +678,8 @@ export const editTax = async (code: string, name: string, percent: string, type:
 };
 
 export const deleteTax = async (code: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -648,6 +701,8 @@ export const deleteTax = async (code: string) => {
 
 // Member
 export const addMember = async (memberCode: string, name: string, address1: string, address2: string, address3: string, email: string, point: string, phone: string, startdate: string, expiredate: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -668,6 +723,8 @@ export const addMember = async (memberCode: string, name: string, address1: stri
 };
 
 export const editMember = async (memberCode: string, name: string, address1: string, address2: string, address3: string, email: string, point: string, phone: string, startdate: string, expiredate: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -688,6 +745,8 @@ export const editMember = async (memberCode: string, name: string, address1: str
 };
 
 export const deleteMember = async (memberCode: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -709,6 +768,8 @@ export const deleteMember = async (memberCode: string) => {
 
 // Sales Type
 export const addSalesType = async (code: string, name1: string, name2: string,name3: string,suffix: string,pricelevel: string, mainlevel: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -729,6 +790,8 @@ export const addSalesType = async (code: string, name1: string, name2: string,na
 };
 
 export const editSalesType = async (code: string, name1: string, name2: string,name3: string,suffix: string,pricelevel: string, mainlevel: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -749,6 +812,8 @@ export const editSalesType = async (code: string, name1: string, name2: string,n
 };
 
 export const deleteSalesType = async (code: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -771,6 +836,8 @@ export const deleteSalesType = async (code: string) => {
 
 // Customer
 export const addCustomer = async (customerCode: string, name: string, contactp: string,address1: string,address2: string,address3: string, email: string, phone: string, taxId: string, location: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -791,6 +858,8 @@ export const addCustomer = async (customerCode: string, name: string, contactp: 
 };
 
 export const editCustomer = async (customerCode: string, name: string, contactp: string,address1: string,address2: string,address3: string, email: string, phone: string, taxId: string, location: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
@@ -811,6 +880,8 @@ export const editCustomer = async (customerCode: string, name: string, contactp:
 };
 
 export const deleteCustomer = async (customerCode: string) => {
+  let token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_DOMAIN;
   try {
     if (!token) {
       throw new Error("No token found. Please log in.");
