@@ -4,7 +4,7 @@ import { toAbsoluteUrl } from '@/utils';
 import useBodyClasses from '@/hooks/useBodyClasses';
 import { AuthBrandedLayoutProvider } from './AuthBrandedLayoutProvider';
 
-import Background from '../../../public/media/app/login-bg.svg'
+import Background from '/media/app/login-bg.svg'
 
 const Layout = () => {
   // Applying body classes to manage the background color in dark mode
